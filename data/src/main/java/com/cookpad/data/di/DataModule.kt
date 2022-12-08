@@ -1,19 +1,21 @@
 package com.cookpad.data.di
 
-import android.content.Context
-import androidx.room.Room
 import com.cookpad.common.Constants.BASE_URL
-import com.cookpad.data.local.CookBookDatabase
+import com.cookpad.data.local.dao.CountryDao
 import com.cookpad.data.local.dao.IngredientDao
+import com.cookpad.data.local.dao.MealCategoryDao
 import com.cookpad.data.remote.CookPadApiService
+import com.cookpad.data.repository.CountryRepositoryImpl
 import com.cookpad.data.repository.IngredientsRepositoryImpl
+import com.cookpad.data.repository.MealCategoryRepositoryImpl
+import com.cookpad.domain.repository.CountryRepository
 import com.cookpad.domain.repository.IngredientsRepository
+import com.cookpad.domain.repository.MealCategoryRepository
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -56,26 +58,27 @@ class DataModule {
         return retrofit.create(CookPadApiService::class.java)
     }
 
-    @Singleton
-    @Provides
-    fun provideDatabase(@ApplicationContext context: Context): CookBookDatabase {
-        return Room.databaseBuilder(
-            context,
-            CookBookDatabase::class.java,
-            "cookpad_database"
-        ).build()
-    }
-
-    @Singleton
-    @Provides
-    fun provideIngredientsDao(database: CookBookDatabase) = database.ingredientDao
-
     @Provides
     fun provideIngredientsRepository(
         apiService: CookPadApiService,
         ingredientDao: IngredientDao
     ): IngredientsRepository {
         return IngredientsRepositoryImpl(apiService, ingredientDao)
+    }
+
+    @Singleton
+    @Provides
+    fun provideMealCategoriesRepository(
+        api: CookPadApiService,
+        dao: MealCategoryDao
+    ): MealCategoryRepository {
+        return MealCategoryRepositoryImpl(api, dao)
+    }
+
+    @Singleton
+    @Provides
+    fun provideCountriesRepository(api: CookPadApiService, dao: CountryDao): CountryRepository {
+        return CountryRepositoryImpl(api, dao)
     }
 
 }

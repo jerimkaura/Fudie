@@ -1,11 +1,25 @@
 package com.cookpad.data.remote.dto
 
 
+import com.cookpad.data.local.entity.MealCategoryEntity
 import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
 
-@JsonClass(generateAdapter = true)
 data class CategoryDTO(
+    @Json(name = "idCategory")
+    val idCategory: String?,
     @Json(name = "strCategory")
-    val strCategory: String
-)
+    val strCategory: String?,
+    @Json(name = "strCategoryDescription")
+    val strCategoryDescription: String?,
+    @Json(name = "strCategoryThumb")
+    val strCategoryThumb: String?
+) {
+    fun toEntity(): MealCategoryEntity {
+        return MealCategoryEntity(
+            idCategory = idCategory ?: "",
+            strCategory = strCategory ?: "",
+            strCategoryDescription = strCategoryDescription ?:"",
+            strCategoryThumb = strCategoryThumb ?:""
+        )
+    }
+}
