@@ -1,14 +1,13 @@
 package com.cookpad.core.screens.home
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.height
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.font.FontWeight
@@ -25,22 +24,9 @@ fun BottomNavigationBar(navController: NavController) {
         BottomNavItem.Home,
     )
     Column {
-        Divider(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(0.2.dp)
-                .background(
-                    if (isSystemInDarkTheme()) {
-                        Color(0xff202121)
-                    } else {
-                        Color(0xffEFEEEF)
-                    }
-                )
-        )
-
         NavigationBar(
             modifier = Modifier.height(60.dp),
-            tonalElevation = 5.dp,
+            tonalElevation = 0.dp,
         ) {
             val backStackEntry by navController.currentBackStackEntryAsState()
             val currentRoute = backStackEntry?.destination?.route
