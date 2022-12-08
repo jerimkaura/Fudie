@@ -21,7 +21,7 @@ import androidx.navigation.compose.rememberNavController
 import com.cookpad.core.navigation.Route
 import com.cookpad.core.screens.home.BottomNavigationBar
 import com.cookpad.core.screens.home.HomeScreen
-import com.cookpad.core.ui.theme.CookPadTheme
+import com.cookpad.core.ui.theme.CookPadThem
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -29,7 +29,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            CookPadTheme {
+            CookPadThem {
                 MainScreen()
             }
         }
@@ -59,7 +59,7 @@ fun MainScreen(){
                     BottomNavigationBar(navController = navController)
                 }
             },
-            containerColor = MaterialTheme.colorScheme.background
+//            containerColor = MaterialTheme.colorScheme.background
         ) {
             NavHost(navController = navController, startDestination = "home_screen") {
                 screens(navController)

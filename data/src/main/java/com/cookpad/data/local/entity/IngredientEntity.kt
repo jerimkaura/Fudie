@@ -11,14 +11,14 @@ data class IngredientEntity(
     val idIngredient: String,
     val strDescription: String,
     val strIngredient: String,
-    val strType: String
+    val strType: String? = ""
 ) {
     fun toDomain(): Ingredient {
         return Ingredient(
             idIngredient = idIngredient,
             strDescription = strDescription,
             strIngredient = strIngredient,
-            strType = strType
+            strType = strType ?: ""
         )
     }
 }
