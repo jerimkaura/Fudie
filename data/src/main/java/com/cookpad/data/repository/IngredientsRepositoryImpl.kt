@@ -1,6 +1,5 @@
 package com.cookpad.data.repository
 
-import android.util.Log
 import com.cookpad.common.util.Resource
 import com.cookpad.data.local.dao.IngredientDao
 import com.cookpad.data.remote.CookPadApiService
