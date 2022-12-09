@@ -1,5 +1,6 @@
 package com.cookpad.core.screens.home
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.height
@@ -25,8 +26,10 @@ fun BottomNavigationBar(navController: NavController) {
     )
     Column {
         NavigationBar(
-            modifier = Modifier.height(60.dp),
-            tonalElevation = 0.dp,
+            modifier = Modifier
+                .height(60.dp),
+            tonalElevation = 1.dp,
+            containerColor = MaterialTheme.colorScheme.background
         ) {
             val backStackEntry by navController.currentBackStackEntryAsState()
             val currentRoute = backStackEntry?.destination?.route
