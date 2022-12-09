@@ -4,13 +4,16 @@ import com.cookpad.common.Constants.BASE_URL
 import com.cookpad.data.local.dao.CountryDao
 import com.cookpad.data.local.dao.IngredientDao
 import com.cookpad.data.local.dao.MealCategoryDao
+import com.cookpad.data.local.dao.MealDao
 import com.cookpad.data.remote.CookPadApiService
 import com.cookpad.data.repository.CountryRepositoryImpl
 import com.cookpad.data.repository.IngredientsRepositoryImpl
 import com.cookpad.data.repository.MealCategoryRepositoryImpl
+import com.cookpad.data.repository.MealRepositoryImpl
 import com.cookpad.domain.repository.CountryRepository
 import com.cookpad.domain.repository.IngredientsRepository
 import com.cookpad.domain.repository.MealCategoryRepository
+import com.cookpad.domain.repository.MealRepository
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Module
@@ -79,6 +82,12 @@ class DataModule {
     @Provides
     fun provideCountriesRepository(api: CookPadApiService, dao: CountryDao): CountryRepository {
         return CountryRepositoryImpl(api, dao)
+    }
+
+    @Singleton
+    @Provides
+    fun provideMealsRepository(api: CookPadApiService, dao: MealDao): MealRepository {
+        return MealRepositoryImpl(api, dao)
     }
 
 }

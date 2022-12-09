@@ -21,7 +21,8 @@ import com.cookpad.domain.model.Ingredient
 @OptIn(ExperimentalFoundationApi::class, ExperimentalMaterial3Api::class)
 @Composable
 fun MealIngredients(ingredients: List<Ingredient>) {
-    val boxColor = if (isSystemInDarkTheme()) Color(0XFF2F2E41) else Color(0xFFE3F2FD)
+    val boxColor = if (isSystemInDarkTheme()) Color(0xFF1e2025) else Color(0xFFF8F6F8)
+    val chipBorder = if (isSystemInDarkTheme()) Color(0XFF2F2E41) else Color(0xFFfed69a)
     LazyHorizontalStaggeredGrid(
         modifier = Modifier.height(180.dp),
         rows = StaggeredGridCells.Fixed(5),
@@ -31,6 +32,9 @@ fun MealIngredients(ingredients: List<Ingredient>) {
     ) {
         items(ingredients.size) {
             AssistChip(
+                border = AssistChipDefaults.assistChipBorder(
+                    borderColor = chipBorder
+                ),
                 shape = RoundedCornerShape(20.dp),
                 onClick = { /* Do something! */ },
                 label = { Text(text = ingredients[it].strIngredient) },
@@ -42,7 +46,7 @@ fun MealIngredients(ingredients: List<Ingredient>) {
                     )
                 },
                 colors = AssistChipDefaults.assistChipColors(
-                    containerColor = boxColor
+                    containerColor = boxColor,
                 )
             )
         }

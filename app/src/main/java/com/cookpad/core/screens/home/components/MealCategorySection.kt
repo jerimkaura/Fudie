@@ -12,19 +12,20 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.rememberAsyncImagePainter
+import color_surface_dark
+import color_surface_light
 import com.cookpad.core.ui.theme.montserrat
 import com.cookpad.domain.model.MealCategory
 
 @Composable
 fun MealCategorySection(mealCategories: List<MealCategory>) {
-    val boxColor = if (isSystemInDarkTheme()) Color(0XFF2F2E41) else Color(0xFFE3F2FD)
+    val itemBgColor = if (isSystemInDarkTheme()) color_surface_dark else color_surface_light
     LazyRow(
         modifier = Modifier
             .padding(vertical = 2.dp, horizontal = 10.dp),
@@ -39,18 +40,18 @@ fun MealCategorySection(mealCategories: List<MealCategory>) {
             ) {
                 Box(
                     modifier = Modifier
-                        .background(Color(0xFFFCFCFF), RoundedCornerShape(10.dp))
-                        .size(60.dp)
-                        .clip(RoundedCornerShape(10.dp)),
+                        .background(itemBgColor, RoundedCornerShape(10.dp))
+                        .size(70.dp)
+                        .clip(RoundedCornerShape(5.dp)),
                     contentAlignment = Alignment.Center
                 ) {
                     Image(
                         painter = rememberAsyncImagePainter(mealCategories[it].strCategoryThumb),
                         modifier = Modifier
-                            .clip(RoundedCornerShape(10.dp))
-                            .size(60.dp)
+                            .clip(RoundedCornerShape(5.dp))
+                            .size(70.dp)
                             .clickable { },
-                        contentScale = ContentScale.Crop,
+                        contentScale = ContentScale.Inside,
                         contentDescription = null
                     )
                 }
