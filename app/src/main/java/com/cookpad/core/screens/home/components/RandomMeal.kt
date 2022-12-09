@@ -49,7 +49,7 @@ fun RandomMeal() {
 
                 }) {
                     Text(
-                        text = "Get a Random Meal",
+                        text = "Get a Random MealDTO",
                         fontSize = 12.sp,
                         fontWeight = FontWeight.Normal
                     )

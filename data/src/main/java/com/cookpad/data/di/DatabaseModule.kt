@@ -35,4 +35,8 @@ class DatabaseModule {
     @Provides
     fun provideCountryDao(database: CookBookDatabase) = database.countryDao
 
+    @Singleton
+    @Provides
+    fun provideMealDao(database: CookBookDatabase) = database.mealDao
+
 }
