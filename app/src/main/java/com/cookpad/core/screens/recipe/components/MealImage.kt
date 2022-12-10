@@ -14,10 +14,16 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import coil.compose.AsyncImage
 import coil.compose.rememberAsyncImagePainter
+import coil.request.CachePolicy
+import coil.request.ImageRequest
 import color_primary_light
 import color_surface_light
 import com.cookpad.core.R
@@ -33,13 +39,17 @@ fun MealImage(recipe: Recipe?, navController: NavController) {
             .height(300.dp)
             .background(Color(0xff000000).copy(0.2f))
     ) {
-        Image(
-            modifier = Modifier.fillMaxSize(),
-            painter = rememberAsyncImagePainter(
-                recipe?.strMealThumb
-            ),
-            contentDescription = recipe?.strMeal,
-            contentScale = ContentScale.Crop
+        AsyncImage(
+            model = ImageRequest.Builder(LocalContext.current)
+                .data(recipe?.strMealThumb)
+                .crossfade(true)
+                .diskCachePolicy(CachePolicy.ENABLED)// it's the same even removing comments
+                .build(),
+            placeholder = painterResource(R.drawable.lily),
+            contentDescription = stringResource(R.string.app_name),
+            contentScale = ContentScale.Crop,
+            modifier = Modifier
+                .fillMaxSize(),
         )
         Row(
             modifier = Modifier
