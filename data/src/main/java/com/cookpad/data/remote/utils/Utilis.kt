@@ -7,3 +7,6 @@ fun String.getFlagUrl(): String {
 }
 
 
+fun String?.getValueOrNull(): String {
+    return if (this?.isEmpty() == true) "No value" else this ?: "No value"
+}
