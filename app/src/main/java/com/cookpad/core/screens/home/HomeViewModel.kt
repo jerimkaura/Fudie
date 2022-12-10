@@ -1,14 +1,13 @@
 package com.cookpad.core.screens.home
 
+import android.util.Log
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.cookpad.common.util.Resource
-import com.cookpad.core.screens.home.states.MealsState
-import com.cookpad.core.screens.home.states.CountriesState
-import com.cookpad.core.screens.home.states.IngredientsState
-import com.cookpad.core.screens.home.states.MealCategoriesState
+import com.cookpad.core.screens.home.states.*
+import com.cookpad.core.screens.recipe.states.RecipeState
 import com.cookpad.domain.use_cases.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
@@ -25,6 +24,7 @@ class HomeViewModel @Inject constructor(
     private val getBeefMealsUseCase: GetBeefMealsUseCase,
     private val getVegetarianMealsUseCase: GetVegetarianMealsUseCase,
     private val getBreakfastMealsUseCase: GetBreakfastMealsUseCase,
+    private val getRandomRecipeUseCase: GetRandomRecipeUseCase,
 ) :
     ViewModel() {
 
@@ -52,6 +52,8 @@ class HomeViewModel @Inject constructor(
     private var _breakfastMeals = mutableStateOf(MealsState())
     val breakfastMeals: State<MealsState> = _breakfastMeals
 
+    private var _randomRecipe = mutableStateOf(RecipeState())
+    val randomRecipe: State<RecipeState> = _randomRecipe
 
     init {
         getMealCategories()
@@ -64,9 +66,25 @@ class HomeViewModel @Inject constructor(
         getBreakFastMeals()
     }
 
+    fun getRandomRecipe() {
+        getRandomRecipeUseCase().onEach { result ->
+            when (result) {
+                is Resource.Loading -> {
+                    _randomRecipe.value = RecipeState(isLoading = true)
+                }
+                is Resource.Success -> {
+                    _randomRecipe.value = RecipeState(data = result.data)
+                }
+                is Resource.Error -> {
+                    _randomRecipe.value = RecipeState(error = result.error.toString())
+                }
+            }
+        }.launchIn(viewModelScope)
+    }
+
     private fun getBreakFastMeals() {
         getBreakfastMealsUseCase().onEach { result ->
-            when (result){
+            when (result) {
                 is Resource.Loading -> {
                     _breakfastMeals.value = MealsState(isLoading = true)
                 }

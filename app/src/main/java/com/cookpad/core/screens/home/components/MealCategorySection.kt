@@ -17,6 +17,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import coil.compose.rememberAsyncImagePainter
 import color_surface_dark
 import color_surface_light
@@ -24,7 +25,7 @@ import com.cookpad.core.ui.theme.montserrat
 import com.cookpad.domain.model.MealCategory
 
 @Composable
-fun MealCategorySection(mealCategories: List<MealCategory>) {
+fun MealCategorySection(mealCategories: List<MealCategory>, navController: NavController) {
     val itemBgColor = if (isSystemInDarkTheme()) color_surface_dark else color_surface_light
     LazyRow(
         modifier = Modifier

@@ -13,4 +13,9 @@ sealed class BottomNavItem(
         R.drawable.ic_home,
         Route.HomeScreen.route
     )
+    object Recipe : BottomNavItem(
+        "Recipe",
+        R.drawable.ic_trending,
+        Route.RecipeScreen.route
+    )
 }

@@ -1,10 +1,8 @@
 package com.cookpad.data.remote
 
-import com.cookpad.data.remote.dto.CountriesResponse
-import com.cookpad.data.remote.dto.IngredientsResponse
-import com.cookpad.data.remote.dto.MealCategoriesResponse
-import com.cookpad.data.remote.dto.MealsResponse
+import com.cookpad.data.remote.dto.*
 import retrofit2.http.GET
+import retrofit2.http.Query
 
 interface CookPadApiService {
     companion object {
@@ -17,6 +15,7 @@ interface CookPadApiService {
         const val GET_MEAL_VEGAN_MEALS = "filter.php?c=vegetarian"
         const val GET_MEAL_RANDOM_MEAL = "random.php"
         const val GET_MEAL_BREAKFAST_MEAL = "filter.php?i=milk"
+        const val GET_MEAL_RECIPE_BY_ID = "lookup.php"
     }
 
     @GET(GET_ALL_INGREDIENTS)
@@ -41,9 +40,12 @@ interface CookPadApiService {
     suspend fun getVegetarianMeal(): MealsResponse
 
     @GET(GET_MEAL_RANDOM_MEAL)
-    suspend fun getRandomMeal()
+    suspend fun getRandomMeal(): MealRecipeResponse
 
     @GET(GET_MEAL_BREAKFAST_MEAL)
     suspend fun getBreakfastMeal(): MealsResponse
+
+    @GET(GET_MEAL_RECIPE_BY_ID)
+    suspend fun getRecipeByMealId(@Query(value = "i") mealId: String): MealRecipeResponse
 
 }
