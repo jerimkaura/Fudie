@@ -15,13 +15,13 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import coil.compose.rememberAsyncImagePainter
-import com.cookpad.core.screens.utils.CountryFlags.AMERICAN
 import com.cookpad.core.ui.theme.montserrat
 import com.cookpad.domain.model.Country
 
 @Composable
-fun MealCountrySection(countries: List<Country>) {
+fun MealCountrySection(countries: List<Country>, navController: NavController) {
     LazyRow {
         items(countries.size) {
             Column(

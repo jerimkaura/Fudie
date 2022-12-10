@@ -15,12 +15,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.cookpad.core.R
 import com.cookpad.domain.model.Ingredient
 
 @OptIn(ExperimentalFoundationApi::class, ExperimentalMaterial3Api::class)
 @Composable
-fun MealIngredients(ingredients: List<Ingredient>) {
+fun MealIngredients(ingredients: List<Ingredient>, navController: NavController) {
     val boxColor = if (isSystemInDarkTheme()) Color(0xFF1e2025) else Color(0xFFF8F6F8)
     val chipBorder = if (isSystemInDarkTheme()) Color(0XFF2F2E41) else Color(0xFFfed69a)
     LazyHorizontalStaggeredGrid(

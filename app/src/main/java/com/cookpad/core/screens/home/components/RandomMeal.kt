@@ -1,24 +1,29 @@
 package com.cookpad.core.screens.home.components
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.cookpad.core.R
+import coil.compose.rememberAsyncImagePainter
+import color_primary_light
+import com.cookpad.core.screens.recipe.states.RecipeState
+import com.cookpad.core.ui.theme.montserrat
 
 @Composable
-fun RandomMeal() {
+fun RandomMeal(randomRecipe: RecipeState, onClick: () -> Unit) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -26,33 +31,75 @@ fun RandomMeal() {
             .height(200.dp),
         shape = RoundedCornerShape(12.dp),
     ) {
-        Box(Modifier.fillMaxSize()) {
-            Image(
-                modifier = Modifier.fillMaxSize(),
-                painter = painterResource(id = R.drawable.billy),
-                contentDescription = null,
-                contentScale = ContentScale.Crop
-            )
+        if (randomRecipe.isLoading) {
             Column(
                 modifier = Modifier
-                    .align(Alignment.BottomEnd)
-                    .padding(16.dp),
+                    .fillMaxSize(),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center,
             ) {
-                Text(
-                    text = "What to cook for lunch?",
-                    fontSize = 18.sp,
-                    fontWeight = FontWeight.Bold,
-                    color = Color.White
+                CircularProgressIndicator(
+                    modifier = Modifier,
+                    strokeWidth = 5.dp,
+                    color = color_primary_light
                 )
-                Button(
-                    onClick = {
-
-                }) {
-                    Text(
-                        text = "Get a Random MealDTO",
-                        fontSize = 12.sp,
-                        fontWeight = FontWeight.Normal
+                Spacer(modifier = Modifier.height(10.dp))
+                Text(
+                    text = "Hang on...",
+                    style = TextStyle(
+                        fontFamily = montserrat,
+                        fontWeight = FontWeight.Medium,
+                        fontSize = 16.sp,
                     )
+                )
+            }
+
+        } else {
+            Box(
+                Modifier
+                    .fillMaxSize()
+                    .background(Color(0xff000000).copy(0.2f))) {
+                Image(
+                    modifier = Modifier.fillMaxSize(),
+                    painter = rememberAsyncImagePainter(
+                        randomRecipe.data?.strMealThumb
+                            ?: "https://www.themealdb.com/images/media/meals/xrttsx1487339558.jpg"
+                    ),
+                    contentDescription = null,
+                    contentScale = ContentScale.Crop
+                )
+                Column(
+                    modifier = Modifier
+                        .align(Alignment.BottomCenter)
+                        .padding(16.dp),
+                    verticalArrangement = Arrangement.SpaceBetween,
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Text(
+                        text = randomRecipe.data?.strMeal ?: "",
+                        style = TextStyle(
+                            fontFamily = montserrat,
+                            fontWeight = FontWeight.ExtraBold,
+                            fontSize = 16.sp,
+                            color = Color.White
+                        )
+
+                    )
+                    Spacer(modifier = Modifier.height(20.dp))
+                    Button(
+                        shape = RoundedCornerShape(10.dp),
+                        onClick = {
+                            onClick.invoke()
+                        }) {
+                        Text(
+                            text = "GET A RANDOM RECIPE",
+                            style = TextStyle(
+                                fontFamily = montserrat,
+                                fontWeight = FontWeight.Bold,
+                                fontSize = 12.sp,
+                            )
+                        )
+                    }
                 }
             }
         }
