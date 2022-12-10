@@ -1,6 +1,5 @@
 package com.cookpad.core.screens.home.components
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -13,12 +12,18 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import coil.compose.rememberAsyncImagePainter
+import coil.compose.AsyncImage
+import coil.request.CachePolicy
+import coil.request.ImageRequest
 import color_primary_light
+import com.cookpad.core.R
 import com.cookpad.core.screens.recipe.states.RecipeState
 import com.cookpad.core.ui.theme.montserrat
 
@@ -59,14 +64,20 @@ fun RandomMeal(randomRecipe: RecipeState, onClick: () -> Unit) {
                 Modifier
                     .fillMaxSize()
                     .background(Color(0xff000000).copy(0.2f))) {
-                Image(
-                    modifier = Modifier.fillMaxSize(),
-                    painter = rememberAsyncImagePainter(
-                        randomRecipe.data?.strMealThumb
-                            ?: "https://www.themealdb.com/images/media/meals/xrttsx1487339558.jpg"
-                    ),
-                    contentDescription = null,
-                    contentScale = ContentScale.Crop
+                AsyncImage(
+                    model = ImageRequest.Builder(LocalContext.current)
+                        .data(
+                            randomRecipe.data?.strMealThumb
+                                ?: "https://www.themealdb.com/images/media/meals/xrttsx1487339558.jpg"
+                        )
+                        .crossfade(true)
+                        .diskCachePolicy(CachePolicy.ENABLED)// it's the same even removing comments
+                        .build(),
+                    placeholder = painterResource(R.drawable.lily),
+                    contentDescription = stringResource(R.string.app_name),
+                    contentScale = ContentScale.Crop,
+                    modifier = Modifier
+                        .fillMaxSize(),
                 )
                 Column(
                     modifier = Modifier

@@ -11,12 +11,19 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import coil.compose.AsyncImage
 import coil.compose.rememberAsyncImagePainter
+import coil.request.CachePolicy
+import coil.request.ImageRequest
+import com.cookpad.core.R
 import com.cookpad.core.ui.theme.montserrat
 import com.cookpad.domain.model.Country
 
@@ -31,18 +38,21 @@ fun MealCountrySection(countries: List<Country>, navController: NavController) {
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.SpaceBetween
             ) {
-
-                Image(
-                    painter = rememberAsyncImagePainter(countries[it].flagUrl),
+                AsyncImage(
+                    model = ImageRequest.Builder(LocalContext.current)
+                        .data(countries[it].flagUrl)
+                        .crossfade(true)
+                        .diskCachePolicy(CachePolicy.ENABLED)// it's the same even removing comments
+                        .build(),
+                    placeholder = painterResource(R.drawable.lily),
+                    contentDescription = stringResource(R.string.app_name),
+                    contentScale = ContentScale.Crop,
                     modifier = Modifier
                         .clip(RoundedCornerShape(5.dp))
                         .width(80.dp)
                         .height(50.dp)
                         .clickable { },
-                    contentScale = ContentScale.Crop,
-                    contentDescription = null
                 )
-
                 Spacer(modifier = Modifier.height(20.dp))
 
                 Text(
