@@ -12,6 +12,9 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowCompat
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.NavHost
@@ -21,6 +24,8 @@ import androidx.navigation.compose.rememberNavController
 import com.cookpad.core.navigation.Route
 import com.cookpad.core.screens.home.BottomNavigationBar
 import com.cookpad.core.screens.home.HomeScreen
+import com.cookpad.core.screens.recipe.RecipeScreen
+import com.cookpad.core.screens.utils.getActivity
 import com.cookpad.core.ui.theme.CookPadThem
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -40,6 +45,17 @@ class MainActivity : ComponentActivity() {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MainScreen(){
+    val context = LocalContext.current
+    val activity = context.getActivity()
+    val window = activity?.window
+    if (window != null) {
+        WindowCompat.setDecorFitsSystemWindows(window, false)
+    }
+
+    val windowInsetsController =
+        window?.let { ViewCompat.getWindowInsetsController(it.decorView) }
+
+    windowInsetsController?.isAppearanceLightNavigationBars = true
     Surface(
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colorScheme.background
@@ -59,7 +75,6 @@ fun MainScreen(){
                     BottomNavigationBar(navController = navController)
                 }
             },
-//            containerColor = MaterialTheme.colorScheme.background
         ) {
             NavHost(navController = navController, startDestination = "home_screen") {
                 screens(navController)
@@ -71,5 +86,10 @@ fun MainScreen(){
 private fun NavGraphBuilder.screens(navController: NavController){
     composable(route = Route.HomeScreen.route){
         HomeScreen(navController)
+    }
+
+
+    composable(route = Route.RecipeScreen.route + "/{meal_id}"){
+        RecipeScreen(navController)
     }
 }
