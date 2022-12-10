@@ -1,19 +1,10 @@
 package com.cookpad.data.di
 
 import com.cookpad.common.Constants.BASE_URL
-import com.cookpad.data.local.dao.CountryDao
-import com.cookpad.data.local.dao.IngredientDao
-import com.cookpad.data.local.dao.MealCategoryDao
-import com.cookpad.data.local.dao.MealDao
+import com.cookpad.data.local.dao.*
 import com.cookpad.data.remote.CookPadApiService
-import com.cookpad.data.repository.CountryRepositoryImpl
-import com.cookpad.data.repository.IngredientsRepositoryImpl
-import com.cookpad.data.repository.MealCategoryRepositoryImpl
-import com.cookpad.data.repository.MealRepositoryImpl
-import com.cookpad.domain.repository.CountryRepository
-import com.cookpad.domain.repository.IngredientsRepository
-import com.cookpad.domain.repository.MealCategoryRepository
-import com.cookpad.domain.repository.MealRepository
+import com.cookpad.data.repository.*
+import com.cookpad.domain.repository.*
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Module
@@ -50,7 +41,7 @@ class DataModule {
         return Retrofit
             .Builder()
             .baseUrl(BASE_URL)
-            .addConverterFactory(MoshiConverterFactory.create())
+            .addConverterFactory(MoshiConverterFactory.create().withNullSerialization())
             .client(okHttpClient)
             .build()
     }
@@ -90,4 +81,9 @@ class DataModule {
         return MealRepositoryImpl(api, dao)
     }
 
+    @Singleton
+    @Provides
+    fun provideRecipeRepository(api: CookPadApiService, dao: RecipeDao): RecipeRepository {
+        return RecipeRepositoryImpl(api, dao)
+    }
 }

@@ -2,6 +2,7 @@ package com.cookpad.core.screens.home.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
@@ -19,17 +20,19 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import coil.compose.rememberAsyncImagePainter
 import color_primary_light
 import color_surface_dark
 import color_surface_light
 import com.cookpad.core.R
+import com.cookpad.core.navigation.Route
 import com.cookpad.core.ui.theme.montserrat
 import com.cookpad.domain.model.Meal
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SpecialMealCategory(meals: List<Meal>) {
+fun SpecialMealCategory(meals: List<Meal>, navController: NavController) {
     val itemBgColor = if (isSystemInDarkTheme()) color_surface_dark.copy(0.6f) else color_primary_light
     val badgeColor = if (isSystemInDarkTheme()) color_surface_dark.copy(0.6f) else color_surface_light
     LazyRow(
@@ -38,7 +41,10 @@ fun SpecialMealCategory(meals: List<Meal>) {
     ) {
         items(meals.size) {
             Card(
-                modifier = Modifier
+                modifier = Modifier.clickable { navController.navigate(
+                    Route
+                        .RecipeScreen
+                        .route + "/${meals[it].idMeal}") }
                     .wrapContentSize()
                     .padding(vertical = 0.dp, horizontal = 10.dp),
                 shape = RoundedCornerShape(10.dp),

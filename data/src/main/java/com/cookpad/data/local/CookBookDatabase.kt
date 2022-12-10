@@ -2,17 +2,11 @@ package com.cookpad.data.local
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.cookpad.data.local.dao.CountryDao
-import com.cookpad.data.local.dao.IngredientDao
-import com.cookpad.data.local.dao.MealCategoryDao
-import com.cookpad.data.local.dao.MealDao
-import com.cookpad.data.local.entity.CountryEntity
-import com.cookpad.data.local.entity.IngredientEntity
-import com.cookpad.data.local.entity.MealCategoryEntity
-import com.cookpad.data.local.entity.MealEntity
+import com.cookpad.data.local.dao.*
+import com.cookpad.data.local.entity.*
 
 @Database(
-    entities = [IngredientEntity::class, MealCategoryEntity::class, CountryEntity::class, MealEntity::class],
+    entities = [IngredientEntity::class, MealCategoryEntity::class, CountryEntity::class, MealEntity::class, RecipeEntity::class],
     version = 1,
     exportSchema = false
 )
@@ -21,4 +15,5 @@ abstract class CookBookDatabase : RoomDatabase() {
     abstract val mealCategoryDao: MealCategoryDao
     abstract val countryDao: CountryDao
     abstract val mealDao: MealDao
+    abstract val recipeDao: RecipeDao
 }
