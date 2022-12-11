@@ -2,6 +2,7 @@ package com.cookpad.data.remote
 
 import com.cookpad.data.remote.dto.*
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface CookPadApiService {
@@ -16,6 +17,8 @@ interface CookPadApiService {
         const val GET_MEAL_RANDOM_MEAL = "random.php"
         const val GET_MEAL_BREAKFAST_MEAL = "filter.php?i=milk"
         const val GET_MEAL_RECIPE_BY_ID = "lookup.php"
+        const val GET_MEALS_BY_CATEGORY_NAME = "filter.php"
+        const val GET_MEALS_BY_INGREDIENT_NAME = "filter.php"
     }
 
     @GET(GET_ALL_INGREDIENTS)
@@ -48,4 +51,9 @@ interface CookPadApiService {
     @GET(GET_MEAL_RECIPE_BY_ID)
     suspend fun getRecipeByMealId(@Query(value = "i") mealId: String): MealRecipeResponse
 
+    @GET(GET_MEALS_BY_CATEGORY_NAME)
+    suspend fun getMealsByCategoryName(@Query(value = "c") categoryName: String): MealsResponse
+
+    @GET(GET_MEALS_BY_INGREDIENT_NAME)
+    suspend fun getMealsByIngredientName(@Query(value = "i") categoryName: String): MealsResponse
 }
