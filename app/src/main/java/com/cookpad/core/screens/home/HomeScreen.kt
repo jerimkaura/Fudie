@@ -39,6 +39,7 @@ fun HomeScreen(navController: NavController, viewModel: HomeViewModel = hiltView
     val randomRecipe = viewModel.randomRecipe.value
     val scope = rememberCoroutineScope()
 
+
     LaunchedEffect(Unit) {
         viewModel.getRandomRecipe()
     }
@@ -67,7 +68,7 @@ fun HomeScreen(navController: NavController, viewModel: HomeViewModel = hiltView
                 item {
                     SectionHeader(
                         "Browse by Category",
-                        onClick = { navController.navigate(Route.RecipeScreen.route) })
+                        onClick = { navController.navigate(Route.CategoriesScreen.route) })
                     if (mealCategories.isLoading) {
                         LoadingAnimation(180.dp)
                     } else if (mealCategories.error != "") {
@@ -80,7 +81,13 @@ fun HomeScreen(navController: NavController, viewModel: HomeViewModel = hiltView
                     RowSpacer()
                 }
                 item {
-                    SectionHeader("Chicken Meals", onClick = {})
+                    SectionHeader("Chicken Meals", onClick = {
+                        navController.navigate(
+                            Route
+                                .MealsScreen
+                                .route + "/${"Chicken"}"
+                        )
+                    })
                     if (chickenMeals.isLoading) {
                         LoadingAnimation(180.dp)
                     } else if (chickenMeals.error != "") {
@@ -107,7 +114,13 @@ fun HomeScreen(navController: NavController, viewModel: HomeViewModel = hiltView
                     RowSpacer()
                 }
                 item {
-                    SectionHeader("Love animals, Eat veggies", onClick = {})
+                    SectionHeader("Love animals, Eat veggies", onClick = {
+                        navController.navigate(
+                            Route
+                                .MealsScreen
+                                .route + "/${"Vegetarian"}"
+                        )
+                    })
                     if (ingredients.isLoading) {
                         LoadingAnimation(180.dp)
                     } else if (countries.error != "") {
@@ -121,7 +134,13 @@ fun HomeScreen(navController: NavController, viewModel: HomeViewModel = hiltView
                 }
 
                 item {
-                    SectionHeader("Have an Awesome Breakfast", onClick = {})
+                    SectionHeader("Have an Awesome Breakfast", onClick = {
+                        navController.navigate(
+                            Route
+                                .MealsScreen
+                                .route + "/${"Milk"}"
+                        )
+                    })
                     if (ingredients.isLoading) {
                         LoadingAnimation(140.dp)
                     } else if (countries.error != "") {
@@ -150,7 +169,13 @@ fun HomeScreen(navController: NavController, viewModel: HomeViewModel = hiltView
                     RowSpacer()
                 }
                 item {
-                    SectionHeader("Pork Meals", onClick = {})
+                    SectionHeader("Pork Meals", onClick = {
+                        navController.navigate(
+                            Route
+                                .MealsScreen
+                                .route + "/${"Pork"}"
+                        )
+                    })
                     if (ingredients.isLoading) {
                         LoadingAnimation(150.dp)
                     } else if (countries.error != "") {

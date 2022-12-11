@@ -58,8 +58,6 @@ class RecipeRepositoryImpl @Inject constructor(
                 )
             )
         }
-
-//        Log.d("RECIPE", "getRecipeByMealId: ${dao.getRecipeByMealId(mealId).idMeal}")
         val newLocalRecipe = dao.getRecipeByMealId(mealId)?.toDomain()
         if (newLocalRecipe != null) {
             emit(Resource.Success(newLocalRecipe))
