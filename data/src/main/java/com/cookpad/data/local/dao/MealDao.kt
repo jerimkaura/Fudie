@@ -1,16 +1,14 @@
 package com.cookpad.data.local.dao
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import com.cookpad.data.local.entity.MealEntity
 import com.cookpad.domain.model.Ingredient
 
 @Dao
 interface MealDao {
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertMeals(mealS: List<MealEntity>)
+
+    @Upsert
+    suspend fun insertMeals(meals: List<MealEntity>)
 
     @Query("SELECT * FROM mealEntity")
     suspend fun getAllMeals(): List<MealEntity>

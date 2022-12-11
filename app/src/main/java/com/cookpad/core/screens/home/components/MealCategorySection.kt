@@ -27,6 +27,7 @@ import color_surface_dark
 import color_surface_light
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.cookpad.core.R
+import com.cookpad.core.navigation.Route
 import com.cookpad.core.ui.theme.montserrat
 import com.cookpad.domain.model.MealCategory
 
@@ -65,7 +66,11 @@ fun MealCategorySection(mealCategories: List<MealCategory>, navController: NavCo
                         modifier = Modifier
                             .clip(RoundedCornerShape(5.dp))
                             .size(70.dp)
-                            .clickable { },
+                            .clickable { navController.navigate(
+                                Route
+                                    .MealsScreen
+                                    .route + "/${mealCategories[it].strCategory}"
+                            )},
                     )
                 }
                 Spacer(modifier = Modifier.height(20.dp))

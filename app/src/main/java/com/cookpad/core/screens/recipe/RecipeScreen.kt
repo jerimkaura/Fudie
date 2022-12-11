@@ -44,7 +44,6 @@ fun RecipeScreen(navController: NavController, viewModel: RecipeViewModels = hil
 
     val recipe = viewModel.recipe.value
 
-
     Scaffold(
         topBar = {
         },
