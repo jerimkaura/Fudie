@@ -21,4 +21,7 @@ interface MealDao {
 
     @Query("DELETE FROM mealEntity WHERE strMeal in (:meals)")
     suspend fun deleteMeals(meals: List<String>)
+
+    @Query("SELECT * FROM mealEntity WHERE strCountry LIKE '%' || :countryName || '%' ")
+    suspend fun getMealsByCountryName(countryName: String): List<MealEntity>
 }
