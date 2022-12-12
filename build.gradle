@@ -1,9 +1,13 @@
 buildscript {
     ext {
         compose_version = '1.1.1'
+        workmanager = "2.7.1"
     }
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-serialization:1.6.10"
+    }
+    repositories {
+        maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
     }
 }// Top-level build file where you can add configuration options common to all sub-projects/modules.
 plugins {

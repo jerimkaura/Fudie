@@ -4,6 +4,6 @@ import com.cookpad.common.util.Resource
 import com.cookpad.domain.model.Ingredient
 import kotlinx.coroutines.flow.Flow
 
-interface IngredientsRepository {
+interface IngredientRepository {
      fun getIngredients(): Flow<Resource<List<Ingredient>>>
 }

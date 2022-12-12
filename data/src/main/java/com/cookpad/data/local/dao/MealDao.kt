@@ -1,16 +1,13 @@
 package com.cookpad.data.local.dao
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import com.cookpad.data.local.entity.MealEntity
-import com.cookpad.domain.model.Ingredient
 
 @Dao
 interface MealDao {
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertMeals(mealS: List<MealEntity>)
+
+    @Upsert
+    suspend fun upsertMeals(meals: List<MealEntity>)
 
     @Query("SELECT * FROM mealEntity")
     suspend fun getAllMeals(): List<MealEntity>
@@ -21,6 +18,6 @@ interface MealDao {
     @Query("SELECT * FROM mealEntity WHERE strCategory  LIKE '%' || :mealCategory || '%'")
     suspend fun getMealsByCategoryName(mealCategory: String): List<MealEntity>
 
-    @Query("DELETE FROM mealEntity WHERE strMeal in (:meals)")
-    suspend fun deleteMeals(meals: List<String>)
+    @Query("SELECT * FROM mealEntity WHERE strCountry LIKE '%' || :countryName || '%' ")
+    suspend fun getMealsByCountryName(countryName: String): List<MealEntity>
 }

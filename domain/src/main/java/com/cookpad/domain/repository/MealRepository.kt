@@ -5,9 +5,7 @@ import com.cookpad.domain.model.Meal
 import kotlinx.coroutines.flow.Flow
 
 interface MealRepository  {
-    fun getChickenMeals(): Flow<Resource<List<Meal>>>
-    fun getBeefMeals(): Flow<Resource<List<Meal>>>
-    fun getPorkMeals(): Flow<Resource<List<Meal>>>
-    fun getVegetarianMeals(): Flow<Resource<List<Meal>>>
-    fun getBreakFastMeals(): Flow<Resource<List<Meal>>>
+    fun getMealByCategoryName(categoryName: String): Flow<Resource<List<Meal>>>
+    fun getMealByIngredientName(ingredientName: String): Flow<Resource<List<Meal>>>
+    fun getMealByCountryName(countryName: String): Flow<Resource<List<Meal>>>
 }

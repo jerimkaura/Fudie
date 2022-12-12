@@ -13,4 +13,15 @@ sealed class BottomNavItem(
         R.drawable.ic_home,
         Route.HomeScreen.route
     )
+    object Categories : BottomNavItem(
+        "Categories",
+        R.drawable.ic_trending,
+        Route.CategoriesScreen.route
+    )
+
+    object Countries : BottomNavItem(
+        "Countries",
+        R.drawable.ic_notes,
+        Route.CountriesScreen.route
+    )
 }

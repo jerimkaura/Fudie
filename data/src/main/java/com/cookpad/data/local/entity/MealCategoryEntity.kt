@@ -7,9 +7,8 @@ import com.cookpad.domain.model.MealCategory
 @Entity
 data class MealCategoryEntity(
     @PrimaryKey
-    val id: Int? = null,
-    val strCategory: String,
     val idCategory: String,
+    val strCategory: String,
     val strCategoryDescription: String,
     val strCategoryThumb: String
 ) {

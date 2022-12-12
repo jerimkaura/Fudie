@@ -1,5 +1,6 @@
 package com.cookpad.core.screens.utils
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -13,7 +14,7 @@ import com.cookpad.core.ui.theme.montserrat
 
 
 @Composable
-fun SectionHeader(heading: String, onClick: () -> Unit) {
+fun SectionHeader(heading: String, showText: Boolean = true, onClick: () -> Unit) {
     Row(
         modifier = Modifier
             .padding(horizontal = 20.dp, vertical = 10.dp)
@@ -32,14 +33,18 @@ fun SectionHeader(heading: String, onClick: () -> Unit) {
 
 
         )
-        Text(
-            text = "See All",
-            style = TextStyle(
-                fontFamily = montserrat,
-                fontWeight = FontWeight.Medium,
-                fontSize = 16.sp,
+        if (showText) {
+            Text(
+                modifier = Modifier.clickable { onClick.invoke() },
+                text = "See All",
+                style = TextStyle(
+                    fontFamily = montserrat,
+                    fontWeight = FontWeight.Medium,
+                    fontSize = 16.sp,
+                )
             )
-        )
+        }
+
     }
 
 }

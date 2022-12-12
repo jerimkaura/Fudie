@@ -23,6 +23,8 @@ import com.cookpad.core.navigation.bottomNavigation.BottomNavItem
 fun BottomNavigationBar(navController: NavController) {
     val items = listOf(
         BottomNavItem.Home,
+        BottomNavItem.Categories,
+        BottomNavItem.Countries,
     )
     Column {
         NavigationBar(

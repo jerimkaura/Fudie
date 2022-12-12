@@ -1,14 +1,13 @@
 package com.cookpad.core.screens.home
 
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.cookpad.common.util.Resource
-import com.cookpad.core.screens.home.states.MealsState
-import com.cookpad.core.screens.home.states.CountriesState
-import com.cookpad.core.screens.home.states.IngredientsState
-import com.cookpad.core.screens.home.states.MealCategoriesState
+import com.cookpad.core.screens.home.states.*
+import com.cookpad.core.screens.recipe.states.RecipeState
 import com.cookpad.domain.use_cases.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
@@ -20,11 +19,9 @@ class HomeViewModel @Inject constructor(
     private val getIngredientsUseCase: GetIngredientsUseCase,
     private val getMealCategoriesUseCase: GetMealCategoriesUseCase,
     private val getCountriesUseCase: GetCountriesUseCase,
-    private val getChickenMealsUseCase: GetChickenMealsUseCase,
-    private val getPorkMealsUseCase: GetPorkMealsUseCase,
-    private val getBeefMealsUseCase: GetBeefMealsUseCase,
-    private val getVegetarianMealsUseCase: GetVegetarianMealsUseCase,
-    private val getBreakfastMealsUseCase: GetBreakfastMealsUseCase,
+    private val getMealByCategoryNameUseCase: GetMealByCategoryNameUseCase,
+    private val getMealByIngredientNameUseCase: GetMealByIngredientNameUseCase,
+    private val getRandomRecipeUseCase: GetRandomRecipeUseCase,
 ) :
     ViewModel() {
 
@@ -52,91 +49,64 @@ class HomeViewModel @Inject constructor(
     private var _breakfastMeals = mutableStateOf(MealsState())
     val breakfastMeals: State<MealsState> = _breakfastMeals
 
+    private var _randomRecipe = mutableStateOf(RecipeState())
+    val randomRecipe: State<RecipeState> = _randomRecipe
 
     init {
         getMealCategories()
         getIngredients()
         getCountries()
-        getChickenMeals()
-        getBeefMeals()
-        getPorkMeals()
-        getVegetarianMeals()
-        getBreakFastMeals()
+        getMealByCategoryName("Chicken",_chickenMeals)
+        getMealByCategoryName("Beef",_beefMeals)
+        getMealByCategoryName("Pork",_porkMeals)
+        getMealByCategoryName("Vegetarian",_vegetarianMeals)
+        getMealByIngredientName("Milk",_breakfastMeals)
     }
 
-    private fun getBreakFastMeals() {
-        getBreakfastMealsUseCase().onEach { result ->
-            when (result){
-                is Resource.Loading -> {
-                    _breakfastMeals.value = MealsState(isLoading = true)
-                }
-                is Resource.Success -> {
-                    _breakfastMeals.value = MealsState(data = result.data)
-                }
-                is Resource.Error -> {
-                    _breakfastMeals.value = MealsState(error = result.error.toString())
-                }
-            }
-        }.launchIn(viewModelScope)
-    }
 
-    private fun getVegetarianMeals() {
-        getVegetarianMealsUseCase().onEach { result ->
-            when (result){
+    fun getRandomRecipe() {
+        getRandomRecipeUseCase().onEach { result ->
+            when (result) {
                 is Resource.Loading -> {
-                    _vegetarianMeals.value = MealsState(isLoading = true)
+                    _randomRecipe.value = RecipeState(isLoading = true)
                 }
                 is Resource.Success -> {
-                    _vegetarianMeals.value = MealsState(data = result.data)
+                    _randomRecipe.value = RecipeState(data = result.data)
                 }
                 is Resource.Error -> {
-                    _vegetarianMeals.value = MealsState(error = result.error.toString())
-                }
-            }
-        }.launchIn(viewModelScope)
-    }
-    private fun getPorkMeals() {
-        getPorkMealsUseCase().onEach { result ->
-            when (result){
-                is Resource.Loading -> {
-                    _porkMeals.value = MealsState(isLoading = true)
-                }
-                is Resource.Success -> {
-                    _porkMeals.value = MealsState(data = result.data)
-                }
-                is Resource.Error -> {
-                    _porkMeals.value = MealsState(error = result.error.toString())
-                }
-            }
-        }.launchIn(viewModelScope)
-    }
-    private fun getBeefMeals() {
-        getBeefMealsUseCase().onEach { result ->
-            when (result){
-                is Resource.Loading -> {
-                    _beefMeals.value = MealsState(isLoading = true)
-                }
-                is Resource.Success -> {
-                    _beefMeals.value = MealsState(data = result.data)
-                }
-                is Resource.Error -> {
-                    _beefMeals.value = MealsState(error = result.error.toString())
+                    _randomRecipe.value = RecipeState(error = result.error.toString())
                 }
             }
         }.launchIn(viewModelScope)
     }
 
-    private fun getChickenMeals() {
-        getChickenMealsUseCase().onEach { result ->
-            when (result){
+    private fun getMealByCategoryName(categoryName: String, _state: MutableState<MealsState>) {
+        getMealByCategoryNameUseCase(categoryName).onEach { result ->
+            when (result) {
                 is Resource.Loading -> {
-                    _chickenMeals.value = MealsState(isLoading = true)
+                    _state.value = MealsState(isLoading = true)
                 }
                 is Resource.Success -> {
-                    _chickenMeals.value = MealsState(data = result.data)
+                    _state.value = MealsState(data = result.data)
                 }
                 is Resource.Error -> {
-                    _chickenMeals.value = MealsState(error = result.error.toString())
+                    _state.value = MealsState(error = result.error.toString())
+                }
+            }
+        }.launchIn(viewModelScope)
+    }
+
+    private fun getMealByIngredientName(ingredientName: String, _state: MutableState<MealsState>) {
+        getMealByIngredientNameUseCase(ingredientName).onEach { result ->
+            when (result) {
+                is Resource.Loading -> {
+                    _state.value = MealsState(isLoading = true)
+                }
+                is Resource.Success -> {
+                    _state.value = MealsState(data = result.data)
+                }
+                is Resource.Error -> {
+                    _state.value = MealsState(error = result.error.toString())
                 }
             }
         }.launchIn(viewModelScope)
@@ -157,7 +127,6 @@ class HomeViewModel @Inject constructor(
             }
         }.launchIn(viewModelScope)
     }
-
 
     private fun getMealCategories() {
         getMealCategoriesUseCase().onEach { result ->
