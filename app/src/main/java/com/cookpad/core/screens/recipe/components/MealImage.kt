@@ -43,9 +43,8 @@ fun MealImage(recipe: Recipe?, navController: NavController) {
             model = ImageRequest.Builder(LocalContext.current)
                 .data(recipe?.strMealThumb)
                 .crossfade(true)
-                .diskCachePolicy(CachePolicy.ENABLED)// it's the same even removing comments
+                .diskCachePolicy(CachePolicy.ENABLED)
                 .build(),
-            placeholder = painterResource(R.drawable.lily),
             contentDescription = stringResource(R.string.app_name),
             contentScale = ContentScale.Crop,
             modifier = Modifier

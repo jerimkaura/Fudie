@@ -66,4 +66,30 @@ class MealRepositoryImpl @Inject constructor(
             val newMeals = dao.getMealsByCategoryName(ingredientName).map { it.toDomain() }
         emit(Resource.Success(newMeals))
     }
+
+    override fun getMealByCountryName(countryName: String): Flow<Resource<List<Meal>>> = flow {
+        emit(Resource.Loading())
+        val localMeals = dao.getMealsByCountryName(countryName).map { it.toDomain() }
+        emit(Resource.Loading(data = localMeals))
+        try {
+            val remoteMeals = api.getMealByCountryName(countryName)
+            dao.insertMeals(remoteMeals.meals.map {
+                it.toMealEntity().copy(strCountry = countryName)
+            })
+            emit(Resource.Success(data = remoteMeals.meals.map {
+                it.toMealEntity().toDomain()
+            }))
+        } catch (e: IOException) {
+            emit(
+                Resource.Error(
+                    message = "Please check your internet connection", data = localMeals
+                )
+            )
+        } catch (e: HttpException) {
+            emit(Resource.Error(message = "Something went wrong", data = localMeals))
+        }
+
+        val newMeals = dao.getMealsByCountryName(countryName).map { it.toDomain() }
+        emit(Resource.Success(newMeals))
+    }
 }

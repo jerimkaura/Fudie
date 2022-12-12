@@ -7,4 +7,5 @@ sealed class Route(val route:String){
     object ProfileScreen : Route("profile_screen")
     object CategoriesScreen : Route("categories_screen")
     object MealsScreen : Route("meals_screen")
+    object CountriesScreen : Route("countries_screen")
 }

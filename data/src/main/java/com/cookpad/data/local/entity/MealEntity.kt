@@ -10,7 +10,8 @@ data class MealEntity(
     val idMeal: String,
     val strMeal: String,
     val strMealThumb: String,
-    val strCategory: String? = "default"
+    val strCategory: String? = "default",
+    val strCountry: String? = "Not Available"
 ) {
     fun toDomain(): Meal {
         return Meal(

@@ -26,7 +26,7 @@ class CookPadApplication : Application(), Configuration.Provider {
             .setMinimumLoggingLevel(android.util.Log.INFO).build()
     }
 
-    fun setupWorker(){
+    private fun setupWorker(){
         val workManager = WorkManager.getInstance()
         var continuation = workManager.beginUniqueWork(
             "dataUpdate",

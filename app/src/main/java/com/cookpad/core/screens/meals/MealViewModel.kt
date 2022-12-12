@@ -26,7 +26,6 @@ class MealViewModel @Inject constructor(
         savedStateHandle.get<String>(Constants.CATEGORY_NAME)?.let { categoryName ->
             getMealByCategoryName(categoryName, _meals)
         }
-
     }
 
     private fun getMealByCategoryName(categoryName: String, _state: MutableState<MealsState>) {

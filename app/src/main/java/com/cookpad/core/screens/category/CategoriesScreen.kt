@@ -38,6 +38,7 @@ import color_surface_dark
 import color_surface_light
 import com.cookpad.core.R
 import com.cookpad.core.navigation.Route
+import com.cookpad.core.screens.home.HomeViewModel
 import com.cookpad.core.screens.home.LoadingAnimation
 import com.cookpad.core.ui.theme.montserrat
 import com.cookpad.domain.model.MealCategory
@@ -45,7 +46,7 @@ import com.cookpad.domain.model.MealCategory
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CategoriesScreen(
-    navController: NavController, viewModel: CategoriesViewModel = hiltViewModel()
+    navController: NavController, viewModel: HomeViewModel = hiltViewModel()
 ) {
     val mealCategories = viewModel.mealCategories.value
     val openDialog = remember { mutableStateOf(false) }

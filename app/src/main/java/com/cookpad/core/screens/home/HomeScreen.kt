@@ -101,7 +101,9 @@ fun HomeScreen(navController: NavController, viewModel: HomeViewModel = hiltView
                 }
                 item {
 
-                    SectionHeader("Explore Countries' Meals", onClick = {})
+                    SectionHeader("Explore Countries' Meals", onClick = {
+                        navController.navigate(Route.CountriesScreen.route)
+                    })
                     if (countries.isLoading) {
                         LoadingAnimation(120.dp)
                     } else if (countries.error != "") {
@@ -158,10 +160,9 @@ fun HomeScreen(navController: NavController, viewModel: HomeViewModel = hiltView
                     SectionHeader("Browse by Ingredients", onClick = {})
                     if (ingredients.isLoading) {
                         LoadingAnimation(180.dp)
-                    } else if (countries.error != "") {
-                        ErrorComposable(countries.error)
+                    } else if (ingredients.error != "") {
+                        ErrorComposable(ingredients.error)
                     } else {
-
                         MealIngredients(ingredients.data!!, navController)
                     }
                 }
