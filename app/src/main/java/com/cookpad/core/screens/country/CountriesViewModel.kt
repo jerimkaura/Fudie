@@ -1,44 +1,47 @@
-package com.cookpad.core.screens.category
+package com.cookpad.core.screens.country
 
+import android.util.Log
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
-import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.cookpad.common.util.Resource
-import com.cookpad.core.screens.home.states.MealCategoriesState
-import com.cookpad.domain.use_cases.GetMealCategoriesUseCase
+import com.cookpad.core.screens.home.states.MealsState
+import com.cookpad.domain.use_cases.GetCountriesUseCase
+import com.cookpad.domain.use_cases.GetMealByCountryNameUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
 
 @HiltViewModel
-class CategoriesViewModel @Inject constructor(
-    private val getMealCategoriesUseCase: GetMealCategoriesUseCase
+class CountriesViewModel @Inject constructor(
+    private val getMealByCountryNameUseCase: GetMealByCountryNameUseCase,
+    private val getCountriesUseCase: GetCountriesUseCase
 ) : ViewModel() {
-    private var _mealCategories = mutableStateOf(MealCategoriesState())
-    val mealCategories: State<MealCategoriesState> = _mealCategories
+
+    private var _meals = mutableStateOf(MealsState())
+    val meals: State<MealsState> = _meals
+
 
     init {
-        getMealCategories()
+        getMealByCountryNameName("American")
     }
 
-    private fun getMealCategories() {
-        getMealCategoriesUseCase().onEach { result ->
+    fun getMealByCountryNameName(categoryName: String) {
+        getMealByCountryNameUseCase(categoryName).onEach { result ->
             when (result) {
                 is Resource.Loading -> {
-                    _mealCategories.value = MealCategoriesState(isLoading = true)
+                    _meals.value = MealsState(isLoading = true)
                 }
                 is Resource.Success -> {
-                    _mealCategories.value = MealCategoriesState(data = result.data)
+                    _meals.value = MealsState(data = result.data)
+                    Log.d(categoryName.uppercase(), "getMealByCountryNameName: ${result.data}")
                 }
                 is Resource.Error -> {
-                    _mealCategories.value = MealCategoriesState(error = result.error.toString())
+                    _meals.value = MealsState(error = result.error.toString())
                 }
-                else -> {}
             }
-
         }.launchIn(viewModelScope)
     }
 }

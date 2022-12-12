@@ -22,6 +22,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.cookpad.core.navigation.Route
 import com.cookpad.core.screens.category.CategoriesScreen
+import com.cookpad.core.screens.country.CountriesScreen
 import com.cookpad.core.screens.home.BottomNavigationBar
 import com.cookpad.core.screens.home.HomeScreen
 import com.cookpad.core.screens.meals.MealsScreen
@@ -91,7 +92,7 @@ fun MainScreen(){
                 }
             },
         ) {
-            NavHost(navController = navController, startDestination = "home_screen") {
+            NavHost(navController = navController, startDestination = "countries_screen") {
                 screens(navController)
             }
         }
@@ -109,6 +110,10 @@ private fun NavGraphBuilder.screens(navController: NavController){
 
     composable(route = Route.CategoriesScreen.route){
         CategoriesScreen(navController)
+    }
+
+    composable(route = Route.CountriesScreen.route){
+        CountriesScreen(navController)
     }
 
     composable(route = Route.MealsScreen.route + "/{category_name}"){
