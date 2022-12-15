@@ -36,7 +36,6 @@ class CountriesViewModel @Inject constructor(
                 }
                 is Resource.Success -> {
                     _meals.value = MealsState(data = result.data)
-                    Log.d(categoryName.uppercase(), "getMealByCountryNameName: ${result.data}")
                 }
                 is Resource.Error -> {
                     _meals.value = MealsState(error = result.error.toString())

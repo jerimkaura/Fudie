@@ -1,6 +1,5 @@
 package com.cookpad.domain.use_cases
 
-import android.util.Log
 import com.cookpad.common.util.Resource
 import com.cookpad.domain.model.Recipe
 import com.cookpad.domain.repository.RecipeRepository

@@ -5,5 +5,5 @@ import com.squareup.moshi.Json
 
 data class MealCategoriesResponse(
     @Json(name = "categories")
-    val categories: List<CategoryDTO>
+    val categories: List<CategoryDTO>?
 )

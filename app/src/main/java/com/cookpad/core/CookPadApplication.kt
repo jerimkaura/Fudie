@@ -16,7 +16,7 @@ class CookPadApplication : Application(), Configuration.Provider {
         WorkManager.initialize(
             this, workManagerConfiguration
         )
-        setupWorker()
+//        setupWorker()
     }
 
     @Inject
