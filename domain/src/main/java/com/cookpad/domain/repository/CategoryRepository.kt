@@ -4,6 +4,6 @@ import com.cookpad.common.util.Resource
 import com.cookpad.domain.model.MealCategory
 import kotlinx.coroutines.flow.Flow
 
-interface MealCategoryRepository {
+interface CategoryRepository {
     fun getMealCategories(): Flow<Resource<List<MealCategory>>>
 }

@@ -2,6 +2,7 @@ package com.cookpad.data.repository
 
 import android.util.Log
 import com.cookpad.common.util.Resource
+import com.cookpad.data.local.dao.MealDao
 import com.cookpad.data.local.dao.RecipeDao
 import com.cookpad.data.remote.CookPadApiService
 import com.cookpad.domain.model.Recipe
@@ -14,17 +15,29 @@ import javax.inject.Inject
 
 class RecipeRepositoryImpl @Inject constructor(
     private val api: CookPadApiService,
-    private val dao: RecipeDao
+    private val recipeDao: RecipeDao,
+    private val mealDao: MealDao
 ) :
     RecipeRepository {
     override fun getRandomMeal(): Flow<Resource<Recipe>> = flow {
         emit(Resource.Loading())
+        val randomLocalRecipe: Recipe?
+        val recipes = recipeDao.getRecipes() ?: emptyList()
+        if (recipes.isEmpty()){
+            Log.d("RECIPE EMPTY", "getRandomMeal: EMPTY")
+        }else{
+            Log.d("RECIPE EMPTY", "getRandomMeal: $recipes")
+            randomLocalRecipe = recipes.random().toDomain()
+            emit(Resource.Success(data = randomLocalRecipe))
+        }
         try {
-            val remoteRecipe = api.getRandomMeal().meals.first()
-            dao.upsertRecipe(remoteRecipe.toEntity())
-            val recipe = dao.getRecipeByMealId(remoteRecipe.toEntity().idMeal)
-            if (recipe != null) {
-                emit(Resource.Success(recipe.toDomain()))
+            val remoteRecipe = api.getRandomMeal().meals?.firstOrNull()
+            remoteRecipe?.let {
+                recipeDao.upsertRecipe(it.toEntity())
+            }
+            val recipe = remoteRecipe?.toEntity()?.idMeal?.let { recipeDao.getRecipeByMealId(it) }
+            recipe?.let { recipeEntity ->
+                emit(Resource.Success(recipeEntity.toDomain()))
             }
         } catch (e: IOException) {
             emit(
@@ -35,16 +48,34 @@ class RecipeRepositoryImpl @Inject constructor(
         } catch (e: HttpException) {
             emit(Resource.Error(message = "Something went wrong"))
         }
+        val newRecipes = recipeDao.getRecipes() ?: emptyList()
+        newRecipes.isNotEmpty().let {
+            if (it){
+                emit(Resource.Success(data = newRecipes.random().toDomain()))
+            }
+        }
+
     }
 
     override fun getRecipeByMealId(mealId: String): Flow<Resource<Recipe>> = flow {
         emit(Resource.Loading())
+        recipeDao.getRecipeByMealId(mealId)?.toDomain()?.let {
+            emit(Resource.Success(data = it))
+        }
         try {
-            val localRecipe = dao.getRecipeByMealId(mealId)?.toDomain() ?: api.getRecipeByMealId(
-                mealId
-            ).meals.first().toEntity().toDomain()
-            val remoteRecipe = api.getRecipeByMealId(mealId).meals.first()
-            dao.upsertRecipe(remoteRecipe.toEntity())
+            api.getRecipeByMealId(mealId).meals?.firstOrNull()?.toEntity().let {
+                it?.let {
+                    recipeDao.upsertRecipe(it)
+                }
+            }
+            val localRecipe =
+                recipeDao.getRecipeByMealId(mealId)
+                    ?: api.getRecipeByMealId(mealId).meals?.firstOrNull()
+                        ?.toEntity()
+            localRecipe?.let {
+                recipeDao.upsertRecipe(it)
+                emit(Resource.Success(data = recipeDao.getRecipeByMealId(it.idMeal)!!.toDomain()))
+            }
         } catch (e: IOException) {
             emit(
                 Resource.Error(
@@ -58,9 +89,22 @@ class RecipeRepositoryImpl @Inject constructor(
                 )
             )
         }
-        val newLocalRecipe = dao.getRecipeByMealId(mealId)?.toDomain()
-        if (newLocalRecipe != null) {
-            emit(Resource.Success(newLocalRecipe))
+        val newLocalRecipe = recipeDao.getRecipeByMealId(mealId)?.toDomain()?.let {
+            emit(Resource.Success(it))
         }
+    }
+
+    override suspend fun getAllRecipes(): List<Recipe> {
+        val meals = mealDao.getAllMeals().forEach { meal ->
+            api.getRecipeByMealId(meal.idMeal).meals?.let { recipes ->
+                recipeDao.insertRecipes(recipes.map { recipeDto ->
+                    recipeDto.toEntity()
+                })
+            }
+        }
+        val recipes = recipeDao.getRecipes()?.map {
+            it.toDomain()
+        }
+        return recipes ?: emptyList()
     }
 }

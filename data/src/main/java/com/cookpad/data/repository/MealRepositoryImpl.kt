@@ -22,7 +22,7 @@ class MealRepositoryImpl @Inject constructor(
         emit(Resource.Loading(data = localMeals))
         try {
             val remoteMeals = api.getMealsByCategoryName(categoryName)
-            dao.insertMeals(remoteMeals.meals.map {
+            dao.upsertMeals(remoteMeals.meals.map {
                 it.toMealEntity().copy(strCategory = categoryName)
             })
         } catch (e: IOException) {
@@ -47,7 +47,7 @@ class MealRepositoryImpl @Inject constructor(
             emit(Resource.Loading(data = localMeals))
             try {
                 val remoteMeals = api.getMealsByIngredientName(ingredientName)
-                dao.insertMeals(remoteMeals.meals.map {
+                dao.upsertMeals(remoteMeals.meals.map {
                     it.toMealEntity().copy(strCategory = ingredientName)
                 })
                 emit(Resource.Success(data = remoteMeals.meals.map {
@@ -73,7 +73,7 @@ class MealRepositoryImpl @Inject constructor(
         emit(Resource.Loading(data = localMeals))
         try {
             val remoteMeals = api.getMealByCountryName(countryName)
-            dao.insertMeals(remoteMeals.meals.map {
+            dao.upsertMeals(remoteMeals.meals.map {
                 it.toMealEntity().copy(strCountry = countryName)
             })
             emit(Resource.Success(data = remoteMeals.meals.map {

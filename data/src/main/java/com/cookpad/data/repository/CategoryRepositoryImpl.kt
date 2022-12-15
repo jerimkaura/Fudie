@@ -4,27 +4,25 @@ import com.cookpad.common.util.Resource
 import com.cookpad.data.local.dao.MealCategoryDao
 import com.cookpad.data.remote.CookPadApiService
 import com.cookpad.domain.model.MealCategory
-import com.cookpad.domain.repository.MealCategoryRepository
+import com.cookpad.domain.repository.CategoryRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import retrofit2.HttpException
 import java.io.IOException
 import javax.inject.Inject
 
-class MealCategoryRepositoryImpl @Inject constructor(
+class CategoryRepositoryImpl @Inject constructor(
     private val api: CookPadApiService,
     private val dao: MealCategoryDao
-) : MealCategoryRepository {
+) : CategoryRepository {
     override fun getMealCategories(): Flow<Resource<List<MealCategory>>> = flow {
         emit(Resource.Loading())
         val localCategories = dao.getMealCategories().map { it.toDomain() }
         emit(Resource.Loading(data = localCategories))
         try {
             val remoteCategories = api.getMealCategories()
-            dao.deleteMealCategories(remoteCategories.categories.map { it.toEntity() }
-                .map { it.strCategory })
-            dao.insertMealCategories(remoteCategories.categories.map { it.toEntity() })
-
+            val mealsToInsert = remoteCategories.categories ?: listOf()
+            dao.upsertMeals(mealsToInsert.map { it.toEntity() })
         } catch (e: IOException) {
             emit(
                 Resource.Error(

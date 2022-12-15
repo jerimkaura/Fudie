@@ -20,12 +20,11 @@ class CountryRepositoryImpl @Inject constructor(
         val localCountries = dao.getCountries().map { it.toDomain() }
         emit(Resource.Loading(data = localCountries))
         try {
-            val remoteCountries = api.getMealCountries()
-            val listOfCountriesToDelete =
-                remoteCountries.meals.map { it.toCountryEntity() }
-                    .map { it.strArea }
-            dao.deleteCountries(listOfCountriesToDelete)
-            dao.insertCountries(remoteCountries.meals.map { it.toCountryEntity() })
+            val remoteCountries = api.getMealCountries().meals ?: emptyList()
+            val newLocalCountries = remoteCountries.map {
+                it.toCountryEntity()
+            }
+            dao.upsertCountries(newLocalCountries)
         } catch (e: IOException) {
             emit(
                 Resource.Error(
@@ -39,6 +38,5 @@ class CountryRepositoryImpl @Inject constructor(
 
         val newCountries = dao.getCountries().map { it.toDomain() }
         emit(Resource.Success(newCountries))
-
     }
 }

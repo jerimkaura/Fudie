@@ -56,8 +56,8 @@ class DataModule {
     fun provideIngredientsRepository(
         apiService: CookPadApiService,
         ingredientDao: IngredientDao
-    ): IngredientsRepository {
-        return IngredientsRepositoryImpl(apiService, ingredientDao)
+    ): IngredientRepository {
+        return IngredientRepositoryImpl(apiService, ingredientDao)
     }
 
     @Singleton
@@ -65,8 +65,8 @@ class DataModule {
     fun provideMealCategoriesRepository(
         api: CookPadApiService,
         dao: MealCategoryDao
-    ): MealCategoryRepository {
-        return MealCategoryRepositoryImpl(api, dao)
+    ): CategoryRepository {
+        return CategoryRepositoryImpl(api, dao)
     }
 
     @Singleton
@@ -83,7 +83,11 @@ class DataModule {
 
     @Singleton
     @Provides
-    fun provideRecipeRepository(api: CookPadApiService, dao: RecipeDao): RecipeRepository {
-        return RecipeRepositoryImpl(api, dao)
+    fun provideRecipeRepository(
+        api: CookPadApiService,
+        recipeDao: RecipeDao,
+        mealDao: MealDao
+    ): RecipeRepository {
+        return RecipeRepositoryImpl(api = api, recipeDao = recipeDao, mealDao = mealDao)
     }
 }
