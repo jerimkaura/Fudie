@@ -1,4 +1,4 @@
-package com.cookpad.common.util
+package com.cookpad.core.screens.utils
 
 import android.content.Context
 import android.net.ConnectivityManager
