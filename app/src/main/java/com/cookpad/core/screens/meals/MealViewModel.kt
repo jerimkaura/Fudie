@@ -10,6 +10,7 @@ import com.cookpad.common.util.Resource
 import com.cookpad.core.screens.home.states.MealsState
 import com.cookpad.core.screens.utils.Constants
 import com.cookpad.domain.use_cases.GetMealByCategoryNameUseCase
+import com.cookpad.domain.use_cases.GetMealByIngredientNameUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -17,14 +18,20 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MealViewModel @Inject constructor(
-    private val getMealByCategoryNameUseCase: GetMealByCategoryNameUseCase, savedStateHandle: SavedStateHandle
+    private val getMealByIngredientNameUseCase: GetMealByIngredientNameUseCase,
+    private val getMealByCategoryNameUseCase: GetMealByCategoryNameUseCase,
+    savedStateHandle: SavedStateHandle
 ) : ViewModel() {
     private var _meals = mutableStateOf(MealsState())
     val meals: State<MealsState> = _meals
 
+    private var _categoryName = mutableStateOf("")
+    val categoryName: State<String> = _categoryName
+
     init {
-        savedStateHandle.get<String>(Constants.CATEGORY_NAME)?.let { categoryName ->
-            getMealByCategoryName(categoryName, _meals)
+        savedStateHandle.get<String>(Constants.CATEGORY_NAME)?.let { catName ->
+            _categoryName.value = catName
+            getMealByCategoryName(catName, _meals)
         }
     }
 
@@ -43,4 +50,5 @@ class MealViewModel @Inject constructor(
             }
         }.launchIn(viewModelScope)
     }
+
 }
