@@ -42,9 +42,16 @@ fun MealCountrySection(countriesState: CountriesState, navController: NavControl
                     verticalArrangement = Arrangement.Center,
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    LottieAnime(size = 50.dp, lottieFile = R.raw.loader, speed = 1.0f)
+                    LottieAnime(size = 70.dp, lottieFile = R.raw.small_section_loader, speed = 1.0f)
                     Spacer(modifier = Modifier.height(10.dp))
-                    androidx.compose.material.Text(text = "Loading countries...")
+                    Text(
+                        text = "Loading countries...",
+                        style = TextStyle(
+                            fontFamily = montserrat,
+                            fontWeight = FontWeight.Medium,
+                            fontSize = 14.sp,
+                        )
+                    )
                 }
             }
         } else if (countriesState.error.isNotEmpty()) {
@@ -58,7 +65,13 @@ fun MealCountrySection(countriesState: CountriesState, navController: NavControl
                 ) {
                     LottieAnime(size = 50.dp, lottieFile = R.raw.no_internet, speed = 2.0f)
                     Spacer(modifier = Modifier.height(10.dp))
-                    androidx.compose.material.Text(text = countriesState.error)
+                    Text(
+                        text = countriesState.error, style = TextStyle(
+                            fontFamily = montserrat,
+                            fontWeight = FontWeight.Medium,
+                            fontSize = 14.sp,
+                        )
+                    )
                 }
             }
         } else {
@@ -101,13 +114,20 @@ fun MealCountrySection(countriesState: CountriesState, navController: NavControl
                     Column(
                         modifier = Modifier
                             .fillParentMaxWidth()
-                            .height(90.dp),
+                            .height(130.dp),
                         verticalArrangement = Arrangement.Center,
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
-                        LottieAnime(size = 50.dp, lottieFile = R.raw.veggies, speed = 2.0f)
+                        LottieAnime(size = 80.dp, lottieFile = R.raw.empty_list, speed = 0.5f)
                         Spacer(modifier = Modifier.height(10.dp))
-                        androidx.compose.material.Text(text = "No Items, check your connection")
+                        Text(
+                            text = "No Items, check your connection", style = TextStyle(
+                                fontFamily = montserrat,
+                                fontWeight = FontWeight.Medium,
+                                fontSize = 14.sp,
+                            )
+                        )
+                        Spacer(modifier = Modifier.height(10.dp))
                     }
                 }
             }

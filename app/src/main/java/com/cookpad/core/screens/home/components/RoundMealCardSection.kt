@@ -61,9 +61,15 @@ fun RoundMealCardSection(mealsState: MealsState, navController: NavController) {
                     verticalArrangement = Arrangement.Center,
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    LottieAnime(size = 50.dp, lottieFile = R.raw.loader, speed = 2.0f)
+                    LottieAnime(size = 50.dp, lottieFile = R.raw.small_section_loader, speed = 2.0f)
                     Spacer(modifier = Modifier.height(10.dp))
-                    androidx.compose.material.Text(text = "Hang on chef...")
+                    Text(
+                        text = "Hang on chef...", style = TextStyle(
+                            fontFamily = montserrat,
+                            fontWeight = FontWeight.Medium,
+                            fontSize = 14.sp,
+                        )
+                    )
                 }
             }
         } else if (mealsState.error.isNotEmpty()) {
@@ -77,7 +83,13 @@ fun RoundMealCardSection(mealsState: MealsState, navController: NavController) {
                 ) {
                     LottieAnime(size = 50.dp, lottieFile = R.raw.no_internet, speed = 2.0f)
                     Spacer(modifier = Modifier.height(10.dp))
-                    androidx.compose.material.Text(text = "Check you connection")
+                    Text(
+                        text = "Check you connection", style = TextStyle(
+                            fontFamily = montserrat,
+                            fontWeight = FontWeight.Medium,
+                            fontSize = 14.sp,
+                        )
+                    )
                 }
             }
         } else {
@@ -146,9 +158,14 @@ fun RoundMealCardSection(mealsState: MealsState, navController: NavController) {
                         verticalArrangement = Arrangement.Center,
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
-                        LottieAnime(size = 50.dp, lottieFile = R.raw.veggies, speed = 2.0f)
+                        LottieAnime(size = 80.dp, lottieFile = R.raw.empty_list, speed = 1.0f)
                         Spacer(modifier = Modifier.height(10.dp))
-                        androidx.compose.material.Text(text = "No Items Found")
+                        Text(text = "No items found, check your connection",
+                            style = TextStyle(
+                            fontFamily = montserrat,
+                            fontWeight = FontWeight.Medium,
+                            fontSize = 14.sp,
+                        ))
                     }
                 }
             }

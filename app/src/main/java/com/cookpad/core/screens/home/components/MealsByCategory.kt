@@ -114,7 +114,6 @@ fun MealsByCategory(
                                 Row(
                                     modifier = Modifier
                                         .align(Alignment.BottomCenter)
-//                                        .background(itemBgColor.copy(0.4f))
                                         .fillMaxWidth()
                                         .height(50.dp),
                                     horizontalArrangement = Arrangement.Center,
@@ -152,9 +151,16 @@ fun MealsByCategory(
                         verticalArrangement = Arrangement.Center,
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
-                        LottieAnime(size = 50.dp, lottieFile = R.raw.loader, speed = 2.0f)
+                        LottieAnime(size = 80.dp, lottieFile = R.raw.empty_list, speed = 2.0f)
                         Spacer(modifier = Modifier.height(10.dp))
-                        androidx.compose.material.Text(text = "No Items Found, try checking your internet")
+                        Text(
+                            text = "No Items Found, try checking your internet",
+                            style = TextStyle(
+                                fontFamily = montserrat,
+                                fontWeight = FontWeight.Medium,
+                                fontSize = 14.sp,
+                            )
+                        )
                     }
                 }
             }
@@ -168,9 +174,16 @@ fun MealsByCategory(
                     verticalArrangement = Arrangement.Center,
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    LottieAnime(size = 50.dp, lottieFile = R.raw.loader, speed = 1.0f)
+                    LottieAnime(size = 50.dp, lottieFile = R.raw.small_section_loader, speed = 1.0f)
                     Spacer(modifier = Modifier.height(10.dp))
-                    androidx.compose.material.Text(text = "Loading...")
+                    Text(
+                        text = "Loading...",
+                        style = TextStyle(
+                            fontFamily = montserrat,
+                            fontWeight = FontWeight.Medium,
+                            fontSize = 14.sp,
+                        )
+                    )
                 }
             }
         } else {
@@ -184,10 +197,16 @@ fun MealsByCategory(
                 ) {
                     LottieAnime(size = 50.dp, lottieFile = R.raw.no_connection, speed = 2.0f)
                     Spacer(modifier = Modifier.height(10.dp))
-                    Text(text = mealsState.error)
+                    Text(
+                        text = mealsState.error,
+                        style = TextStyle(
+                            fontFamily = montserrat,
+                            fontWeight = FontWeight.Medium,
+                            fontSize = 14.sp,
+                        )
+                    )
                 }
             }
         }
-
     }
 }

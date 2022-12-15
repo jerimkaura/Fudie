@@ -31,16 +31,24 @@ import coil.request.ImageRequest
 import color_primary_light
 import color_surface_light
 import com.cookpad.core.R
+import com.cookpad.core.navigation.Route
+import com.cookpad.core.screens.recipe.RecipeViewModels
 import com.cookpad.core.screens.utils.SectionHeader
 import com.cookpad.core.ui.theme.montserrat
 import com.cookpad.domain.model.Meal
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import kotlin.time.Duration.Companion.seconds
 
 @Composable
-fun SelectedMeal(meals: List<Meal>?, navController: NavController) {
-    val iconTint = if (isSystemInDarkTheme()) color_primary_light else color_primary_light
-    val boxBackground = if (isSystemInDarkTheme()) Color(0XFF2F2E41) else color_surface_light
+fun SelectedMeal(
+    meals: List<Meal>?,
+    categoryName: String,
+    recipeViewModel: RecipeViewModels,
+    navController: NavController
+) {
+    val boxBackground = if (isSystemInDarkTheme()) color_primary_light else color_primary_light
+    val iconTint = color_surface_light
     val meal: MutableState<Meal?> = remember { mutableStateOf(null) }
 
     LaunchedEffect(Unit) {
@@ -54,6 +62,7 @@ fun SelectedMeal(meals: List<Meal>?, navController: NavController) {
             delay(5.seconds)
         }
     }
+    val scope = rememberCoroutineScope()
 
     Column() {
         Box(
@@ -87,37 +96,38 @@ fun SelectedMeal(meals: List<Meal>?, navController: NavController) {
                         .padding(vertical = 0.dp)
                         .background(boxBackground, CircleShape)
                         .size(30.dp)
-                        .clip(CircleShape),
+                        .clip(CircleShape)
+                        .clickable {
+                            navController.navigateUp()
+                        },
                     contentAlignment = Alignment.Center
                 ) {
                     Icon(
                         modifier = Modifier
-                            .clickable {
-                                navController.navigateUp()
-                            }
+                            .clip(CircleShape)
                             .size(20.dp),
                         imageVector = ImageVector.vectorResource(id = R.drawable.ic_back),
                         contentDescription = "",
-                        tint = iconTint
+//                        tint = iconTint
                     )
                 }
 
-                Box(
-                    modifier = Modifier
-                        .padding(vertical = 0.dp)
-                        .background(boxBackground, CircleShape)
-                        .size(30.dp)
-                        .clip(CircleShape),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Icon(
-                        modifier = Modifier
-                            .size(20.dp),
-                        imageVector = ImageVector.vectorResource(id = R.drawable.ic_fav),
-                        contentDescription = "",
-                        tint = iconTint
-                    )
-                }
+//                Box(
+//                    modifier = Modifier
+//                        .padding(vertical = 0.dp)
+//                        .background(boxBackground, CircleShape)
+//                        .size(30.dp)
+//                        .clip(CircleShape),
+//                    contentAlignment = Alignment.Center
+//                ) {
+//                    Icon(
+//                        modifier = Modifier
+//                            .size(20.dp),
+//                        imageVector = ImageVector.vectorResource(id = R.drawable.ic_fav),
+//                        contentDescription = "",
+//                        tint = iconTint
+//                    )
+//                }
             }
 
             Text(
@@ -140,10 +150,18 @@ fun SelectedMeal(meals: List<Meal>?, navController: NavController) {
                     .padding(10.dp),
                 shape = RoundedCornerShape(10.dp),
                 onClick = {
-
-                }) {
+                    scope.launch {
+                        meal.value?.let {
+                            recipeViewModel.getRecipeByMealId(mealId = it.idMeal)
+                            navController.navigate(
+                                Route.RecipeScreen.route + "/${it.idMeal}"
+                            )
+                        }
+                    }
+                }
+            ) {
                 Text(
-                    text = "TRY OUR SELECTION",
+                    text = "TRY ${meal.value?.strMeal?.uppercase() ?: "".uppercase()}",
                     style = TextStyle(
                         fontFamily = montserrat,
                         fontWeight = FontWeight.Bold,
@@ -154,7 +172,7 @@ fun SelectedMeal(meals: List<Meal>?, navController: NavController) {
 
         }
         Spacer(modifier = Modifier.height(10.dp))
-        SectionHeader(heading = "Have fun selecting", onClick = {})
+        SectionHeader(heading = categoryName, false, onClick = {})
         Spacer(modifier = Modifier.height(10.dp))
     }
 }

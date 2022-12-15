@@ -1,6 +1,5 @@
 package com.cookpad.core.screens.recipe.components
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.isSystemInDarkTheme
@@ -15,13 +14,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
-import coil.compose.rememberAsyncImagePainter
 import coil.request.CachePolicy
 import coil.request.ImageRequest
 import color_primary_light
@@ -31,8 +28,8 @@ import com.cookpad.domain.model.Recipe
 
 @Composable
 fun MealImage(recipe: Recipe?, navController: NavController) {
-    val iconTint = if (isSystemInDarkTheme()) color_primary_light else color_primary_light
-    val boxBackground = if (isSystemInDarkTheme()) Color(0XFF2F2E41) else color_surface_light
+    val boxBackground = if (isSystemInDarkTheme()) color_primary_light else color_primary_light
+    val iconTint = color_surface_light
     Box(
         Modifier
             .padding(vertical = 0.dp, horizontal = 0.dp)

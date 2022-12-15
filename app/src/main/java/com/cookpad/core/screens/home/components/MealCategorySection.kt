@@ -6,7 +6,7 @@ import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Text
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -37,7 +37,7 @@ fun MealCategorySection(
     navController: NavController
 ) {
     val itemBgColor = if (isSystemInDarkTheme()) color_surface_dark else color_surface_light
-    SectionHeader("Meals Categories", onClick = {
+    SectionHeader("Explore Categories", onClick = {
         navController.navigate(
             Route
                 .CategoriesScreen
@@ -100,13 +100,21 @@ fun MealCategorySection(
                     Column(
                         modifier = Modifier
                             .fillParentMaxWidth()
-                            .height(100.dp),
+                            .height(120.dp),
                         verticalArrangement = Arrangement.Center,
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
-                        LottieAnime(size = 50.dp, lottieFile = R.raw.veggies, speed = 2.0f)
+                        LottieAnime(size = 80.dp, lottieFile = R.raw.empty_list, speed = 2.0f)
+                        Spacer(modifier = Modifier.height(1.dp))
+                        Text(
+                            text = "No Items Found, check your internet",
+                            style = TextStyle(
+                                fontFamily = montserrat,
+                                fontWeight = FontWeight.Medium,
+                                fontSize = 14.sp,
+                            )
+                        )
                         Spacer(modifier = Modifier.height(10.dp))
-                        Text(text = "No Items Found")
                     }
                 }
             }
@@ -119,7 +127,7 @@ fun MealCategorySection(
                     verticalArrangement = Arrangement.Center,
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    LottieAnime(size = 50.dp, lottieFile = R.raw.loader, speed = 1.0f)
+                    LottieAnime(size = 50.dp, lottieFile = R.raw.small_section_loader, speed = 1.0f)
                     Spacer(modifier = Modifier.height(10.dp))
                     Text(text = "Loading...")
                 }

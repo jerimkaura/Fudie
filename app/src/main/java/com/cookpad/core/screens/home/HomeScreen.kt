@@ -19,7 +19,6 @@ import color_primary_light
 import com.cookpad.core.navigation.Route
 import com.cookpad.core.screens.home.components.*
 import com.cookpad.core.screens.recipe.RecipeViewModels
-import com.cookpad.core.screens.utils.SectionHeader
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)

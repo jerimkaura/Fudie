@@ -71,7 +71,7 @@ fun SelectedCountry(
             }
         }
         Spacer(modifier = Modifier.height(10.dp))
-        SectionHeader(heading = "Have fun selecting", onClick = {})
+        SectionHeader(heading = "Select country", false, onClick = {})
         Spacer(modifier = Modifier.height(10.dp))
     }
 }

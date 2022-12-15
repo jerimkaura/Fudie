@@ -10,8 +10,10 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color.Companion.Blue
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.cookpad.core.R
@@ -20,6 +22,7 @@ import com.cookpad.core.screens.category.components.CategoryItem
 import com.cookpad.core.screens.category.components.TopBarCategoriesScreen
 import com.cookpad.core.screens.home.HomeViewModel
 import com.cookpad.core.screens.utils.LottieAnime
+import com.cookpad.core.ui.theme.montserrat
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -64,11 +67,16 @@ fun CategoriesScreen(
                     verticalArrangement = Arrangement.Center,
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    LottieAnime(size = 180.dp, lottieFile = R.raw.veggies, speed = 2.0f)
+                    LottieAnime(size = 180.dp, lottieFile = R.raw.no_connection, speed = 2.0f)
                     Spacer(modifier = Modifier.height(30.dp))
-                    Text(text = "Hang on chehjf...")
-
-
+                    Text(
+                        text = mealCategories.error,
+                        style = TextStyle(
+                            fontFamily = montserrat,
+                            fontWeight = FontWeight.Medium,
+                            fontSize = 14.sp,
+                        )
+                    )
                 }
 
             } else {
@@ -87,6 +95,29 @@ fun CategoriesScreen(
                                 index.value = categories.indexOf(it)
                             }, openDialog)
                         }
+                    }
+                } else {
+                    Column(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .padding(
+                                top = paddingValues.calculateTopPadding(),
+                                bottom = paddingValues.calculateBottomPadding()
+                            )
+                            .fillMaxSize(),
+                        verticalArrangement = Arrangement.Center,
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        LottieAnime(size = 150.dp, lottieFile = R.raw.veggies, speed = 1.0f)
+                        Spacer(modifier = Modifier.height(30.dp))
+                        Text(
+                            text = "Looks like you don't have much here.",
+                            style = TextStyle(
+                                fontFamily = montserrat,
+                                fontWeight = FontWeight.Medium,
+                                fontSize = 14.sp,
+                            )
+                        )
                     }
                 }
             }
