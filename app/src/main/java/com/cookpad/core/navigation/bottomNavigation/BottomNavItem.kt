@@ -15,7 +15,7 @@ sealed class BottomNavItem(
     )
     object Categories : BottomNavItem(
         "Categories",
-        R.drawable.ic_trending,
+        R.drawable.ic_categories,
         Route.CategoriesScreen.route
     )
 }
