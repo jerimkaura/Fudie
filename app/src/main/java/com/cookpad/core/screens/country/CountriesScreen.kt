@@ -54,7 +54,6 @@ fun CountriesScreen(
     }
 
     val savedCountryName = countriesViewModel.selectedCountryName.value
-
     Scaffold(topBar = {}, content = {paddingValues ->
         Column(
             modifier = Modifier
