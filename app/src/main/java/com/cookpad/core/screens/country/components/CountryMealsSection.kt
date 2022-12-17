@@ -50,7 +50,6 @@ fun CountryMealsSection(
             LottieAnime(size = 180.dp, lottieFile = R.raw.veggies, speed = 0.50f)
             Spacer(modifier = Modifier.height(30.dp))
             Text(text = "Hang on chef...")
-
         }
     }
     if (!mealsState.isLoading && mealsState.error.isEmpty()) {

@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -38,9 +37,7 @@ fun RandomMeal(randomRecipe: RecipeState, onClick: () -> Unit) {
     ) {
         if (randomRecipe.error.isNotEmpty()) {
             Box(
-                Modifier
-                    .fillMaxSize()
-//                    .background(Color(0xff000000).copy(0.2f))
+                Modifier.fillMaxSize()
             ) {
                 Column(
                     modifier = Modifier
@@ -52,7 +49,7 @@ fun RandomMeal(randomRecipe: RecipeState, onClick: () -> Unit) {
                     LottieAnime(size = 100.dp, lottieFile = R.raw.no_connection, speed = 1.0f)
                     Text(
                         modifier = Modifier,
-                        text = randomRecipe.error.toString(),
+                        text = randomRecipe.error,
                         style = TextStyle(
                             fontFamily = montserrat,
                             fontWeight = FontWeight.Medium,
@@ -62,7 +59,6 @@ fun RandomMeal(randomRecipe: RecipeState, onClick: () -> Unit) {
 
                     )
                 }
-
             }
         }
         if (randomRecipe.isLoading) {
@@ -75,7 +71,6 @@ fun RandomMeal(randomRecipe: RecipeState, onClick: () -> Unit) {
                 Spacer(modifier = Modifier.height(10.dp))
                 LottieAnime(size = 30.dp, lottieFile = R.raw.loader, speed = 1.0f)
             }
-
         } else {
             Box(
                 Modifier

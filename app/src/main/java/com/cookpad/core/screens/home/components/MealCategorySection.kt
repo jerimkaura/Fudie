@@ -85,8 +85,7 @@ fun MealCategorySection(
                             )
                         }
                         Spacer(modifier = Modifier.height(20.dp))
-
-                        androidx.compose.material3.Text(
+                        Text(
                             text = mealCategories[it].strCategory, style = TextStyle(
                                 fontFamily = montserrat,
                                 fontWeight = FontWeight.Medium,
@@ -147,6 +146,5 @@ fun MealCategorySection(
                 }
             }
         }
-
     }
 }

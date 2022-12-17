@@ -7,7 +7,6 @@ import com.cookpad.domain.model.Country
 @Entity
 data class CountryEntity(
     @PrimaryKey
-    val id: Int? = null,
     val strArea: String,
     val flagUrl: String
 ) {

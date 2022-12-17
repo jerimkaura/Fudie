@@ -1,13 +1,13 @@
 package com.cookpad.core.screens.country
 
-import android.util.Log
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.cookpad.common.util.Resource
 import com.cookpad.core.screens.home.states.MealsState
-import com.cookpad.domain.use_cases.GetCountriesUseCase
+import com.cookpad.core.screens.utils.Constants
 import com.cookpad.domain.use_cases.GetMealByCountryNameUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
@@ -17,14 +17,20 @@ import javax.inject.Inject
 @HiltViewModel
 class CountriesViewModel @Inject constructor(
     private val getMealByCountryNameUseCase: GetMealByCountryNameUseCase,
-    private val getCountriesUseCase: GetCountriesUseCase
+    savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
     private var _meals = mutableStateOf(MealsState())
     val meals: State<MealsState> = _meals
 
 
+    private var _selectedCountryName = mutableStateOf("")
+    val selectedCountryName: State<String> = _selectedCountryName
+
     init {
+        savedStateHandle.get<String>(Constants.SELECTED_COUNTRY_NAME)?.let { countryName ->
+            _selectedCountryName.value = countryName
+        }
         getMealByCountryNameName("American")
     }
 

@@ -31,7 +31,6 @@ import com.cookpad.domain.model.MealCategory
 @Composable
 fun CategoryItem(
     category: MealCategory,
-    navController: NavController,
     onClick: (mealCategory: MealCategory) -> Unit,
     openDialog: MutableState<Boolean>
 ) {
@@ -58,7 +57,7 @@ fun CategoryItem(
                 model = ImageRequest.Builder(LocalContext.current)
                     .data(category.strCategoryThumb)
                     .crossfade(true)
-                    .diskCachePolicy(CachePolicy.ENABLED)// it's the same even removing comments
+                    .diskCachePolicy(CachePolicy.ENABLED)
                     .build(),
                 contentDescription = stringResource(R.string.app_name),
                 contentScale = ContentScale.Inside,
@@ -68,7 +67,6 @@ fun CategoryItem(
             )
         }
         Spacer(modifier = Modifier.height(5.dp))
-
         Text(
             text = category.strCategory, style = TextStyle(
                 fontFamily = montserrat,
