@@ -36,54 +36,6 @@ class MealRepositoryImpl @Inject constructor(
             emit(Resource.Error(message = "Something went wrong", data = localMeals))
         }
 
-<<<<<<< HEAD
-        val newMeals = dao.getMealsByName("Chicken").map { it.toDomain() }
-        emit(Resource.Success(newMeals))
-    }
-
-    override fun getBeefMeals(): Flow<Resource<List<Meal>>> = flow {
-        emit(Resource.Loading())
-        val localMeals = dao.getMealsByName("Beef").map { it.toDomain() }
-        emit(Resource.Loading(data = localMeals))
-        try {
-            val remoteMeals = api.getBeefMeals()
-            val listOfMealsToDelete =
-                remoteMeals.meals.map { it.toMealEntity() }
-                    .map { it.strMeal }
-            dao.deleteMeals(listOfMealsToDelete)
-            dao.insertMeals(remoteMeals.meals.map { it.toMealEntity() })
-        } catch (e: IOException) {
-            emit(
-                Resource.Error(
-                    message = "Please check your internet connection",
-                    data = localMeals
-                )
-            )
-        } catch (e: HttpException) {
-            emit(Resource.Error(message = "Something went wrong", data = localMeals))
-        }
-
-        val newMeals = dao.getMealsByName("Beef").map { it.toDomain() }
-        emit(Resource.Success(newMeals))
-    }
-
-    override fun getPorkMeals(): Flow<Resource<List<Meal>>> = flow {
-        emit(Resource.Loading())
-        val localMeals = dao.getMealsByName("Pork").map { it.toDomain() }
-        emit(Resource.Loading(data = localMeals))
-        try {
-            val remoteMeals = api.getPorkMeals()
-            val listOfMealsToDelete =
-                remoteMeals.meals.map { it.toMealEntity() }
-                    .map { it.strMeal }
-            dao.deleteMeals(listOfMealsToDelete)
-            dao.insertMeals(remoteMeals.meals.map { it.toMealEntity() })
-        } catch (e: IOException) {
-            emit(
-                Resource.Error(
-                    message = "Please check your internet connection",
-                    data = localMeals
-=======
         val newMeals = dao.getMealsByCategoryName(categoryName).map { it.toDomain() }
         emit(Resource.Success(newMeals))
     }
@@ -112,8 +64,8 @@ class MealRepositoryImpl @Inject constructor(
             }
 
             val newMeals = dao.getMealsByCategoryName(ingredientName).map { it.toDomain() }
-        emit(Resource.Success(newMeals))
-    }
+            emit(Resource.Success(newMeals))
+        }
 
     override fun getMealByCountryName(countryName: String): Flow<Resource<List<Meal>>> = flow {
         emit(Resource.Loading())
@@ -131,70 +83,13 @@ class MealRepositoryImpl @Inject constructor(
             emit(
                 Resource.Error(
                     message = "Please check your internet connection", data = localMeals
->>>>>>> main
                 )
             )
         } catch (e: HttpException) {
             emit(Resource.Error(message = "Something went wrong", data = localMeals))
         }
 
-<<<<<<< HEAD
-        val newMeals = dao.getMealsByName("Pork").map { it.toDomain() }
-        emit(Resource.Success(newMeals))
-    }
-
-    override fun getVegetarianMeals(): Flow<Resource<List<Meal>>> = flow {
-        emit(Resource.Loading())
-        val localMeals = dao.getMealsByCategoryName("Vegetarian").map { it.toDomain() }
-        emit(Resource.Loading(data = localMeals))
-        try {
-            val remoteMeals = api.getVegetarianMeal()
-            val listOfMealsToDelete =
-                remoteMeals.meals.map { it.toMealEntity() }
-                    .map { it.strMeal }
-            dao.deleteMeals(listOfMealsToDelete)
-            dao.insertMeals(remoteMeals.meals.map { it.toMealEntity().copy(strCategory = "Vegetarian") })
-        } catch (e: IOException) {
-            emit(
-                Resource.Error(
-                    message = "Please check your internet connection",
-                    data = localMeals
-                )
-            )
-        } catch (e: HttpException) {
-            emit(Resource.Error(message = "Something went wrong", data = localMeals))
-        }
-
-        val newMeals = dao.getMealsByCategoryName("Vegetarian").map { it.toDomain() }
-        emit(Resource.Success(newMeals))
-    }
-
-    override fun getBreakFastMeals(): Flow<Resource<List<Meal>>>  = flow {
-        emit(Resource.Loading())
-        val localMeals = dao.getMealsByCategoryName("Milk").map { it.toDomain() }
-        emit(Resource.Loading(data = localMeals))
-        try {
-            val remoteMeals = api.getBreakfastMeal()
-            val listOfMealsToDelete =
-                remoteMeals.meals.map { it.toMealEntity() }
-                    .map { it.strMeal }
-            dao.deleteMeals(listOfMealsToDelete)
-            dao.insertMeals(remoteMeals.meals.map { it.toMealEntity().copy(strCategory = "Milk") })
-        } catch (e: IOException) {
-            emit(
-                Resource.Error(
-                    message = "Please check your internet connection",
-                    data = localMeals
-                )
-            )
-        } catch (e: HttpException) {
-            emit(Resource.Error(message = "Something went wrong", data = localMeals))
-        }
-
-        val newMeals = dao.getMealsByCategoryName("Milk").map { it.toDomain() }
-=======
         val newMeals = dao.getMealsByCountryName(countryName).map { it.toDomain() }
->>>>>>> main
         emit(Resource.Success(newMeals))
     }
 }

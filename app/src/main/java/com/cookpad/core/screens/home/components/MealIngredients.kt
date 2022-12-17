@@ -124,5 +124,4 @@ fun MealIngredients(ingredientsState: IngredientsState, navController: NavContro
             }
         }
     }
-
 }

@@ -1,6 +1,5 @@
 package com.cookpad.data.repository
 
-import android.util.Log
 import com.cookpad.common.util.Resource
 import com.cookpad.data.local.dao.MealDao
 import com.cookpad.data.local.dao.RecipeDao
@@ -23,10 +22,7 @@ class RecipeRepositoryImpl @Inject constructor(
         emit(Resource.Loading())
         val randomLocalRecipe: Recipe?
         val recipes = recipeDao.getRecipes() ?: emptyList()
-        if (recipes.isEmpty()){
-            Log.d("RECIPE EMPTY", "getRandomMeal: EMPTY")
-        }else{
-            Log.d("RECIPE EMPTY", "getRandomMeal: $recipes")
+        if (recipes.isNotEmpty()){
             randomLocalRecipe = recipes.random().toDomain()
             emit(Resource.Success(data = randomLocalRecipe))
         }
@@ -89,22 +85,21 @@ class RecipeRepositoryImpl @Inject constructor(
                 )
             )
         }
-        val newLocalRecipe = recipeDao.getRecipeByMealId(mealId)?.toDomain()?.let {
+        recipeDao.getRecipeByMealId(mealId)?.toDomain()?.let {
             emit(Resource.Success(it))
         }
     }
 
     override suspend fun getAllRecipes(): List<Recipe> {
-        val meals = mealDao.getAllMeals().forEach { meal ->
+        mealDao.getAllMeals().forEach { meal ->
             api.getRecipeByMealId(meal.idMeal).meals?.let { recipes ->
                 recipeDao.insertRecipes(recipes.map { recipeDto ->
                     recipeDto.toEntity()
                 })
             }
         }
-        val recipes = recipeDao.getRecipes()?.map {
+        return recipeDao.getRecipes()?.map {
             it.toDomain()
-        }
-        return recipes ?: emptyList()
+        } ?: emptyList()
     }
 }

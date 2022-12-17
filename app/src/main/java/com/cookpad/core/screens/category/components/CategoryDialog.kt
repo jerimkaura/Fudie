@@ -14,7 +14,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -36,7 +35,6 @@ fun CategoryDialog(
     navController: NavController
 ) {
     val dialogBackground = if (isSystemInDarkTheme()) color_surface_dark else color_surface_light
-    val context = LocalContext.current
     val scroll = rememberScrollState(0)
     AlertDialog(
         shape = RoundedCornerShape(10.dp),

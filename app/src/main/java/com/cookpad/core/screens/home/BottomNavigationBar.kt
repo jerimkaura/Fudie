@@ -1,6 +1,5 @@
 package com.cookpad.core.screens.home
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.height
@@ -24,7 +23,6 @@ fun BottomNavigationBar(navController: NavController) {
     val items = listOf(
         BottomNavItem.Home,
         BottomNavItem.Categories,
-        BottomNavItem.Countries,
     )
     Column {
         NavigationBar(
@@ -64,9 +62,7 @@ fun BottomNavigationBar(navController: NavController) {
                                     fontWeight = FontWeight.Bold
                                 )
                             }
-
                         }
-
                     },
                 )
             }
