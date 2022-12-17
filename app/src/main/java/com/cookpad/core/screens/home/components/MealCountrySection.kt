@@ -38,7 +38,7 @@ fun MealCountrySection(
 ) {
     val scope = rememberCoroutineScope()
     SectionHeader("Explore Countries' Meals", onClick = {
-        navController.navigate(Route.CountriesScreen.route)
+        navController.navigate(Route.CountriesScreen.route + "/American")
     })
 
     LazyRow {
