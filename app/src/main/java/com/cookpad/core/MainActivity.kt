@@ -122,15 +122,15 @@ private fun NavGraphBuilder.screens(navController: NavController) {
     composable(route = Route.RecipeScreen.route + "/{meal_id}",
         enterTransition = {
             slideInHorizontally(
-                animationSpec = spring(stiffness = Spring.StiffnessMediumLow),
+                animationSpec = tween(500),
                 initialOffsetX = {
-                    it + 1
+                    it
                 }
             )
         },
         exitTransition = {
             slideOutHorizontally(
-                animationSpec = spring(stiffness = Spring.StiffnessMediumLow),
+                animationSpec = tween(500),
                 targetOffsetX = {
                     it
                 }
@@ -147,7 +147,7 @@ private fun NavGraphBuilder.screens(navController: NavController) {
             slideOutHorizontally(
                 animationSpec = spring(stiffness = Spring.StiffnessMediumLow),
                 targetOffsetX = {
-                    it
+                  -  it
                 }
             )
         }) {
@@ -164,13 +164,7 @@ private fun NavGraphBuilder.screens(navController: NavController) {
         CountriesScreen(navController)
     }
 
-    composable(route = Route.MealsScreen.route + "/{category_name}",
-        enterTransition = {
-            fadeIn(animationSpec = tween(3000))
-        },
-        exitTransition = {
-            fadeOut(animationSpec = tween(3000))
-        }) {
+    composable(route = Route.MealsScreen.route + "/{category_name}",) {
         MealsScreen(navController)
     }
 }

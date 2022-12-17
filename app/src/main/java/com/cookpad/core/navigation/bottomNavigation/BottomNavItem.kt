@@ -18,4 +18,9 @@ sealed class BottomNavItem(
         R.drawable.ic_categories,
         Route.CategoriesScreen.route
     )
+    object Countries : BottomNavItem(
+        "Countries",
+        R.drawable.ic_countries,
+        Route.CountriesScreen.route + "/American"
+    )
 }
