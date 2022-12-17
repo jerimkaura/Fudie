@@ -35,6 +35,7 @@ fun CountriesSection(
         modifier = Modifier.wrapContentHeight(),
     ) {
         if (countries.error.isEmpty() && !countries.isLoading) {
+            selectedIndex = countries.data?.indexOf(selectedCountry.value)!!
             items(countries.data!!.size) { index ->
                 CountryItem(countries.data ?: listOf(),
                     index = index,

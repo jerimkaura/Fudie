@@ -30,8 +30,6 @@ fun SectionHeader(heading: String, showText: Boolean = true, onClick: () -> Unit
                 fontWeight = FontWeight.Bold,
                 fontSize = 16.sp,
             )
-
-
         )
         if (showText) {
             Text(
@@ -44,7 +42,5 @@ fun SectionHeader(heading: String, showText: Boolean = true, onClick: () -> Unit
                 )
             )
         }
-
     }
-
 }

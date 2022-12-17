@@ -91,7 +91,7 @@ fun CategoriesScreen(
                             .fillMaxSize(), columns = GridCells.Fixed(3)
                     ) {
                         items(categories.size) { category ->
-                            CategoryItem(categories[category], navController, onClick = {
+                            CategoryItem(categories[category], onClick = {
                                 index.value = categories.indexOf(it)
                             }, openDialog)
                         }

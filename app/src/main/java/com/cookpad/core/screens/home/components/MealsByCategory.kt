@@ -2,13 +2,11 @@ package com.cookpad.core.screens.home.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
@@ -29,10 +27,7 @@ import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import coil.request.CachePolicy
 import coil.request.ImageRequest
-import color_primary_light
-import color_surface_dark
 import color_surface_light
-import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.cookpad.core.R
 import com.cookpad.core.navigation.Route
 import com.cookpad.core.screens.home.states.MealsState
@@ -42,20 +37,14 @@ import com.cookpad.core.screens.utils.SectionHeader
 import com.cookpad.core.ui.theme.montserrat
 import kotlinx.coroutines.launch
 
-@OptIn(ExperimentalMaterial3Api::class, ExperimentalGlideComposeApi::class)
 @Composable
 fun MealsByCategory(
     mealsState: MealsState,
     recipeViewModel: RecipeViewModels,
     navController: NavController
 ) {
-    val itemBgColor =
-        if (isSystemInDarkTheme()) color_surface_dark.copy(0.6f) else color_primary_light
-    val badgeColor =
-        if (isSystemInDarkTheme()) color_surface_dark.copy(0.6f) else color_surface_light
-
     val scope = rememberCoroutineScope()
-    val context = LocalContext.current
+    LocalContext.current
     SectionHeader("Chicken Meals", onClick = {
         navController.navigate(
             Route
@@ -82,14 +71,6 @@ fun MealsByCategory(
                         Column(
                             modifier = Modifier
                                 .background(Color(0xff000000).copy(0.1f))
-                                .clickable {
-                                    scope.launch {
-                                        recipeViewModel.getRecipeByMealId(mealId = chickenMeals[it].idMeal)
-                                        navController.navigate(
-                                            Route.RecipeScreen.route + "/${chickenMeals[it].idMeal}"
-                                        )
-                                    }
-                                }
                                 .width(250.dp)
                                 .height(180.dp),
                             horizontalAlignment = Alignment.CenterHorizontally,
@@ -109,7 +90,15 @@ fun MealsByCategory(
                                     contentDescription = stringResource(R.string.app_name),
                                     contentScale = ContentScale.Crop,
                                     modifier = Modifier
-                                        .fillMaxSize(),
+                                        .fillMaxSize()
+                                        .clickable {
+                                            scope.launch {
+                                                recipeViewModel.getRecipeByMealId(mealId = chickenMeals[it].idMeal)
+                                                navController.navigate(
+                                                    Route.RecipeScreen.route + "/${chickenMeals[it].idMeal}"
+                                                )
+                                            }
+                                        },
                                 )
                                 Row(
                                     modifier = Modifier
@@ -135,9 +124,7 @@ fun MealsByCategory(
                                 }
 
                             }
-
                             Spacer(modifier = Modifier.height(1.dp))
-
                             Spacer(modifier = Modifier.height(1.dp))
                         }
                     }
@@ -164,7 +151,6 @@ fun MealsByCategory(
                     }
                 }
             }
-
         } else if (mealsState.isLoading) {
             item {
                 Column(

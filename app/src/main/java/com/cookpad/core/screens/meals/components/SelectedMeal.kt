@@ -57,8 +57,6 @@ fun SelectedMeal(
                 val random = meals.random()
                 meal.value = random
             }
-
-
             delay(5.seconds)
         }
     }
@@ -108,26 +106,9 @@ fun SelectedMeal(
                             .size(20.dp),
                         imageVector = ImageVector.vectorResource(id = R.drawable.ic_back),
                         contentDescription = "",
-//                        tint = iconTint
+                        tint = iconTint
                     )
                 }
-
-//                Box(
-//                    modifier = Modifier
-//                        .padding(vertical = 0.dp)
-//                        .background(boxBackground, CircleShape)
-//                        .size(30.dp)
-//                        .clip(CircleShape),
-//                    contentAlignment = Alignment.Center
-//                ) {
-//                    Icon(
-//                        modifier = Modifier
-//                            .size(20.dp),
-//                        imageVector = ImageVector.vectorResource(id = R.drawable.ic_fav),
-//                        contentDescription = "",
-//                        tint = iconTint
-//                    )
-//                }
             }
 
             Text(

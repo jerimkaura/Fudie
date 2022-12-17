@@ -154,7 +154,7 @@ private fun NavGraphBuilder.screens(navController: NavController) {
         CategoriesScreen(navController)
     }
 
-    composable(route = Route.CountriesScreen.route,
+    composable(route = Route.CountriesScreen.route + "/{selected_country_name}",
         enterTransition = {
             fadeIn(animationSpec = tween(3000))
         },

@@ -6,8 +6,12 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.cookpad.common.util.Resource
-import com.cookpad.core.screens.home.states.*
+import com.cookpad.core.screens.home.states.CountriesState
+import com.cookpad.core.screens.home.states.IngredientsState
+import com.cookpad.core.screens.home.states.MealCategoriesState
+import com.cookpad.core.screens.home.states.MealsState
 import com.cookpad.core.screens.recipe.states.RecipeState
+import com.cookpad.domain.model.Country
 import com.cookpad.domain.use_cases.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
@@ -56,11 +60,11 @@ class HomeViewModel @Inject constructor(
         getMealCategories()
         getIngredients()
         getCountries()
-        getMealByCategoryName("Chicken",_chickenMeals)
-        getMealByCategoryName("Beef",_beefMeals)
-        getMealByCategoryName("Pork",_porkMeals)
-        getMealByCategoryName("Vegetarian",_vegetarianMeals)
-        getMealByIngredientName("Milk",_breakfastMeals)
+        getMealByCategoryName("Chicken", _chickenMeals)
+        getMealByCategoryName("Beef", _beefMeals)
+        getMealByCategoryName("Pork", _porkMeals)
+        getMealByCategoryName("Vegetarian", _vegetarianMeals)
+        getMealByIngredientName("Milk", _breakfastMeals)
     }
 
 

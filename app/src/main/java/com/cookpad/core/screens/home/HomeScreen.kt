@@ -10,7 +10,6 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -35,13 +34,11 @@ fun HomeScreen(
     val mealCategories = viewModel.mealCategories.value
     val countries = viewModel.countries.value
     val chickenMeals = viewModel.chickenMeals.value
-    val beefMeals = viewModel.beefMeals.value
     val porkMeals = viewModel.porkMeals.value
     val vegetarianMeals = viewModel.vegetarianMeals.value
     val breakfastMeals = viewModel.breakfastMeals.value
     val randomRecipe = viewModel.randomRecipe.value
     val scope = rememberCoroutineScope()
-    val recipe = recipeViewModel.recipe.collectAsState().value
 
 
     LaunchedEffect(Unit) {
@@ -86,7 +83,7 @@ fun HomeScreen(
                 RowSpacer()
             }
             item {
-                MealCountrySection(countries, navController)
+                MealCountrySection(countries, navController, viewModel)
             }
             item {
                 RowSpacer()

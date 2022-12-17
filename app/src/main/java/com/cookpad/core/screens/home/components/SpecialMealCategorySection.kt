@@ -6,7 +6,9 @@ import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.*
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -34,13 +36,11 @@ import com.cookpad.core.screens.utils.LottieAnime
 import com.cookpad.core.screens.utils.SectionHeader
 import com.cookpad.core.ui.theme.montserrat
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SpecialMealCategory(mealsState: MealsState, navController: NavController, title: String) {
     val itemBgColor =
         if (isSystemInDarkTheme()) color_surface_dark.copy(0.6f) else color_primary_light
-    val badgeColor =
-        if (isSystemInDarkTheme()) color_surface_dark.copy(0.6f) else color_surface_light
+    if (isSystemInDarkTheme()) color_surface_dark.copy(0.6f) else color_surface_light
     SectionHeader(title, onClick = {
         navController.navigate(
             Route
@@ -48,7 +48,6 @@ fun SpecialMealCategory(mealsState: MealsState, navController: NavController, ti
                 .route + "/${"Vegetarian"}"
         )
     })
-
 
     LazyRow(
         modifier = Modifier
@@ -101,13 +100,6 @@ fun SpecialMealCategory(mealsState: MealsState, navController: NavController, ti
                 items(meals.size) {
                     Card(
                         modifier = Modifier
-                            .clickable {
-                                navController.navigate(
-                                    Route
-                                        .RecipeScreen
-                                        .route + "/${meals[it].idMeal}"
-                                )
-                            }
                             .wrapContentSize()
                             .padding(vertical = 0.dp, horizontal = 10.dp),
                         shape = RoundedCornerShape(10.dp),
@@ -134,7 +126,14 @@ fun SpecialMealCategory(mealsState: MealsState, navController: NavController, ti
                                     contentDescription = stringResource(R.string.app_name),
                                     contentScale = ContentScale.Crop,
                                     modifier = Modifier
-                                        .fillMaxSize(),
+                                        .fillMaxSize()
+                                        .clickable {
+                                            navController.navigate(
+                                                Route
+                                                    .RecipeScreen
+                                                    .route + "/${meals[it].idMeal}"
+                                            )
+                                        },
                                     loading = {
                                         LottieAnime(
                                             size = 10.dp,
@@ -143,7 +142,6 @@ fun SpecialMealCategory(mealsState: MealsState, navController: NavController, ti
                                         )
                                     }
                                 )
-
                                 Row(
                                     modifier = Modifier
                                         .align(Alignment.BottomCenter)
@@ -151,7 +149,6 @@ fun SpecialMealCategory(mealsState: MealsState, navController: NavController, ti
                                         .fillMaxWidth(),
                                     horizontalArrangement = Arrangement.Center
                                 ) {
-
                                     Text(
                                         modifier = Modifier.padding(5.dp),
                                         text = meals[it].strMeal,

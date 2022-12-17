@@ -112,8 +112,8 @@ class MealRepositoryImpl @Inject constructor(
             }
 
             val newMeals = dao.getMealsByCategoryName(ingredientName).map { it.toDomain() }
-        emit(Resource.Success(newMeals))
-    }
+            emit(Resource.Success(newMeals))
+        }
 
     override fun getMealByCountryName(countryName: String): Flow<Resource<List<Meal>>> = flow {
         emit(Resource.Loading())

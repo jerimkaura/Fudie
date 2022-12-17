@@ -5,9 +5,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.dp
 import com.airbnb.lottie.compose.*
-import com.cookpad.core.R
 
 @Composable
 fun LottieAnime(size: Dp, lottieFile: Int, speed: Float) {
