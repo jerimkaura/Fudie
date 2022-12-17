@@ -6,6 +6,7 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -22,16 +23,24 @@ import coil.request.CachePolicy
 import coil.request.ImageRequest
 import com.cookpad.core.R
 import com.cookpad.core.navigation.Route
+import com.cookpad.core.screens.home.HomeViewModel
 import com.cookpad.core.screens.home.states.CountriesState
 import com.cookpad.core.screens.utils.LottieAnime
 import com.cookpad.core.screens.utils.SectionHeader
 import com.cookpad.core.ui.theme.montserrat
+import kotlinx.coroutines.launch
 
 @Composable
-fun MealCountrySection(countriesState: CountriesState, navController: NavController) {
+fun MealCountrySection(
+    countriesState: CountriesState,
+    navController: NavController,
+    homeViewModel: HomeViewModel
+) {
+    val scope = rememberCoroutineScope()
     SectionHeader("Explore Countries' Meals", onClick = {
         navController.navigate(Route.CountriesScreen.route)
     })
+
     LazyRow {
         if (countriesState.isLoading) {
             item {
@@ -97,7 +106,11 @@ fun MealCountrySection(countriesState: CountriesState, navController: NavControl
                                 .clip(RoundedCornerShape(5.dp))
                                 .width(80.dp)
                                 .height(50.dp)
-                                .clickable { },
+                                .clickable {
+                                    scope.launch {
+                                        navController.navigate(Route.CountriesScreen.route + "/${countries[it].strArea}")
+                                    }
+                                },
                         )
                         Spacer(modifier = Modifier.height(20.dp))
                         Text(
