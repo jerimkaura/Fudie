@@ -1,6 +1,7 @@
 package com.cookpad.core.screens.utils
 
 object Constants {
+    const val INGREDIENT_NAME = "ingredient_name"
     const val CATEGORY_NAME = "category_name"
     const val SELECTED_COUNTRY_NAME = "selected_country_name"
     const val INGREDIENTS = "Ingredients"

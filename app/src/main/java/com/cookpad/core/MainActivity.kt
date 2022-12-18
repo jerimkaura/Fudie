@@ -25,9 +25,10 @@ import com.cookpad.core.app_settings.LocalRecipeSerializer
 import com.cookpad.core.navigation.Route
 import com.cookpad.core.screens.category.CategoriesScreen
 import com.cookpad.core.screens.country.CountriesScreen
-import com.cookpad.core.screens.home.BottomNavigationBar
+import com.cookpad.core.navigation.bottomNavigation.BottomNavigationBar
 import com.cookpad.core.screens.home.HomeScreen
-import com.cookpad.core.screens.meals.MealsScreen
+import com.cookpad.core.screens.ingredient.IngredientsScreen
+import com.cookpad.core.screens.ingredient.SingleIngredientScreen
 import com.cookpad.core.screens.recipe.RecipeScreen
 import com.cookpad.core.screens.utils.getActivity
 import com.cookpad.core.ui.theme.CookPadThem
@@ -78,6 +79,7 @@ fun MainScreen(){
             Route.HomeScreen.route -> true
             Route.CategoriesScreen.route -> true
             Route.CountriesScreen.route -> true
+            Route.IngredientsScreen.route -> true
             else -> false
         }
 
@@ -154,7 +156,7 @@ private fun NavGraphBuilder.screens(navController: NavController) {
         CategoriesScreen(navController)
     }
 
-    composable(route = Route.CountriesScreen.route + "/{selected_country_name}",
+    composable(route = Route.CountriesScreen.route + "/{country_name}",
         enterTransition = {
             fadeIn(animationSpec = tween(3000))
         },
@@ -164,7 +166,36 @@ private fun NavGraphBuilder.screens(navController: NavController) {
         CountriesScreen(navController)
     }
 
-    composable(route = Route.MealsScreen.route + "/{category_name}",) {
-        MealsScreen(navController)
+    composable(route = Route.IngredientsScreen.route) {
+        IngredientsScreen(navController)
+    }
+    composable(route = Route.CategoriesScreen.route,
+        enterTransition = {
+            fadeIn(animationSpec = spring(stiffness = Spring.StiffnessMediumLow))
+        },
+        exitTransition = {
+            slideOutHorizontally(
+                animationSpec = spring(stiffness = Spring.StiffnessMediumLow),
+                targetOffsetX = {
+                    -  it
+                }
+            )
+        }) {
+        CategoriesScreen(navController)
+    }
+
+    composable(route = Route.SingleIngredientsScreen.route +"/{ingredient_name}",
+        enterTransition = {
+            fadeIn(animationSpec = spring(stiffness = Spring.StiffnessMediumLow))
+        },
+        exitTransition = {
+            slideOutHorizontally(
+                animationSpec = spring(stiffness = Spring.StiffnessMediumLow),
+                targetOffsetX = {
+                    -  it
+                }
+            )
+        }) {
+        SingleIngredientScreen(navController)
     }
 }

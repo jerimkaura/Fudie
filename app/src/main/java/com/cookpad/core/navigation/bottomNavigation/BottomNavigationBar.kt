@@ -1,6 +1,5 @@
-package com.cookpad.core.screens.home
+package com.cookpad.core.navigation.bottomNavigation
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.height
@@ -11,19 +10,21 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
-import com.cookpad.core.navigation.bottomNavigation.BottomNavItem
+import com.cookpad.core.ui.theme.montserrat
 
 @Composable
 fun BottomNavigationBar(navController: NavController) {
     val items = listOf(
         BottomNavItem.Home,
         BottomNavItem.Categories,
+        BottomNavItem.Ingredients,
     )
     Column {
         NavigationBar(
@@ -54,13 +55,15 @@ fun BottomNavigationBar(navController: NavController) {
                                 imageVector = ImageVector.vectorResource(id = item.icon),
                                 contentDescription = item.title
                             )
-
                             if (selected) {
                                 Text(
                                     text = item.title,
-                                    textAlign = TextAlign.Center,
-                                    fontSize = 15.sp,
-                                    fontWeight = FontWeight.Bold
+                                    style = TextStyle(
+                                        textAlign = TextAlign.Center,
+                                        fontFamily = montserrat,
+                                        fontWeight = FontWeight.SemiBold,
+                                        fontSize = 14.sp,
+                                    )
                                 )
                             }
                         }
