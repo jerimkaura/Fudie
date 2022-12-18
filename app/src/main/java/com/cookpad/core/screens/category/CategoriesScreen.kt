@@ -50,10 +50,9 @@ fun CategoriesScreen(
                     verticalArrangement = Arrangement.Center,
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    LottieAnime(size = 180.dp, lottieFile = R.raw.veggies, speed = 0.50f)
+                    LottieAnime(size = 70.dp, lottieFile = R.raw.loader, speed = 2.0f)
                     Spacer(modifier = Modifier.height(30.dp))
                     Text(text = "Hang on chef...")
-
                 }
             } else if (mealCategories.error.isNotEmpty()) {
                 Column(
@@ -78,7 +77,6 @@ fun CategoriesScreen(
                         )
                     )
                 }
-
             } else {
                 val categories = mealCategories.data ?: emptyList()
                 if (categories.isNotEmpty()) {
