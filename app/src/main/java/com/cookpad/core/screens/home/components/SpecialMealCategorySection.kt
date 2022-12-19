@@ -40,7 +40,6 @@ import com.cookpad.core.ui.theme.montserrat
 fun SpecialMealCategory(mealsState: MealsState, navController: NavController, title: String) {
     val itemBgColor =
         if (isSystemInDarkTheme()) color_surface_dark.copy(0.6f) else color_primary_light
-    if (isSystemInDarkTheme()) color_surface_dark.copy(0.6f) else color_surface_light
     SectionHeader(title, onClick = {
         navController.navigate(
             Route

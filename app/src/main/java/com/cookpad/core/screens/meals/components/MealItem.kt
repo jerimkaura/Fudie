@@ -47,7 +47,6 @@ fun MealItem(meal: Meal, recipeViewModel: RecipeViewModels, navController: NavCo
                         Route.RecipeScreen.route + "/${meal.idMeal}"
                     )
                 }
-
             }
             .wrapContentSize(),
             shape = RoundedCornerShape(5.dp),

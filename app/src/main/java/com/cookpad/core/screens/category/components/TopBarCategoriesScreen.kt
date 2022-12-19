@@ -17,7 +17,7 @@ import com.cookpad.core.ui.theme.montserrat
 @Composable
 fun TopBarCategoriesScreen() {
     if (isSystemInDarkTheme()) color_primary_light else color_primary_light
-    val boxBackground = MaterialTheme.colorScheme.background
+    MaterialTheme.colorScheme.background
     Column {
         CenterAlignedTopAppBar(
             modifier = Modifier

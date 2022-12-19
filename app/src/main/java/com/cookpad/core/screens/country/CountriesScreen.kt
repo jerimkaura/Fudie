@@ -1,5 +1,6 @@
 package com.cookpad.core.screens.country
 
+import android.util.Log
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -37,6 +38,7 @@ fun CountriesScreen(
     }
 
     val savedCountryName = countriesViewModel.selectedCountryName.value
+
     Scaffold(
         content = { paddingValues ->
             Column(
@@ -49,13 +51,16 @@ fun CountriesScreen(
                 if (selectedCountry.value == null) {
                     if (countries.error.isEmpty() && !countries.isLoading) {
                         if (savedCountryName.isNotEmpty()) {
+                            Log.d("SAVED COUNTRY 1", "CountriesScreen: $savedCountryName")
                             val tempCountry = countries.data?.find {
                                 it.strArea == savedCountryName
                             }
+                            Log.d("TEMP COUNTRY 1", "CountriesScreen: $tempCountry")
                             selectedCountry.value = tempCountry
                         } else {
                             selectedCountry.value = countries.data?.get(0)
                         }
+
                     }
                 }
                 SelectedCountry(selectedCountry)
