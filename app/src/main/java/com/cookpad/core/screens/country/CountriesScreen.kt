@@ -37,6 +37,10 @@ fun CountriesScreen(
     }
 
     val savedCountryName = countriesViewModel.selectedCountryName.value
+<<<<<<< HEAD
+
+=======
+>>>>>>> main
     Scaffold(
         content = { paddingValues ->
             Column(
@@ -49,9 +53,11 @@ fun CountriesScreen(
                 if (selectedCountry.value == null) {
                     if (countries.error.isEmpty() && !countries.isLoading) {
                         if (savedCountryName.isNotEmpty()) {
+                            Log.d("SAVED COUNTRY 1", "CountriesScreen: $savedCountryName")
                             val tempCountry = countries.data?.find {
                                 it.strArea == savedCountryName
                             }
+                            Log.d("TEMP COUNTRY 1", "CountriesScreen: $tempCountry")
                             selectedCountry.value = tempCountry
                         } else {
                             selectedCountry.value = countries.data?.get(0)

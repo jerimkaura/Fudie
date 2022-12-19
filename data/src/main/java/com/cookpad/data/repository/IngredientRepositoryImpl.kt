@@ -21,7 +21,6 @@ class IngredientRepositoryImpl @Inject constructor(
         emit(Resource.Loading(data = localIngredients))
         try {
             val remoteIngredients = api.getIngredients().meals ?: emptyList()
-
             ingredientDao.upsertIngredients(remoteIngredients.map { it.toIngredientEntity() })
         } catch (e: IOException) {
             emit(

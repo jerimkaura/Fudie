@@ -47,8 +47,8 @@ fun MealCategorySection(
 
     LazyRow {
         if (mealCategoriesState.data !== null) {
-            val mealCategories = mealCategoriesState.data
-            if (mealCategories != null && mealCategories.isNotEmpty()) {
+            val mealCategories = mealCategoriesState.data ?: emptyList()
+            if (mealCategories.isNotEmpty()) {
                 items(mealCategories.size) {
                     Column(
                         modifier = Modifier
@@ -68,7 +68,7 @@ fun MealCategorySection(
                                 model = ImageRequest.Builder(LocalContext.current)
                                     .data(mealCategories[it].strCategoryThumb)
                                     .crossfade(true)
-                                    .diskCachePolicy(CachePolicy.ENABLED)// it's the same even removing comments
+                                    .diskCachePolicy(CachePolicy.ENABLED)
                                     .build(),
                                 contentDescription = stringResource(R.string.app_name),
                                 contentScale = ContentScale.Inside,

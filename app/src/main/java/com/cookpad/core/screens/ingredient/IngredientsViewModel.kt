@@ -22,12 +22,15 @@ import javax.inject.Inject
 class IngredientsViewModel @Inject constructor(
     private val getMealByIngredientNameUseCase: GetMealByIngredientNameUseCase, savedStateHandle: SavedStateHandle) :
     ViewModel() {
+    private  var _ingredientName = mutableStateOf("")
+    val ingredientName : State<String> = _ingredientName
 
     private var _meals = MutableStateFlow(MealsState())
     val meals = _meals.asStateFlow()
 
     init {
         savedStateHandle.get<String>(Constants.INGREDIENT_NAME)?.let { ingredientName ->
+            _ingredientName.value = ingredientName
             getMealByIngredientName(ingredientName, _meals)
         }
     }

@@ -1,6 +1,5 @@
-package com.cookpad.core.screens.home.components
+package com.cookpad.core.screens.utils
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
@@ -8,8 +7,8 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -20,14 +19,30 @@ import com.cookpad.core.ui.theme.montserrat
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TopBarHomeScreen(navController: NavController, onProfileClick: () -> Unit) {
+fun TopBar(navController: NavController, iconVisible: Boolean = false, title: String) {
+    MaterialTheme.colorScheme.background
     Column {
         CenterAlignedTopAppBar(
             modifier = Modifier
-                .padding(horizontal = 0.dp, vertical = 0.dp),
+                .padding(horizontal = 10.dp, vertical = 0.dp),
+            navigationIcon = {
+                if (iconVisible) {
+                    Icon(
+                        modifier = Modifier
+                            .clickable {
+                                navController.navigateUp()
+                            }
+                            .clip(CircleShape)
+                            .size(20.dp),
+                        imageVector = ImageVector.vectorResource(id = R.drawable.ic_back),
+                        contentDescription = "",
+                    )
+                }
+            },
+
             title = {
                 Text(
-                    text = "CookPad",
+                    text = title,
                     style = TextStyle(
                         fontFamily = montserrat,
                         fontWeight = FontWeight.SemiBold,
@@ -37,21 +52,7 @@ fun TopBarHomeScreen(navController: NavController, onProfileClick: () -> Unit) {
             },
             colors = TopAppBarDefaults.topAppBarColors(
                 containerColor = MaterialTheme.colorScheme.background,
-            ),
-            navigationIcon = {
-                Image(
-                    painter = painterResource(id = R.drawable.logo),
-                    modifier = Modifier
-                        .padding(horizontal = 10.dp)
-                        .clip(CircleShape)
-                        .size(45.dp)
-                        .clickable { onProfileClick.invoke() },
-                    contentScale = ContentScale.Crop,
-                    contentDescription = null
-                )
-            },
-            actions = {
-            },
+            )
         )
     }
 }

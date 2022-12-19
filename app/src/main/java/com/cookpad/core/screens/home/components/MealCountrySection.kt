@@ -23,7 +23,6 @@ import coil.request.CachePolicy
 import coil.request.ImageRequest
 import com.cookpad.core.R
 import com.cookpad.core.navigation.Route
-import com.cookpad.core.screens.home.HomeViewModel
 import com.cookpad.core.screens.home.states.CountriesState
 import com.cookpad.core.screens.utils.LottieAnime
 import com.cookpad.core.screens.utils.SectionHeader
@@ -33,8 +32,7 @@ import kotlinx.coroutines.launch
 @Composable
 fun  MealCountrySection(
     countriesState: CountriesState,
-    navController: NavController,
-    homeViewModel: HomeViewModel
+    navController: NavController
 ) {
     val scope = rememberCoroutineScope()
     SectionHeader("Explore Countries' Meals", onClick = {

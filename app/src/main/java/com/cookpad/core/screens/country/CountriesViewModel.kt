@@ -1,5 +1,6 @@
 package com.cookpad.core.screens.country
 
+import android.util.Log
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.SavedStateHandle
@@ -23,15 +24,17 @@ class CountriesViewModel @Inject constructor(
     private var _meals = mutableStateOf(MealsState())
     val meals: State<MealsState> = _meals
 
-
     private var _selectedCountryName = mutableStateOf("")
     val selectedCountryName: State<String> = _selectedCountryName
 
+
     init {
         savedStateHandle.get<String>(Constants.SELECTED_COUNTRY_NAME)?.let { countryName ->
+            Log.d("VIEWMODEL COUNTRY NAME", "$countryName: ")
             _selectedCountryName.value = countryName
+            getMealByCountryNameName(countryName)
         }
-        getMealByCountryNameName("American")
+//        getMealByCountryNameName("American")
     }
 
     fun getMealByCountryNameName(categoryName: String) {

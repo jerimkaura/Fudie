@@ -57,7 +57,7 @@ fun MealIngredients(ingredientsState: IngredientsState, navController: NavContro
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            LottieAnime(size = 50.dp, lottieFile = R.raw.loader, speed = 2.0f)
+            LottieAnime(size = 80.dp, lottieFile = R.raw.loader, speed = 2.0f)
             Spacer(modifier = Modifier.height(10.dp))
             androidx.compose.material.Text(
                 text = ingredientsState.error, style = TextStyle(
@@ -84,11 +84,7 @@ fun MealIngredients(ingredientsState: IngredientsState, navController: NavContro
                         ),
                         shape = RoundedCornerShape(20.dp),
                         onClick = {
-                            navController.navigate(
-                                Route
-                                    .MealsScreen
-                                    .route + "/${ingredients[it].strIngredient}"
-                            )
+                            navController.navigate(Route.SingleIngredientsScreen.route + "/${ingredients[it].strIngredient}")
                         },
                         label = { Text(text = ingredients[it].strIngredient) },
                         leadingIcon = {

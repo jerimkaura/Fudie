@@ -8,6 +8,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
@@ -25,21 +26,26 @@ import coil.compose.AsyncImage
 import coil.request.CachePolicy
 import coil.request.ImageRequest
 import com.cookpad.core.R
-import com.cookpad.core.screens.ingredient.components.TopBarIngredientsScreen
+import com.cookpad.core.navigation.Route
+import com.cookpad.core.screens.recipe.RecipeViewModels
 import com.cookpad.core.screens.utils.LottieAnime
+import com.cookpad.core.screens.utils.TopBar
 import com.cookpad.core.ui.theme.montserrat
 import com.cookpad.domain.model.Meal
+import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SingleIngredientScreen(
     navController: NavController,
+    recipeViewModels: RecipeViewModels = hiltViewModel(),
     ingredientsViewModel: IngredientsViewModel = hiltViewModel(),
 ) {
     val mealsState = ingredientsViewModel.meals.collectAsState().value
+    val ingredientName = ingredientsViewModel.ingredientName.value
     Scaffold(
         topBar = {
-            TopBarIngredientsScreen()
+            TopBar(navController = navController, iconVisible = true, title = ingredientName)
         },
         content = { paddingValues ->
             if (mealsState.isLoading) {
@@ -95,7 +101,7 @@ fun SingleIngredientScreen(
                         columns = GridCells.Fixed(3)
                     ) {
                         items(meals.size) {
-                            IngredientMeal(meals[it], navController)
+                            IngredientMeal(meals[it], recipeViewModels, navController)
                         }
                     }
                 } else {
@@ -131,7 +137,8 @@ fun SingleIngredientScreen(
 }
 
 @Composable
-fun IngredientMeal(meal: Meal, navController: NavController) {
+fun IngredientMeal(meal: Meal, recipeViewModels: RecipeViewModels, navController: NavController) {
+    val scope = rememberCoroutineScope()
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
@@ -140,11 +147,17 @@ fun IngredientMeal(meal: Meal, navController: NavController) {
             .height(120.dp),
         verticalArrangement = Arrangement.Center
     ) {
-        Card(modifier = Modifier
-            .clickable {
-
-            }
-            .wrapContentSize(),
+        Card(
+            modifier = Modifier
+                .clickable {
+                    scope.launch {
+                        recipeViewModels.getRecipeByMealId(mealId = meal.idMeal)
+                        navController.navigate(
+                            Route.RecipeScreen.route + "/${meal.idMeal}"
+                        )
+                    }
+                }
+                .wrapContentSize(),
             shape = RoundedCornerShape(5.dp),
             elevation = CardDefaults.cardElevation(1.dp)) {
             AsyncImage(

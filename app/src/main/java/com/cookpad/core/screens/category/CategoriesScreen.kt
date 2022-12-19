@@ -19,9 +19,9 @@ import androidx.navigation.NavController
 import com.cookpad.core.R
 import com.cookpad.core.screens.category.components.CategoryDialog
 import com.cookpad.core.screens.category.components.CategoryItem
-import com.cookpad.core.screens.category.components.TopBarCategoriesScreen
 import com.cookpad.core.screens.home.HomeViewModel
 import com.cookpad.core.screens.utils.LottieAnime
+import com.cookpad.core.screens.utils.TopBar
 import com.cookpad.core.ui.theme.montserrat
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -36,7 +36,7 @@ fun CategoriesScreen(
     }
     Scaffold(
         topBar = {
-            TopBarCategoriesScreen()
+            TopBar(navController = navController, title = "Categories")
         },
         content = { paddingValues ->
             if (mealCategories.isLoading) {
@@ -45,7 +45,7 @@ fun CategoriesScreen(
                         .fillMaxSize()
                         .padding(
                             top = paddingValues.calculateTopPadding(),
-                            bottom = paddingValues.calculateBottomPadding()
+                            bottom = paddingValues.calculateBottomPadding() + 60.dp
                         ),
                     verticalArrangement = Arrangement.Center,
                     horizontalAlignment = Alignment.CenterHorizontally

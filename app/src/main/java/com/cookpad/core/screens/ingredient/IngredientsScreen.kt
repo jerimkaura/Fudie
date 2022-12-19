@@ -46,8 +46,8 @@ fun IngredientsScreen(
                     modifier = Modifier
                         .padding(
                             top = paddingValues.calculateTopPadding(),
-                            bottom = paddingValues.calculateBottomPadding(),
-                            )
+                            bottom = paddingValues.calculateBottomPadding() + 60.dp,
+                        )
                         .fillMaxSize(),
                     verticalArrangement = Arrangement.Center,
                     horizontalAlignment = Alignment.CenterHorizontally
