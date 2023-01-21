@@ -83,7 +83,7 @@ fun CategoriesScreen(
                     LazyVerticalGrid(
                         modifier = Modifier
                             .padding(
-                                bottom = paddingValues.calculateBottomPadding(),
+                                bottom = paddingValues.calculateBottomPadding() + 100.dp,
                                 top = paddingValues.calculateTopPadding()
                             )
                             .fillMaxSize(), columns = GridCells.Fixed(3)

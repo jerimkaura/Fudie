@@ -1,5 +1,6 @@
 package com.cookpad.core.screens.country
 
+import android.util.Log
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -23,7 +24,6 @@ fun CountriesScreen(
     countriesViewModel: CountriesViewModel = hiltViewModel(),
     recipeViewModel: RecipeViewModels = hiltViewModel()
 ) {
-    LocalContext.current
     val countries = homeViewModel.countries.value
     val meals = countriesViewModel.meals.value
     val recipeState: MutableState<RecipeState?> = remember {

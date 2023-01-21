@@ -1,6 +1,7 @@
 package com.cookpad.core.screens.home.components
 
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.staggeredgrid.LazyHorizontalStaggeredGrid
@@ -86,7 +87,16 @@ fun MealIngredients(ingredientsState: IngredientsState, navController: NavContro
                         onClick = {
                             navController.navigate(Route.SingleIngredientsScreen.route + "/${ingredients[it].strIngredient}")
                         },
-                        label = { Text(text = ingredients[it].strIngredient) },
+                        label = {
+                            Text(
+                                text = ingredients[it].strIngredient,
+                                style = TextStyle(
+                                    fontFamily = montserrat,
+                                    fontWeight = FontWeight.Medium,
+                                    fontSize = 12.sp,
+                                )
+                            )
+                        },
                         leadingIcon = {
                             Icon(
                                 painter = painterResource(id = R.drawable.ic_trending),

@@ -53,7 +53,7 @@ fun MealCategorySection(
                     Column(
                         modifier = Modifier
                             .wrapContentSize()
-                            .padding(vertical = 20.dp, horizontal = 10.dp),
+                            .padding(vertical = 5.dp, horizontal = 10.dp),
                         horizontalAlignment = Alignment.CenterHorizontally,
                         verticalArrangement = Arrangement.SpaceBetween
                     ) {
@@ -74,7 +74,7 @@ fun MealCategorySection(
                                 contentScale = ContentScale.Inside,
                                 modifier = Modifier
                                     .clip(RoundedCornerShape(5.dp))
-                                    .size(70.dp)
+                                    .size(80.dp)
                                     .clickable {
                                         navController.navigate(
                                             Route
@@ -84,12 +84,12 @@ fun MealCategorySection(
                                     },
                             )
                         }
-                        Spacer(modifier = Modifier.height(20.dp))
+                        Spacer(modifier = Modifier.height(10.dp))
                         Text(
                             text = mealCategories[it].strCategory, style = TextStyle(
                                 fontFamily = montserrat,
-                                fontWeight = FontWeight.Medium,
-                                fontSize = 14.sp,
+                                fontWeight = FontWeight.SemiBold,
+                                fontSize = 12.sp,
                             )
                         )
                     }

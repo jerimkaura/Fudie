@@ -1,3 +1,5 @@
+package com.cookpad.core.screens.home.components
+
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -13,7 +15,6 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
 import androidx.compose.ui.unit.sp
@@ -29,7 +30,7 @@ import com.cookpad.domain.model.Meal
 import kotlinx.coroutines.launch
 
 @Composable
-fun MealItem(meal: Meal, recipeViewModel: RecipeViewModels, navController: NavController) {
+fun AllMealsItem(meal: Meal, recipeViewModel: RecipeViewModels, navController: NavController) {
     val scope = rememberCoroutineScope()
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -38,18 +39,12 @@ fun MealItem(meal: Meal, recipeViewModel: RecipeViewModels, navController: NavCo
             .wrapContentHeight(),
         verticalArrangement = Arrangement.Center
     ) {
-        Card(modifier = Modifier
-            .clickable {
-                scope.launch {
-                    recipeViewModel.getRecipeByMealId(mealId = meal.idMeal)
-                    navController.navigate(
-                        Route.RecipeScreen.route + "/${meal.idMeal}"
-                    )
-                }
-            }
-            .wrapContentSize(),
+        Card(
+            modifier = Modifier
+                .wrapContentSize(),
             shape = RoundedCornerShape(15.dp),
-            elevation = CardDefaults.cardElevation(1.dp)) {
+            elevation = CardDefaults.cardElevation(1.dp)
+        ) {
             AsyncImage(
                 model = ImageRequest.Builder(LocalContext.current)
                     .data(meal.strMealThumb).crossfade(true)
@@ -58,19 +53,27 @@ fun MealItem(meal: Meal, recipeViewModel: RecipeViewModels, navController: NavCo
                 contentDescription = stringResource(R.string.app_name),
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
+                    .clickable {
+                        scope.launch {
+                            recipeViewModel.getRecipeByMealId(mealId = meal.idMeal)
+                            navController.navigate(
+                                Route.RecipeScreen.route + "/${meal.idMeal}"
+                            )
+                        }
+                    }
                     .width(190.dp)
                     .height(120.dp),
             )
         }
-
+        Spacer(modifier = Modifier.height(5.dp))
         Text(
-            modifier = Modifier.padding(5.dp),
+            modifier = Modifier.padding(horizontal = 5.dp),
             text = meal.strMeal,
             style = TextStyle(
                 fontFamily = montserrat,
                 fontWeight = FontWeight.Medium,
-                fontSize = 12.sp,
                 lineHeight = 1.5.em,
+                fontSize = 12.sp,
             ),
             maxLines = 2
         )

@@ -49,8 +49,6 @@ fun MealsScreen(
     val categoryName = mealViewModel.categoryName.value
 
     Scaffold(
-        topBar = {
-        },
         content = { paddingValues ->
             if (mealsState.isLoading) {
                 Column(
@@ -99,7 +97,7 @@ fun MealsScreen(
                         LazyVerticalGrid(
                             modifier = Modifier
                                 .fillMaxSize(),
-                            columns = GridCells.Fixed(3)
+                            columns = GridCells.Fixed(2)
                         ) {
                             items(meals.size) {
                                 MealItem(meals[it], recipeViewModel, navController)

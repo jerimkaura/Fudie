@@ -1,7 +1,6 @@
 package com.cookpad.core.screens.recipe.components
 
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
+import android.widget.Toast
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -16,8 +15,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Color.Companion.Blue
-import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -35,7 +33,6 @@ import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.PagerState
 import com.google.accompanist.pager.pagerTabIndicatorOffset
 import kotlinx.coroutines.launch
-import com.cookpad.core.R
 
 @ExperimentalMaterialApi
 @ExperimentalPagerApi
@@ -93,51 +90,7 @@ fun TabsContent(tabs: List<MealTabs>, pagerState: PagerState, recipe: Recipe) {
             Constants.INSTRUCTIONS -> {
                 RecipeInstructions(recipe)
             }
-            Constants.INFO -> {
-                RecipeInfo(recipe)
-            }
         }
-    }
-}
-
-@Composable
-fun RecipeInfo(recipe: Recipe) {
-    val details = listOf(
-        RecipeDetail("Native Origin", recipe.strArea),
-        RecipeDetail("Category", recipe.strCategory),
-        if (!recipe.strYoutube.contains("No value")) {
-            RecipeDetail("Video Streaming", "Available")
-        } else {
-            RecipeDetail("Video Streaming", "Unavailable")
-        }
-    )
-    LazyColumn(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(vertical = 10.dp),
-        horizontalAlignment = Alignment.Start,
-        verticalArrangement = Arrangement.Top
-    ) {
-        items(details) {
-            DetailItem(it)
-        }
-        item {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(200.dp),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.Center
-            ) {
-                Image(
-                    modifier = Modifier.height(120.dp).width(60.dp),
-                    painter = painterResource(id = R.drawable.youtube),
-                    contentDescription = "",
-                    contentScale = ContentScale.Fit
-                )
-            }
-        }
-
     }
 }
 
@@ -149,9 +102,27 @@ fun RecipeInstructions(recipe: Recipe) {
             .fillMaxWidth()
             .padding(vertical = 10.dp)
             .height(500.dp),
-        horizontalAlignment = Alignment.Start,
+        horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Top
     ) {
+        val context = LocalContext.current
+        if (!recipe.strYoutube.contains("No value")) {
+            Button(
+                modifier = Modifier.padding(vertical = 5.dp),
+                onClick = {
+                    Toast.makeText(context, recipe.strYoutube, Toast.LENGTH_LONG).show()
+                }
+            ) {
+                Text(
+                    text = "Watch Video",
+                    style = TextStyle(
+                        fontFamily = montserrat,
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 12.sp,
+                    )
+                )
+            }
+        }
         Text(
             modifier = Modifier.verticalScroll(scroll),
             text = recipe.strInstructions,
@@ -163,8 +134,11 @@ fun RecipeInstructions(recipe: Recipe) {
                 textAlign = TextAlign.Justify,
             )
         )
+
     }
+
 }
+
 
 @Composable
 fun RecipeIngredients(recipe: Recipe) {
