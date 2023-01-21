@@ -31,6 +31,7 @@ import com.cookpad.core.screens.ingredient.IngredientsScreen
 import com.cookpad.core.screens.ingredient.SingleIngredientScreen
 import com.cookpad.core.screens.meals.MealsScreen
 
+
 import com.cookpad.core.screens.recipe.RecipeScreen
 import com.cookpad.core.screens.utils.getActivity
 import com.cookpad.core.ui.theme.CookPadThem
@@ -166,6 +167,16 @@ private fun NavGraphBuilder.screens(navController: NavController) {
             fadeOut(animationSpec = tween(1000))
         }) {
         CountriesScreen(navController)
+    }
+
+    composable(route = Route.MealsScreen.route + "/{category_name}",
+        enterTransition = {
+            fadeIn(animationSpec = tween(3000))
+        },
+        exitTransition = {
+            fadeOut(animationSpec = tween(3000))
+        }) {
+        MealsScreen(navController)
     }
 
     composable(route = Route.MealsScreen.route + "/{category_name}",
