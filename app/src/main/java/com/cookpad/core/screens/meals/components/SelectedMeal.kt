@@ -91,13 +91,13 @@ fun SelectedMeal(
             ) {
                 Box(
                     modifier = Modifier
+                        .clickable {
+                            navController.navigateUp()
+                        }
                         .padding(vertical = 0.dp)
                         .background(boxBackground, CircleShape)
                         .size(30.dp)
-                        .clip(CircleShape)
-                        .clickable {
-                            navController.navigateUp()
-                        },
+                        .clip(CircleShape),
                     contentAlignment = Alignment.Center
                 ) {
                     Icon(
@@ -111,19 +111,6 @@ fun SelectedMeal(
                 }
             }
 
-            Text(
-                modifier = Modifier
-                    .align(Alignment.Center)
-                    .padding(10.dp),
-                text = meal.value?.strMeal ?: "",
-                style = TextStyle(
-                    fontFamily = montserrat,
-                    fontWeight = FontWeight.ExtraBold,
-                    fontSize = 20.sp,
-                    color = Color.White, textAlign = TextAlign.Center
-                )
-
-            )
 
             Button(
                 modifier = Modifier
@@ -142,7 +129,7 @@ fun SelectedMeal(
                 }
             ) {
                 Text(
-                    text = "TRY ${meal.value?.strMeal?.uppercase() ?: "".uppercase()}",
+                    text = "Try this selection",
                     style = TextStyle(
                         fontFamily = montserrat,
                         fontWeight = FontWeight.Bold,

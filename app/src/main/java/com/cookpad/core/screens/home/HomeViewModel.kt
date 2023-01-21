@@ -1,5 +1,6 @@
 package com.cookpad.core.screens.home
 
+import android.util.Log
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
@@ -11,7 +12,6 @@ import com.cookpad.core.screens.home.states.IngredientsState
 import com.cookpad.core.screens.home.states.MealCategoriesState
 import com.cookpad.core.screens.home.states.MealsState
 import com.cookpad.core.screens.recipe.states.RecipeState
-import com.cookpad.domain.model.Country
 import com.cookpad.domain.use_cases.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
@@ -26,6 +26,7 @@ class HomeViewModel @Inject constructor(
     private val getMealByCategoryNameUseCase: GetMealByCategoryNameUseCase,
     private val getMealByIngredientNameUseCase: GetMealByIngredientNameUseCase,
     private val getRandomRecipeUseCase: GetRandomRecipeUseCase,
+    private val getAllMealsUseCase: GetAllMealsUseCase
 ) :
     ViewModel() {
 
@@ -56,8 +57,12 @@ class HomeViewModel @Inject constructor(
     private var _randomRecipe = mutableStateOf(RecipeState())
     val randomRecipe: State<RecipeState> = _randomRecipe
 
+    private var _allMeals = mutableStateOf(MealsState())
+    val allMeals: State<MealsState> = _allMeals
+
     init {
         getMealCategories()
+        getAllMeals()
         getIngredients()
         getCountries()
         getMealByCategoryName("Chicken", _chickenMeals)
@@ -65,6 +70,22 @@ class HomeViewModel @Inject constructor(
         getMealByCategoryName("Pork", _porkMeals)
         getMealByCategoryName("Vegetarian", _vegetarianMeals)
         getMealByIngredientName("Milk", _breakfastMeals)
+    }
+
+    private fun getAllMeals() {
+        getAllMealsUseCase().onEach { result ->
+            when (result) {
+                is Resource.Loading -> {
+                    _allMeals.value = MealsState(isLoading = true)
+                }
+                is Resource.Error -> {
+                    _allMeals.value = MealsState(error = result.error.toString())
+                }
+                is Resource.Success -> {
+                    _allMeals.value = MealsState(data = result.data)
+                }
+            }
+        }.launchIn(viewModelScope)
     }
 
 

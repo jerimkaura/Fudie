@@ -11,6 +11,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
 import androidx.compose.ui.unit.sp
@@ -130,7 +131,6 @@ fun RecipeDetails(recipe: Recipe?, navController: NavController) {
     val tabs = listOf(
         MealTabs.Ingredients,
         MealTabs.Instructions,
-        MealTabs.Details
     )
     val pagerState = rememberPagerState()
     recipe?.let {
@@ -145,9 +145,10 @@ fun RecipeDetails(recipe: Recipe?, navController: NavController) {
                 style = TextStyle(
                     fontFamily = montserrat,
                     fontWeight = FontWeight.Bold,
-                    fontSize = 16.sp,
+                    fontSize = 14.sp,
                 ),
-                maxLines = 2,
+                overflow = TextOverflow.Ellipsis,
+                maxLines = 3,
             )
             Spacer(modifier = Modifier.height(20.dp))
             Tabs(tabs = tabs, pagerState = pagerState)

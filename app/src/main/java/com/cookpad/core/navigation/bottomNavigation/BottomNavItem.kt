@@ -19,6 +19,12 @@ sealed class BottomNavItem(
         Route.CategoriesScreen.route
     )
 
+    object Countries : BottomNavItem(
+        "Countries",
+        R.drawable.ic_flag,
+        Route.CountriesScreen.route
+    )
+
     object Ingredients : BottomNavItem(
         "Ingredients",
         R.drawable.ic_ingredients,

@@ -1,7 +1,9 @@
 package com.cookpad.core.screens.home
 
+import MealItem
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
@@ -17,6 +19,7 @@ import androidx.navigation.NavController
 import color_primary_light
 import com.cookpad.core.navigation.Route
 import com.cookpad.core.screens.home.components.*
+import com.cookpad.core.screens.home.states.MealsState
 import com.cookpad.core.screens.recipe.RecipeViewModels
 import kotlinx.coroutines.launch
 
@@ -27,13 +30,8 @@ fun HomeScreen(
     viewModel: HomeViewModel = hiltViewModel(),
     recipeViewModel: RecipeViewModels = hiltViewModel(),
 ) {
-    val ingredients = viewModel.ingredients.value
     val mealCategories = viewModel.mealCategories.value
-    val countries = viewModel.countries.value
-    val chickenMeals = viewModel.chickenMeals.value
-    val porkMeals = viewModel.porkMeals.value
-    val vegetarianMeals = viewModel.vegetarianMeals.value
-    val breakfastMeals = viewModel.breakfastMeals.value
+    val allMealsState = viewModel.allMeals.value
     val randomRecipe = viewModel.randomRecipe.value
     val scope = rememberCoroutineScope()
 
@@ -42,17 +40,15 @@ fun HomeScreen(
         viewModel.getRandomRecipe()
     }
     Scaffold(
-        topBar = { TopBarHomeScreen(navController, onProfileClick = {}) }
-    ) { paddingValues ->
-        LazyColumn(
-            modifier = Modifier
-                .padding(
-                    bottom = paddingValues.calculateBottomPadding() + 60.dp,
-                    top = paddingValues.calculateTopPadding() + 10.dp
-                )
-                .fillMaxSize()
-        ) {
-            item {
+        content = { paddingValues->
+            Column(
+                modifier = Modifier
+                    .padding(
+                        bottom = paddingValues.calculateBottomPadding(),
+                        top = paddingValues.calculateTopPadding()
+                    )
+                    .fillMaxSize()
+            ) {
                 RandomMeal(randomRecipe, onClick = {
                     scope.launch {
                         randomRecipe.data?.idMeal?.let {
@@ -66,68 +62,27 @@ fun HomeScreen(
 
                     }
                 })
-            }
-            item {
                 MealCategorySection(mealCategories, navController)
-            }
-            item {
-                RowSpacer()
-            }
-            item {
-                MealsByCategory(chickenMeals, recipeViewModel, navController)
-            }
-            item {
-                RowSpacer()
-            }
-            item {
-                MealCountrySection(countries, navController)
-            }
-            item {
-                RowSpacer()
-            }
-            item {
-                SpecialMealCategory(vegetarianMeals, navController, title="Vegetarian")
-            }
-            item {
-                RowSpacer()
-            }
-
-            item {
-                RoundMealCardSection(breakfastMeals, navController)
-            }
-
-            item {
-                RowSpacer()
-            }
-
-            item {
-                MealIngredients(ingredients, navController)
-            }
-            item {
-                RowSpacer()
-            }
-            item {
-                SpecialMealCategory(porkMeals, navController, title="Pork")
+                AllMealsSection(allMealsState = allMealsState, recipeViewModel, navController)
             }
         }
-    }
+    )
 }
 
 @Composable
-fun LoadingAnimation(height: Dp) {
-    Row(
+fun AllMealsSection(
+    allMealsState: MealsState,
+    recipeViewModel: RecipeViewModels,
+    navController: NavController
+) {
+    val allMeals = allMealsState.data ?: emptyList()
+    LazyVerticalGrid(
         modifier = Modifier
-            .fillMaxWidth()
-            .padding(20.dp)
-            .height(height),
-        horizontalArrangement = Arrangement.Center,
-        verticalAlignment = Alignment.CenterVertically
+
+            .fillMaxHeight(), columns = GridCells.Fixed(2)
     ) {
-        CircularProgressIndicator(
-            modifier = Modifier,
-            strokeWidth = 3.dp,
-            color = color_primary_light
-        )
+        items(allMeals.size) { mealItem ->
+            MealItem(allMeals[mealItem], recipeViewModel, navController)
+        }
     }
 }
-

@@ -45,7 +45,7 @@ fun CategoriesScreen(
                         .fillMaxSize()
                         .padding(
                             top = paddingValues.calculateTopPadding(),
-                            bottom = paddingValues.calculateBottomPadding() + 60.dp
+                            bottom = paddingValues.calculateBottomPadding()
                         ),
                     verticalArrangement = Arrangement.Center,
                     horizontalAlignment = Alignment.CenterHorizontally
@@ -83,7 +83,7 @@ fun CategoriesScreen(
                     LazyVerticalGrid(
                         modifier = Modifier
                             .padding(
-                                bottom = paddingValues.calculateBottomPadding(),
+                                bottom = paddingValues.calculateBottomPadding() + 100.dp,
                                 top = paddingValues.calculateTopPadding()
                             )
                             .fillMaxSize(), columns = GridCells.Fixed(3)

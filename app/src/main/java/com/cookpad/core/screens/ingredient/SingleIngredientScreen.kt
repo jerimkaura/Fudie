@@ -1,5 +1,6 @@
 package com.cookpad.core.screens.ingredient
 
+import MealItem
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
@@ -95,13 +96,13 @@ fun SingleIngredientScreen(
                             .fillMaxSize()
                             .padding(
                                 top = paddingValues.calculateTopPadding(),
-                                bottom = paddingValues.calculateBottomPadding()
+                                bottom = paddingValues.calculateBottomPadding() + 10.dp
                             )
                             .fillMaxSize(),
-                        columns = GridCells.Fixed(3)
+                        columns = GridCells.Fixed(2)
                     ) {
                         items(meals.size) {
-                            IngredientMeal(meals[it], recipeViewModels, navController)
+                            MealItem(meals[it], recipeViewModels, navController)
                         }
                     }
                 } else {

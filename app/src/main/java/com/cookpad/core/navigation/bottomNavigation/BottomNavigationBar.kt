@@ -2,7 +2,7 @@ package com.cookpad.core.navigation.bottomNavigation
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -24,22 +24,21 @@ fun BottomNavigationBar(navController: NavController) {
     val items = listOf(
         BottomNavItem.Home,
         BottomNavItem.Categories,
+        BottomNavItem.Countries,
         BottomNavItem.Ingredients,
     )
-    Column {
-        NavigationBar(
-            modifier = Modifier
-                .height(60.dp),
-            tonalElevation = 1.dp,
-            containerColor = MaterialTheme.colorScheme.background
-        ) {
-            val backStackEntry by navController.currentBackStackEntryAsState()
-            val currentRoute = backStackEntry?.destination?.route
-            items.forEach { item ->
-                val selected = currentRoute == item.route
-                NavigationBarItem(
-                    selected = selected,
-                    colors = NavigationBarItemDefaults.colors(
+    NavigationBar(
+        modifier = Modifier.wrapContentHeight(),
+        tonalElevation = 1.dp,
+        containerColor = MaterialTheme.colorScheme.background
+    ) {
+        val backStackEntry by navController.currentBackStackEntryAsState()
+        val currentRoute = backStackEntry?.destination?.route
+        items.forEach { item ->
+            val selected = currentRoute == item.route
+            NavigationBarItem(
+                selected = selected,
+                colors = NavigationBarItemDefaults.colors(
                         indicatorColor = MaterialTheme.colorScheme.background
                     ),
                     onClick = {
@@ -47,7 +46,6 @@ fun BottomNavigationBar(navController: NavController) {
                     },
                     icon = {
                         Column(
-
                             horizontalAlignment = Alignment.CenterHorizontally,
                             verticalArrangement = Arrangement.Center
                         ) {
@@ -61,8 +59,8 @@ fun BottomNavigationBar(navController: NavController) {
                                     style = TextStyle(
                                         textAlign = TextAlign.Center,
                                         fontFamily = montserrat,
-                                        fontWeight = FontWeight.SemiBold,
-                                        fontSize = 14.sp,
+                                        fontWeight = FontWeight.Medium,
+                                        fontSize = 12.sp,
                                     )
                                 )
                             }
@@ -72,4 +70,3 @@ fun BottomNavigationBar(navController: NavController) {
             }
         }
     }
-}

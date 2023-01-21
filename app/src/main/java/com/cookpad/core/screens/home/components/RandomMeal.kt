@@ -31,9 +31,9 @@ fun RandomMeal(randomRecipe: RecipeState, onClick: () -> Unit) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(vertical = 8.dp, horizontal = 10.dp)
-            .height(200.dp),
-        shape = RoundedCornerShape(12.dp),
+            .padding(vertical = 5.dp, horizontal = 10.dp)
+            .height(180.dp),
+        shape = RoundedCornerShape(15.dp),
     ) {
         if (randomRecipe.error.isNotEmpty()) {
             Box(
@@ -101,24 +101,14 @@ fun RandomMeal(randomRecipe: RecipeState, onClick: () -> Unit) {
                     verticalArrangement = Arrangement.SpaceBetween,
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    Text(
-                        text = randomRecipe.data?.strMeal ?: "",
-                        style = TextStyle(
-                            fontFamily = montserrat,
-                            fontWeight = FontWeight.ExtraBold,
-                            fontSize = 16.sp,
-                            color = Color.White
-                        )
-
-                    )
-                    Spacer(modifier = Modifier.height(20.dp))
+                    Spacer(modifier = Modifier.height(10.dp))
                     Button(
                         shape = RoundedCornerShape(10.dp),
                         onClick = {
                             onClick.invoke()
                         }) {
                         Text(
-                            text = "GET A RANDOM RECIPE",
+                            text = "Try your Random Recipe",
                             style = TextStyle(
                                 fontFamily = montserrat,
                                 fontWeight = FontWeight.Bold,

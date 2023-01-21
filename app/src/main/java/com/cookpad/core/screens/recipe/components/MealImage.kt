@@ -60,14 +60,14 @@ fun MealImage(recipe: Recipe?, navController: NavController) {
                     .padding(vertical = 0.dp)
                     .background(boxBackground, CircleShape)
                     .size(30.dp)
-                    .clip(CircleShape),
+                    .clip(CircleShape)
+                    .clickable {
+                        navController.navigateUp()
+                    },
                 contentAlignment = Alignment.Center
             ) {
                 Icon(
                     modifier = Modifier
-                        .clickable {
-                            navController.navigateUp()
-                        }
                         .size(20.dp),
                     imageVector = ImageVector.vectorResource(id = R.drawable.ic_back),
                     contentDescription = "",
