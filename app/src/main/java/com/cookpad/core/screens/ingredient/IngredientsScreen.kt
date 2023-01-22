@@ -119,7 +119,7 @@ fun IngredientsScreen(
                     verticalArrangement = Arrangement.Center,
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    LottieAnime(size = 180.dp, lottieFile = R.raw.no_connection, speed = 2.0f)
+                    LottieAnime(size = 180.dp, lottieFile = R.raw.no_internet, speed = 2.0f)
                     Spacer(modifier = Modifier.height(30.dp))
                     Text(
                         text = ingredientsState.error,

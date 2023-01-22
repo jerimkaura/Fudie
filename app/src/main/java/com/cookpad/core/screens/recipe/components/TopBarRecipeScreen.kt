@@ -78,7 +78,7 @@ fun TopBarRecipeScreen() {
                             Icon(
                                 modifier = Modifier
                                     .size(20.dp),
-                                imageVector = ImageVector.vectorResource(id = R.drawable.ic_food_bank),
+                                imageVector = ImageVector.vectorResource(id = R.drawable.ic_ingredients),
                                 contentDescription = "Notification Icon",
                             )
                         }

@@ -165,7 +165,7 @@ fun MealsByCategory(
                     verticalArrangement = Arrangement.Center,
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    LottieAnime(size = 50.dp, lottieFile = R.raw.small_section_loader, speed = 1.0f)
+                    LottieAnime(size = 50.dp, lottieFile = R.raw.loader, speed = 1.0f)
                     Spacer(modifier = Modifier.height(10.dp))
                     Text(
                         text = "Loading...",
@@ -186,7 +186,7 @@ fun MealsByCategory(
                     verticalArrangement = Arrangement.Center,
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    LottieAnime(size = 50.dp, lottieFile = R.raw.no_connection, speed = 2.0f)
+                    LottieAnime(size = 50.dp, lottieFile = R.raw.no_internet, speed = 2.0f)
                     Spacer(modifier = Modifier.height(10.dp))
                     Text(
                         text = mealsState.error,

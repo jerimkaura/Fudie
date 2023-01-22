@@ -47,7 +47,7 @@ fun RandomMeal(randomRecipe: RecipeState, onClick: () -> Unit) {
                     verticalArrangement = Arrangement.Center,
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    LottieAnime(size = 100.dp, lottieFile = R.raw.no_connection, speed = 1.0f)
+                    LottieAnime(size = 100.dp, lottieFile = R.raw.no_internet, speed = 1.0f)
                     Text(
                         modifier = Modifier,
                         text = randomRecipe.error,

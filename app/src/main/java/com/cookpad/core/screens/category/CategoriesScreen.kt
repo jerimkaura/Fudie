@@ -53,7 +53,14 @@ fun CategoriesScreen(
                 ) {
                     LottieAnime(size = 70.dp, lottieFile = R.raw.loader, speed = 2.0f)
                     Spacer(modifier = Modifier.height(30.dp))
-                    Text(text = "Hang on chef...")
+                    Text(
+                        text = "Hang on chef...",
+                        style = TextStyle(
+                            fontFamily = montserrat,
+                            fontWeight = FontWeight.Medium,
+                            fontSize = 12.sp,
+                        )
+                    )
                 }
             } else if (mealCategories.error.isNotEmpty()) {
                 Column(
@@ -67,7 +74,7 @@ fun CategoriesScreen(
                     verticalArrangement = Arrangement.Center,
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    LottieAnime(size = 180.dp, lottieFile = R.raw.no_connection, speed = 2.0f)
+                    LottieAnime(size = 180.dp, lottieFile = R.raw.no_internet, speed = 2.0f)
                     Spacer(modifier = Modifier.height(30.dp))
                     Text(
                         text = mealCategories.error,
@@ -87,7 +94,8 @@ fun CategoriesScreen(
                             .padding(
                                 bottom = paddingValues.calculateBottomPadding() + 100.dp,
                                 top = paddingValues.calculateTopPadding(),
-                            ).padding(horizontal = 10.dp)
+                            )
+                            .padding(horizontal = 10.dp)
                             .fillMaxSize(), columns = GridCells.Fixed(3)
                     ) {
                         items(categories.size) { category ->
@@ -108,7 +116,7 @@ fun CategoriesScreen(
                         verticalArrangement = Arrangement.Center,
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
-                        LottieAnime(size = 150.dp, lottieFile = R.raw.veggies, speed = 1.0f)
+                        LottieAnime(size = 150.dp, lottieFile = R.raw.empty_list, speed = 1.0f)
                         Spacer(modifier = Modifier.height(30.dp))
                         Text(
                             text = "Looks like you don't have much here.",

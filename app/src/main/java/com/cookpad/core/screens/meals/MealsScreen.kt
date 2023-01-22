@@ -64,7 +64,7 @@ fun MealsScreen(
                 ) {
                     LottieAnime(
                         size = 70.dp,
-                        lottieFile = R.raw.small_section_loader,
+                        lottieFile = R.raw.loader,
                         speed = 2.0f
                     )
                     Spacer(modifier = Modifier.height(30.dp))

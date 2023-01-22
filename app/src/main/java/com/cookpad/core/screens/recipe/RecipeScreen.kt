@@ -103,7 +103,7 @@ fun RecipeScreen(navController: NavController, viewModel: RecipeViewModels = hil
                             ),
                         )
                         Spacer(modifier = Modifier.height(70.dp))
-                        LottieAnime(size = 150.dp, lottieFile = R.raw.no_connection, speed = 1.0f)
+                        LottieAnime(size = 150.dp, lottieFile = R.raw.no_internet, speed = 1.0f)
                         Spacer(modifier = Modifier.height(300.dp))
                         Button(
                             shape = RoundedCornerShape(30.dp),
