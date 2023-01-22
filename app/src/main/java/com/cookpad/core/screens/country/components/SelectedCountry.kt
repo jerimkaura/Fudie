@@ -8,6 +8,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -22,11 +23,12 @@ import com.cookpad.domain.model.Country
 fun SelectedCountry(
     selectedCountry: MutableState<Country?>
 ) {
+    val imageHeight = (0.25 * LocalConfiguration.current.screenHeightDp).dp
     Column {
         Box(
             Modifier
                 .padding(vertical = 0.dp, horizontal = 0.dp)
-                .height(200.dp)
+                .height(imageHeight)
                 .background(Color.Blue.copy(0.1f))
         ) {
             AsyncImage(

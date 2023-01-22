@@ -16,6 +16,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
@@ -61,12 +62,12 @@ fun SelectedMeal(
         }
     }
     val scope = rememberCoroutineScope()
-
+    val imageHeight = (0.2 * LocalConfiguration.current.screenHeightDp).dp
     Column() {
         Box(
             Modifier
                 .padding(vertical = 0.dp, horizontal = 0.dp)
-                .height(250.dp)
+                .height(imageHeight)
                 .background(Color(0xff000000).copy(0.2f))
         ) {
             AsyncImage(

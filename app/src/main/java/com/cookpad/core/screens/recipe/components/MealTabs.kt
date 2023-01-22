@@ -8,5 +8,4 @@ import com.cookpad.core.screens.utils.Constants.INSTRUCTIONS
 sealed class MealTabs(var icon: Int, var title: String) {
     object Ingredients : MealTabs(R.drawable.ic_terms_service, INGREDIENTS)
     object Instructions : MealTabs(R.drawable.ic_notes, INSTRUCTIONS)
-    object Details : MealTabs(R.drawable.ic_policy, INFO)
 }

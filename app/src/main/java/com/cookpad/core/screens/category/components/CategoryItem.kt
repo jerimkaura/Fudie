@@ -16,9 +16,9 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
 import coil.compose.SubcomposeAsyncImage
 import coil.request.CachePolicy
 import coil.request.ImageRequest
@@ -32,7 +32,8 @@ import com.cookpad.domain.model.MealCategory
 fun CategoryItem(
     category: MealCategory,
     onClick: (mealCategory: MealCategory) -> Unit,
-    openDialog: MutableState<Boolean>
+    openDialog: MutableState<Boolean>,
+    itemWidth: Dp
 ) {
     val itemBgColor = if (isSystemInDarkTheme()) color_surface_dark else color_surface_light
     Column(
@@ -49,7 +50,7 @@ fun CategoryItem(
                     onClick.invoke(category)
                 }
                 .background(itemBgColor, RoundedCornerShape(10.dp))
-                .size(120.dp)
+                .size(itemWidth - 10.dp)
                 .clip(RoundedCornerShape(5.dp)),
             contentAlignment = Alignment.Center
         ) {
@@ -63,7 +64,7 @@ fun CategoryItem(
                 contentScale = ContentScale.Inside,
                 modifier = Modifier
                     .clip(RoundedCornerShape(5.dp))
-                    .size(120.dp)
+                    .size(itemWidth - 10.dp)
             )
         }
         Spacer(modifier = Modifier.height(5.dp))
@@ -71,7 +72,7 @@ fun CategoryItem(
             text = category.strCategory, style = TextStyle(
                 fontFamily = montserrat,
                 fontWeight = FontWeight.SemiBold,
-                fontSize = 14.sp,
+                fontSize = 12.sp,
             )
         )
         Spacer(modifier = Modifier.height(10.dp))

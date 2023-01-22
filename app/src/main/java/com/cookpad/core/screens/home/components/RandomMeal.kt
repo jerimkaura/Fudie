@@ -11,6 +11,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
@@ -27,12 +28,12 @@ import com.cookpad.core.ui.theme.montserrat
 
 @Composable
 fun RandomMeal(randomRecipe: RecipeState, onClick: () -> Unit) {
-
+    val imageHeight = (0.25 * LocalConfiguration.current.screenHeightDp).dp
     Card(
         modifier = Modifier
             .fillMaxWidth()
             .padding(vertical = 5.dp, horizontal = 10.dp)
-            .height(180.dp),
+            .height(imageHeight),
         shape = RoundedCornerShape(15.dp),
     ) {
         if (randomRecipe.error.isNotEmpty()) {
@@ -46,7 +47,7 @@ fun RandomMeal(randomRecipe: RecipeState, onClick: () -> Unit) {
                     verticalArrangement = Arrangement.Center,
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    LottieAnime(size = 100.dp, lottieFile = R.raw.no_connection, speed = 1.0f)
+                    LottieAnime(size = 100.dp, lottieFile = R.raw.no_internet, speed = 1.0f)
                     Text(
                         modifier = Modifier,
                         text = randomRecipe.error,

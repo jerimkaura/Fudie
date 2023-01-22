@@ -60,11 +60,11 @@ fun IngredientsScreen(
                                     .clickable {
                                         navController.navigate(Route.SingleIngredientsScreen.route + "/${ingredients[it].strIngredient}")
                                     }
-                                    .padding(all = 16.dp),
+                                    .padding(vertical = 8.dp, horizontal = 16.dp),
                                 verticalAlignment = Alignment.CenterVertically
                             ) {
                                 Icon(
-                                    modifier = Modifier.padding(horizontal = 5.dp),
+                                    modifier = Modifier.padding(horizontal = 3.dp),
                                     imageVector = ImageVector.vectorResource(id = R.drawable.ic_trending),
                                     contentDescription = "",
                                     tint = color_primary_light
@@ -78,7 +78,7 @@ fun IngredientsScreen(
                                     Column(
                                         modifier = Modifier
                                             .weight(weight = 3f, fill = false)
-                                            .padding(start = 16.dp)
+                                            .padding(start = 10.dp)
                                     ) {
 
                                         Text(
@@ -93,7 +93,8 @@ fun IngredientsScreen(
                                         Text(
                                             text = ingredients[it].strDescription,
                                             style = TextStyle(
-                                                fontSize = 14.sp,
+                                                fontFamily = montserrat,
+                                                fontSize = 12.sp,
                                                 letterSpacing = (0.8).sp,
                                                 color = Color.Gray,
                                             ),
@@ -118,7 +119,7 @@ fun IngredientsScreen(
                     verticalArrangement = Arrangement.Center,
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    LottieAnime(size = 180.dp, lottieFile = R.raw.no_connection, speed = 2.0f)
+                    LottieAnime(size = 180.dp, lottieFile = R.raw.no_internet, speed = 2.0f)
                     Spacer(modifier = Modifier.height(30.dp))
                     Text(
                         text = ingredientsState.error,

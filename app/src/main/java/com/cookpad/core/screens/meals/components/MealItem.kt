@@ -13,7 +13,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
 import androidx.compose.ui.unit.sp
@@ -29,7 +29,12 @@ import com.cookpad.domain.model.Meal
 import kotlinx.coroutines.launch
 
 @Composable
-fun MealItem(meal: Meal, recipeViewModel: RecipeViewModels, navController: NavController) {
+fun MealItem(
+    meal: Meal,
+    recipeViewModel: RecipeViewModels,
+    navController: NavController,
+    itemWidth: Dp
+) {
     val scope = rememberCoroutineScope()
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -38,16 +43,17 @@ fun MealItem(meal: Meal, recipeViewModel: RecipeViewModels, navController: NavCo
             .wrapContentHeight(),
         verticalArrangement = Arrangement.Center
     ) {
-        Card(modifier = Modifier
-            .clickable {
-                scope.launch {
-                    recipeViewModel.getRecipeByMealId(mealId = meal.idMeal)
-                    navController.navigate(
-                        Route.RecipeScreen.route + "/${meal.idMeal}"
-                    )
+        Card(
+            modifier = Modifier
+                .clickable {
+                    scope.launch {
+                        recipeViewModel.getRecipeByMealId(mealId = meal.idMeal)
+                        navController.navigate(
+                            Route.RecipeScreen.route + "/${meal.idMeal}"
+                        )
+                    }
                 }
-            }
-            .wrapContentSize(),
+                .wrapContentSize(),
             shape = RoundedCornerShape(15.dp),
             elevation = CardDefaults.cardElevation(1.dp)) {
             AsyncImage(
@@ -58,7 +64,7 @@ fun MealItem(meal: Meal, recipeViewModel: RecipeViewModels, navController: NavCo
                 contentDescription = stringResource(R.string.app_name),
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
-                    .width(190.dp)
+                    .width(itemWidth - 10.dp)
                     .height(120.dp),
             )
         }

@@ -1,6 +1,7 @@
 package com.cookpad.core.screens.utils
 
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.*
@@ -14,6 +15,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import color_primary_light
 import com.cookpad.core.R
 import com.cookpad.core.ui.theme.montserrat
 
@@ -22,6 +24,7 @@ import com.cookpad.core.ui.theme.montserrat
 fun TopBar(navController: NavController, iconVisible: Boolean = false, title: String) {
     MaterialTheme.colorScheme.background
     Column {
+        val boxBackground = if (isSystemInDarkTheme()) color_primary_light else color_primary_light
         CenterAlignedTopAppBar(
             modifier = Modifier
                 .padding(horizontal = 10.dp, vertical = 0.dp),
@@ -36,6 +39,7 @@ fun TopBar(navController: NavController, iconVisible: Boolean = false, title: St
                             .size(20.dp),
                         imageVector = ImageVector.vectorResource(id = R.drawable.ic_back),
                         contentDescription = "",
+                        tint = boxBackground
                     )
                 }
             },

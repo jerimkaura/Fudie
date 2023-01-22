@@ -10,6 +10,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -52,7 +53,14 @@ fun CategoriesScreen(
                 ) {
                     LottieAnime(size = 70.dp, lottieFile = R.raw.loader, speed = 2.0f)
                     Spacer(modifier = Modifier.height(30.dp))
-                    Text(text = "Hang on chef...")
+                    Text(
+                        text = "Hang on chef...",
+                        style = TextStyle(
+                            fontFamily = montserrat,
+                            fontWeight = FontWeight.Medium,
+                            fontSize = 12.sp,
+                        )
+                    )
                 }
             } else if (mealCategories.error.isNotEmpty()) {
                 Column(
@@ -66,7 +74,7 @@ fun CategoriesScreen(
                     verticalArrangement = Arrangement.Center,
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    LottieAnime(size = 180.dp, lottieFile = R.raw.no_connection, speed = 2.0f)
+                    LottieAnime(size = 180.dp, lottieFile = R.raw.no_internet, speed = 2.0f)
                     Spacer(modifier = Modifier.height(30.dp))
                     Text(
                         text = mealCategories.error,
@@ -79,19 +87,21 @@ fun CategoriesScreen(
                 }
             } else {
                 val categories = mealCategories.data ?: emptyList()
+                val itemWidth = ((LocalConfiguration.current.screenWidthDp - 20).toDouble() / 3).dp
                 if (categories.isNotEmpty()) {
                     LazyVerticalGrid(
                         modifier = Modifier
                             .padding(
                                 bottom = paddingValues.calculateBottomPadding() + 100.dp,
-                                top = paddingValues.calculateTopPadding()
+                                top = paddingValues.calculateTopPadding(),
                             )
+                            .padding(horizontal = 10.dp)
                             .fillMaxSize(), columns = GridCells.Fixed(3)
                     ) {
                         items(categories.size) { category ->
                             CategoryItem(categories[category], onClick = {
                                 index.value = categories.indexOf(it)
-                            }, openDialog)
+                            }, openDialog, itemWidth)
                         }
                     }
                 } else {
@@ -106,7 +116,7 @@ fun CategoriesScreen(
                         verticalArrangement = Arrangement.Center,
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
-                        LottieAnime(size = 150.dp, lottieFile = R.raw.veggies, speed = 1.0f)
+                        LottieAnime(size = 150.dp, lottieFile = R.raw.empty_list, speed = 1.0f)
                         Spacer(modifier = Modifier.height(30.dp))
                         Text(
                             text = "Looks like you don't have much here.",

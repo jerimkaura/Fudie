@@ -53,7 +53,7 @@ fun RoundMealCardSection(mealsState: MealsState, navController: NavController) {
                     verticalArrangement = Arrangement.Center,
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    LottieAnime(size = 50.dp, lottieFile = R.raw.small_section_loader, speed = 2.0f)
+                    LottieAnime(size = 50.dp, lottieFile = R.raw.loader, speed = 2.0f)
                     Spacer(modifier = Modifier.height(10.dp))
                     Text(
                         text = "Hang on chef...", style = TextStyle(
@@ -116,11 +116,6 @@ fun RoundMealCardSection(mealsState: MealsState, navController: NavController) {
                                     .diskCachePolicy(CachePolicy.ENABLED)
                                     .build(),
                                 loading = {
-                                    LottieAnime(
-                                        size = 10.dp,
-                                        lottieFile = R.raw.veggies,
-                                        speed = 1.0f
-                                    )
                                 },
                                 contentDescription = stringResource(R.string.app_name),
                                 contentScale = ContentScale.Crop,

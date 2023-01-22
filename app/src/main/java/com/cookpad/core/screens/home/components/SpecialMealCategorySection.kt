@@ -61,7 +61,7 @@ fun SpecialMealCategory(mealsState: MealsState, navController: NavController, ti
                     verticalArrangement = Arrangement.Center,
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    LottieAnime(size = 50.dp, lottieFile = R.raw.small_section_loader, speed = 1.0f)
+                    LottieAnime(size = 50.dp, lottieFile = R.raw.loader, speed = 1.0f)
                     Spacer(modifier = Modifier.height(10.dp))
                     androidx.compose.material.Text(
                         text = "Hang on chef...",
@@ -134,11 +134,7 @@ fun SpecialMealCategory(mealsState: MealsState, navController: NavController, ti
                                             )
                                         },
                                     loading = {
-                                        LottieAnime(
-                                            size = 10.dp,
-                                            lottieFile = R.raw.veggies,
-                                            speed = 1.0f
-                                        )
+
                                     }
                                 )
                                 Row(

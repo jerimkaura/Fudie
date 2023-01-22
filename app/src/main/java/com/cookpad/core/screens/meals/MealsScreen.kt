@@ -8,6 +8,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -63,7 +64,7 @@ fun MealsScreen(
                 ) {
                     LottieAnime(
                         size = 70.dp,
-                        lottieFile = R.raw.small_section_loader,
+                        lottieFile = R.raw.loader,
                         speed = 2.0f
                     )
                     Spacer(modifier = Modifier.height(30.dp))
@@ -91,6 +92,7 @@ fun MealsScreen(
                 }
             } else {
                 val meals = mealsState.data ?: emptyList()
+                val itemWidth = ((LocalConfiguration.current.screenWidthDp - 20).toDouble() / 2).dp
                 if (meals.isNotEmpty()) {
                     Column( modifier = Modifier.padding(bottom = 10.dp)) {
                         SelectedMeal(meals,categoryName, recipeViewModel ,navController)
@@ -100,7 +102,7 @@ fun MealsScreen(
                             columns = GridCells.Fixed(2)
                         ) {
                             items(meals.size) {
-                                MealItem(meals[it], recipeViewModel, navController)
+                                MealItem(meals[it], recipeViewModel, navController, itemWidth)
                             }
                         }
                     }

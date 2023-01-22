@@ -9,6 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.cookpad.core.R
@@ -37,6 +38,7 @@ fun CountryMealsSection(
     }
     if (!mealsState.isLoading && mealsState.error.isEmpty()) {
         val meals = mealsState.data ?: listOf()
+        val itemWidth = ((LocalConfiguration.current.screenWidthDp - 20).toDouble() / 2).dp
         LazyVerticalGrid(
             modifier = Modifier
                 .fillMaxSize()
@@ -44,7 +46,12 @@ fun CountryMealsSection(
             columns = GridCells.Fixed(2)
         ) {
             items(meals.size) { meal->
-                MealItem(meal = meals[meal], recipeViewModel = recipeViewModel , navController = navController )
+                MealItem(
+                    meal = meals[meal],
+                    recipeViewModel = recipeViewModel,
+                    navController = navController,
+                    itemWidth = itemWidth
+                )
             }
         }
     }

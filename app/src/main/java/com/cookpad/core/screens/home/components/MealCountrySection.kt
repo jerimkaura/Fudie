@@ -49,7 +49,7 @@ fun  MealCountrySection(
                     verticalArrangement = Arrangement.Center,
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    LottieAnime(size = 70.dp, lottieFile = R.raw.small_section_loader, speed = 1.0f)
+                    LottieAnime(size = 70.dp, lottieFile = R.raw.loader, speed = 1.0f)
                     Spacer(modifier = Modifier.height(10.dp))
                     Text(
                         text = "Loading countries...",

@@ -13,6 +13,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
@@ -30,10 +31,11 @@ import com.cookpad.domain.model.Recipe
 fun MealImage(recipe: Recipe?, navController: NavController) {
     val boxBackground = if (isSystemInDarkTheme()) color_primary_light else color_primary_light
     val iconTint = color_surface_light
+    val imageHeight = (0.25 * LocalConfiguration.current.screenHeightDp).dp
     Box(
         Modifier
             .padding(vertical = 0.dp, horizontal = 0.dp)
-            .height(300.dp)
+            .height(imageHeight)
             .background(Color(0xff000000).copy(0.2f))
     ) {
         AsyncImage(

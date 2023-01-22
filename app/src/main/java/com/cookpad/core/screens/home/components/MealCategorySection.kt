@@ -103,7 +103,7 @@ fun MealCategorySection(
                         verticalArrangement = Arrangement.Center,
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
-                        LottieAnime(size = 80.dp, lottieFile = R.raw.empty_list, speed = 2.0f)
+                        LottieAnime(size = 70.dp, lottieFile = R.raw.empty_list, speed = 2.0f)
                         Spacer(modifier = Modifier.height(1.dp))
                         Text(
                             text = "No Items Found, check your internet",
@@ -126,7 +126,7 @@ fun MealCategorySection(
                     verticalArrangement = Arrangement.Center,
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    LottieAnime(size = 50.dp, lottieFile = R.raw.small_section_loader, speed = 1.0f)
+                    LottieAnime(size = 50.dp, lottieFile = R.raw.loader, speed = 1.0f)
                     Spacer(modifier = Modifier.height(10.dp))
                     Text(text = "Loading...")
                 }
@@ -140,7 +140,7 @@ fun MealCategorySection(
                     verticalArrangement = Arrangement.Center,
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    LottieAnime(size = 50.dp, lottieFile = R.raw.no_connection, speed = 2.0f)
+                    LottieAnime(size = 50.dp, lottieFile = R.raw.no_internet, speed = 2.0f)
                     Spacer(modifier = Modifier.height(10.dp))
                     Text(text = mealCategoriesState.error)
                 }
