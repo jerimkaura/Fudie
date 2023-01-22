@@ -38,7 +38,7 @@ fun TopBarRecipeScreen() {
             ),
             navigationIcon = {
                 Image(
-                    painter = painterResource(id = R.drawable.billy),
+                    painter = painterResource(id = R.drawable.logo),
                     modifier = Modifier
                         .padding(horizontal = 10.dp)
                         .clip(CircleShape)
@@ -78,7 +78,7 @@ fun TopBarRecipeScreen() {
                             Icon(
                                 modifier = Modifier
                                     .size(20.dp),
-                                imageVector = ImageVector.vectorResource(id = R.drawable.ic_notification),
+                                imageVector = ImageVector.vectorResource(id = R.drawable.ic_food_bank),
                                 contentDescription = "Notification Icon",
                             )
                         }

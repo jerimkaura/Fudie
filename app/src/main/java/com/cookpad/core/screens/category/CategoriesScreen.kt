@@ -10,6 +10,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -79,19 +80,20 @@ fun CategoriesScreen(
                 }
             } else {
                 val categories = mealCategories.data ?: emptyList()
+                val itemWidth = ((LocalConfiguration.current.screenWidthDp - 20).toDouble() / 3).dp
                 if (categories.isNotEmpty()) {
                     LazyVerticalGrid(
                         modifier = Modifier
                             .padding(
                                 bottom = paddingValues.calculateBottomPadding() + 100.dp,
-                                top = paddingValues.calculateTopPadding()
-                            )
+                                top = paddingValues.calculateTopPadding(),
+                            ).padding(horizontal = 10.dp)
                             .fillMaxSize(), columns = GridCells.Fixed(3)
                     ) {
                         items(categories.size) { category ->
                             CategoryItem(categories[category], onClick = {
                                 index.value = categories.indexOf(it)
-                            }, openDialog)
+                            }, openDialog, itemWidth)
                         }
                     }
                 } else {

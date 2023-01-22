@@ -13,6 +13,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
@@ -90,6 +91,7 @@ fun SingleIngredientScreen(
                 }
             } else {
                 val meals = mealsState.data ?: emptyList()
+                val itemWidth = ((LocalConfiguration.current.screenWidthDp - 20).toDouble() / 2).dp
                 if (meals.isNotEmpty()) {
                     LazyVerticalGrid(
                         modifier = Modifier
@@ -102,7 +104,7 @@ fun SingleIngredientScreen(
                         columns = GridCells.Fixed(2)
                     ) {
                         items(meals.size) {
-                            MealItem(meals[it], recipeViewModels, navController)
+                            MealItem(meals[it], recipeViewModels, navController, itemWidth)
                         }
                     }
                 } else {

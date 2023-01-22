@@ -37,10 +37,6 @@ fun CountriesScreen(
     }
 
     val savedCountryName = countriesViewModel.selectedCountryName.value
-<<<<<<< HEAD
-
-=======
->>>>>>> main
     Scaffold(
         content = { paddingValues ->
             Column(
