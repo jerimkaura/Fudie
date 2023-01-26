@@ -1,5 +1,6 @@
 package com.cookpad.core
 
+
 import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
@@ -23,15 +24,15 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.cookpad.core.app_settings.LocalRecipeSerializer
 import com.cookpad.core.navigation.Route
+import com.cookpad.core.navigation.bottomNavigation.BottomNavigationBar
 import com.cookpad.core.screens.category.CategoriesScreen
 import com.cookpad.core.screens.country.CountriesScreen
-import com.cookpad.core.navigation.bottomNavigation.BottomNavigationBar
 import com.cookpad.core.screens.home.HomeScreen
 import com.cookpad.core.screens.ingredient.IngredientsScreen
 import com.cookpad.core.screens.ingredient.SingleIngredientScreen
 import com.cookpad.core.screens.meals.MealsScreen
-
-
+import com.cookpad.core.screens.planner.PlannerScreen
+import com.cookpad.core.screens.addplan.AddPlanScreen
 import com.cookpad.core.screens.recipe.RecipeScreen
 import com.cookpad.core.screens.utils.getActivity
 import com.cookpad.core.ui.theme.CookPadThem
@@ -82,6 +83,7 @@ fun MainScreen(){
             Route.HomeScreen.route -> true
             Route.CategoriesScreen.route -> true
             Route.CountriesScreen.route -> true
+            Route.PlannerScreen.route -> true
             Route.IngredientsScreen.route -> true
             else -> false
         }
@@ -93,7 +95,7 @@ fun MainScreen(){
                 }
             },
         ) {
-            AnimatedNavHost(navController = navController, startDestination = "home_screen") {
+            AnimatedNavHost(navController = navController, startDestination = "planner_screen") {
                 screens(navController)
             }
         }
@@ -168,16 +170,7 @@ private fun NavGraphBuilder.screens(navController: NavController) {
         }) {
         CountriesScreen(navController)
     }
-
-    composable(route = Route.MealsScreen.route + "/{category_name}",
-        enterTransition = {
-            fadeIn(animationSpec = tween(3000))
-        },
-        exitTransition = {
-            fadeOut(animationSpec = tween(3000))
-        }) {
-        MealsScreen(navController)
-    }
+    
 
     composable(route = Route.MealsScreen.route + "/{category_name}",
         enterTransition = {
@@ -215,10 +208,30 @@ private fun NavGraphBuilder.screens(navController: NavController) {
             slideOutHorizontally(
                 animationSpec = spring(stiffness = Spring.StiffnessMediumLow),
                 targetOffsetX = {
-                    -  it
+                    -it
                 }
             )
         }) {
         SingleIngredientScreen(navController)
+    }
+
+    composable(route = Route.PlannerScreen.route,
+        enterTransition = {
+            fadeIn(animationSpec = spring(stiffness = Spring.StiffnessMediumLow))
+        },
+        exitTransition = {
+            fadeOut(animationSpec = spring(stiffness = Spring.StiffnessMediumLow))
+        }) {
+        PlannerScreen(navController)
+    }
+
+    composable(route = Route.AddPlanScreen.route,
+        enterTransition = {
+            fadeIn(animationSpec = spring(stiffness = Spring.StiffnessMediumLow))
+        },
+        exitTransition = {
+            fadeOut(animationSpec = spring(stiffness = Spring.StiffnessMediumLow))
+        }) {
+        AddPlanScreen(navController)
     }
 }

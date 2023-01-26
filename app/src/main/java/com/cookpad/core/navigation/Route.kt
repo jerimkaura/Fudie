@@ -8,4 +8,6 @@ sealed class Route(val route:String){
     object CountriesScreen : Route("countries_screen")
     object IngredientsScreen : Route("ingredients_screen")
     object SingleIngredientsScreen : Route("single_ingredients_screen")
+    object PlannerScreen : Route("planner_screen")
+    object AddPlanScreen : Route("add_plan_screen")
 }

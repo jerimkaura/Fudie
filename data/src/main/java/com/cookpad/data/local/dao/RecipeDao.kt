@@ -16,4 +16,7 @@ interface RecipeDao {
 
     @Query("SELECT * FROM recipeEntity WHERE idMeal LIKE '%' || :mealId || '%'")
     suspend fun getRecipeByMealId(mealId: String): RecipeEntity?
+
+    @Query("SELECT * FROM recipeEntity WHERE strMeal LIKE '%' || :searchString || '%'")
+    suspend fun searchRecipe(searchString: String): List<RecipeEntity>
 }

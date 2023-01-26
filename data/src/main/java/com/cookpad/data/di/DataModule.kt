@@ -90,4 +90,10 @@ class DataModule {
     ): RecipeRepository {
         return RecipeRepositoryImpl(api = api, recipeDao = recipeDao, mealDao = mealDao)
     }
+
+    @Singleton
+    @Provides
+    fun providePlannerRepository(planDao: MealPlanDao): MealPlanRepository{
+        return MealPlanRepositoryImpl(dao = planDao)
+    }
 }

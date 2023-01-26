@@ -102,4 +102,35 @@ class RecipeRepositoryImpl @Inject constructor(
             it.toDomain()
         } ?: emptyList()
     }
+
+    override fun searchRecipe(searchString: String): Flow<Resource<List<Recipe>>> = flow {
+        emit(Resource.Loading())
+        recipeDao.searchRecipe(searchString).let { recipes ->
+            if (recipes.isNotEmpty()) {
+                emit(Resource.Success(data = recipes.map { it.toDomain() }))
+            } else {
+                try {
+                    val onlineResults = api.searchMeal(searchString).meals ?: emptyList()
+                    val convertedRecipes = onlineResults.map {
+                      it.toEntity().toDomain()
+                   }
+                    emit(Resource.Success(data = convertedRecipes))
+                    recipeDao.insertRecipes(onlineResults.map { it.toEntity() })
+                } catch (e: IOException) {
+                    emit(
+                        Resource.Error(
+                            message = "Please check your internet connection",
+                        )
+                    )
+                } catch (e: HttpException) {
+                    emit(
+                        Resource.Error(
+                            message = "Something went wrong",
+                        )
+                    )
+                }
+            }
+        }
+
+    }
 }
