@@ -6,7 +6,12 @@ import com.cookpad.data.local.dao.*
 import com.cookpad.data.local.entity.*
 
 @Database(
-    entities = [IngredientEntity::class, MealCategoryEntity::class, CountryEntity::class, MealEntity::class, RecipeEntity::class],
+    entities = [
+        IngredientEntity::class,
+        MealCategoryEntity::class,
+        CountryEntity::class,
+        MealEntity::class,
+        RecipeEntity::class, MealPlanEntity::class],
     version = 1,
     exportSchema = false
 )
@@ -16,4 +21,5 @@ abstract class CookBookDatabase : RoomDatabase() {
     abstract val countryDao: CountryDao
     abstract val mealDao: MealDao
     abstract val recipeDao: RecipeDao
+    abstract val mealPlanDao: MealPlanDao
 }

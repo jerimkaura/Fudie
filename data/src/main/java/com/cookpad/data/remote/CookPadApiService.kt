@@ -19,6 +19,7 @@ interface CookPadApiService {
         const val GET_MEALS_BY_CATEGORY_NAME = "filter.php"
         const val GET_MEALS_BY_INGREDIENT_NAME = "filter.php"
         const val GET_MEALS_BY_COUNTRY_NAME = "filter.php"
+        const val SEARCH_MEAL = "search.php"
     }
 
     @GET(GET_ALL_INGREDIENTS)
@@ -59,4 +60,7 @@ interface CookPadApiService {
 
     @GET(GET_MEALS_BY_COUNTRY_NAME)
     suspend fun getMealByCountryName(@Query(value = "a") countryName: String): MealsResponse
+
+    @GET(SEARCH_MEAL)
+    suspend fun searchMeal(@Query(value = "s") searchString: String): MealRecipeResponse
 }

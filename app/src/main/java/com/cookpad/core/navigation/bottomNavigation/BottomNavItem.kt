@@ -20,14 +20,14 @@ sealed class BottomNavItem(
     )
 
     object Countries : BottomNavItem(
-        "Countries",
+        "Cuisines",
         R.drawable.ic_flag,
         Route.CountriesScreen.route
     )
 
     object Ingredients : BottomNavItem(
-        "Ingredients",
-        R.drawable.ic_ingredients,
-        Route.IngredientsScreen.route
+        "Planner",
+        R.drawable.ic_plan_add,
+        Route.PlannerScreen.route
     )
 }

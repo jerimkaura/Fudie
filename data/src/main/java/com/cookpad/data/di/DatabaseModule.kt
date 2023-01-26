@@ -42,4 +42,8 @@ class DatabaseModule {
     @Singleton
     @Provides
     fun provideRecipeDao(database: CookBookDatabase) = database.recipeDao
+
+    @Singleton
+    @Provides
+    fun provideMealPlanDao(database: CookBookDatabase) = database.mealPlanDao
 }
