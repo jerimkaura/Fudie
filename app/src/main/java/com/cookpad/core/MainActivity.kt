@@ -95,7 +95,7 @@ fun MainScreen(){
                 }
             },
         ) {
-            AnimatedNavHost(navController = navController, startDestination = "home_screen") {
+            AnimatedNavHost(navController = navController, startDestination = "planner_screen") {
                 screens(navController)
             }
         }
