@@ -9,4 +9,5 @@ interface MealRepository  {
     fun getMealByIngredientName(ingredientName: String): Flow<Resource<List<Meal>>>
     fun getMealByCountryName(countryName: String): Flow<Resource<List<Meal>>>
     fun getaAllMeals(): Flow<Resource<List<Meal>>>
+    fun searchMeal(searchString: String): Flow<Resource<List<Meal>>>
 }

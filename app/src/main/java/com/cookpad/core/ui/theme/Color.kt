@@ -7,7 +7,7 @@ val color_on_background_dark = Color(0xFFE2E2E5)
 val color_surface_dark = Color(0xFF272931)
 val color_onSurface_dark = Color(0xFFE2E2E5)
 val color_box_dark =  Color(0xFF272931)
-val color_box_border_dark = Color(0xff202121)
+val color_box_border_dark = Color(0xFF272931)
 
 
 val color_primary_light = Color(0xFFfda521)

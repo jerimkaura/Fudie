@@ -95,13 +95,24 @@ class MealRepositoryImpl @Inject constructor(
     override fun getaAllMeals(): Flow<Resource<List<Meal>>> = flow {
         emit(Resource.Loading())
         try {
-            val allMeals = dao.getAllMeals().toMutableList().shuffled().map { it.toDomain() }.take(100)
+            val allMeals =
+                dao.getAllMeals().toMutableList().shuffled().map { it.toDomain() }.take(100)
             emit(Resource.Success(data = allMeals))
-        }catch (e: IOException) {
+        } catch (e: Exception) {
             emit(
-                Resource.Error(message = "Please check your internet connection")
+                Resource.Error(message = "Something went wrong")
             )
-        } catch (e: HttpException) {
+        }
+    }
+
+    override fun searchMeal(searchString: String): Flow<Resource<List<Meal>>> = flow {
+        emit(Resource.Loading())
+        try {
+            val meals = dao.getMealsByName(searchString).map {
+                it.toDomain()
+            }
+            emit(Resource.Success(data = meals))
+        } catch (e: Exception) {
             emit(
                 Resource.Error(message = "Something went wrong")
             )

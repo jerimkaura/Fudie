@@ -24,7 +24,6 @@ import com.cookpad.core.ui.theme.montserrat
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-@Preview(showBackground = true)
 fun TopBarPlannerScreen() {
     if (isSystemInDarkTheme()) color_primary_light else color_primary_light
     Column {
