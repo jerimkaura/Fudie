@@ -41,9 +41,8 @@ fun PlannerScreen(
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Icon(
-                            painter = painterResource(id = R.drawable.ic_plan_add),
+                            painter = painterResource(id = R.drawable.ic_circle_add),
                             contentDescription = null,
-//                            tint = Color.White
                         )
                     }
                 },

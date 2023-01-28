@@ -85,7 +85,7 @@ fun PlanItem(meal: Meal, addPlanViewModel: AddPlanViewModel) {
                                     .show()
                             }
                             .size(20.dp),
-                        imageVector = ImageVector.vectorResource(id = R.drawable.ic_circle_add),
+                        imageVector = ImageVector.vectorResource(id = R.drawable.ic_remove),
                         contentDescription = "",
                         tint = Color.White
                     )

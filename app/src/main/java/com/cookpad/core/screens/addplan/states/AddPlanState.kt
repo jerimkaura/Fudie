@@ -1,4 +1,4 @@
-package com.cookpad.core.screens.planner.states
+package com.cookpad.core.screens.addplan.states
 
 import com.cookpad.domain.model.MealPlan
 

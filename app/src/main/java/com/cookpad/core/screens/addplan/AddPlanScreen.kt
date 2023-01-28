@@ -13,10 +13,10 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.cookpad.core.screens.addplan.components.AddMealSection
 import com.cookpad.core.screens.addplan.components.SelectDaySection
+import com.cookpad.core.screens.addplan.components.TopBarAddPlannerScreen
 import com.cookpad.core.screens.addplan.states.SelectedMealsState
 import com.cookpad.core.screens.planner.PlannerViewModel
-import com.cookpad.core.screens.planner.components.TopBarPlannerScreen
-import com.cookpad.core.screens.planner.states.AddPlanState
+import com.cookpad.core.screens.addplan.states.AddPlanState
 import com.cookpad.core.ui.theme.montserrat
 
 
@@ -33,7 +33,7 @@ fun AddPlanScreen(
 
     Scaffold(
         topBar = {
-            TopBarPlannerScreen()
+            TopBarAddPlannerScreen(navController)
         },
         content = { paddingValues ->
             if (createMealPlanResponse.isLoading) {

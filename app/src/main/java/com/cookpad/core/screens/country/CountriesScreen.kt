@@ -19,11 +19,10 @@ import com.cookpad.domain.model.Country
 @Composable
 fun CountriesScreen(
     navController: NavController,
-    homeViewModel: HomeViewModel = hiltViewModel(),
     countriesViewModel: CountriesViewModel = hiltViewModel(),
     recipeViewModel: RecipeViewModels = hiltViewModel()
 ) {
-    val countries = homeViewModel.countries.value
+    val countries = countriesViewModel.countries.value
     val meals = countriesViewModel.meals.value
     val recipeState: MutableState<RecipeState?> = remember {
         mutableStateOf(null)
