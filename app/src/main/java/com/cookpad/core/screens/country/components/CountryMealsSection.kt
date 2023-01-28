@@ -38,7 +38,7 @@ fun CountryMealsSection(
     }
     if (!mealsState.isLoading && mealsState.error.isEmpty()) {
         val meals = mealsState.data ?: listOf()
-        val itemWidth = ((LocalConfiguration.current.screenWidthDp - 20).toDouble() / 2).dp
+        val itemWidth = ((LocalConfiguration.current.screenWidthDp - 30).toDouble() / 2).dp
         LazyVerticalGrid(
             modifier = Modifier
                 .fillMaxSize()

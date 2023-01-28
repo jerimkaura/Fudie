@@ -9,7 +9,7 @@ import androidx.lifecycle.viewModelScope
 import com.cookpad.common.util.Resource
 import com.cookpad.core.screens.addplan.states.SearchRecipeState
 import com.cookpad.core.screens.addplan.states.SelectedMealsState
-import com.cookpad.core.screens.planner.states.AddPlanState
+import com.cookpad.core.screens.addplan.states.AddPlanState
 import com.cookpad.core.screens.utils.getDay
 import com.cookpad.domain.model.Meal
 import com.cookpad.domain.model.MealPlan

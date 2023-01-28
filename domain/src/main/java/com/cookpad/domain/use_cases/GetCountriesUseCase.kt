@@ -8,6 +8,7 @@ import javax.inject.Inject
 
 class GetCountriesUseCase @Inject constructor(private val repository: CountryRepository) {
     operator fun invoke(): Flow<Resource<List<Country>>> {
+
         return repository.getCountries()
     }
 }

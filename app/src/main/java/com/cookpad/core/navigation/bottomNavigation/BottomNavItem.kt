@@ -9,8 +9,8 @@ sealed class BottomNavItem(
     var route: String,
 ){
     object Home : BottomNavItem(
-        "Home",
-        R.drawable.ic_home,
+            "Discover",
+        R.drawable.ic_discover,
         Route.HomeScreen.route
     )
     object Categories : BottomNavItem(

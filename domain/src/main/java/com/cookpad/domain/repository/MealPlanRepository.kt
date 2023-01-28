@@ -6,6 +6,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface MealPlanRepository {
     fun createMealPlan(mealPlans: List<MealPlan>): Flow<Resource<String>>
-    fun getMealPlans(): Flow<Resource<List<MealPlan>>>
-    fun getMealPlansByDayOfTheWeek(strDayOfWeek: String): Flow<Resource<List<MealPlan>>>
+    fun getMealPlans(): Flow<List<MealPlan>>
+    fun getMealPlansByDayOfTheWeek(strDayOfWeek: String): Flow<List<MealPlan>>
+    fun deleteMealPlanById(planId: Long): Flow<Resource<String>>
 }

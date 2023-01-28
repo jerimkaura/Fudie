@@ -1,5 +1,6 @@
 package com.cookpad.core.screens.country.components
 
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.isSystemInDarkTheme
@@ -23,6 +24,7 @@ import com.cookpad.core.screens.country.CountriesViewModel
 import com.cookpad.core.screens.home.states.CountriesState
 import com.cookpad.core.ui.theme.montserrat
 import com.cookpad.domain.model.Country
+import kotlin.math.log
 
 @Composable
 fun CountriesSection(
@@ -31,12 +33,21 @@ fun CountriesSection(
     selectedCountry: MutableState<Country?>
 ) {
     var selectedIndex by remember { mutableStateOf(0) }
+
     LazyRow(
         modifier = Modifier.wrapContentHeight(),
     ) {
-        if (countries.error.isEmpty() && !countries.isLoading) {
-            selectedIndex = countries.data?.indexOf(selectedCountry.value)!!
-            items(countries.data!!.size) { index ->
+        if (countries.isLoading) {
+            item {
+                Text(text = "Loading")
+            }
+        } else if (countries.error.isNotEmpty()) {
+            item {
+                Text(text = countries.error)
+            }
+        } else {
+            selectedIndex = countries.data?.indexOf(selectedCountry.value) ?: 0
+            items(countries.data?.size ?: 0) { index ->
                 CountryItem(countries.data ?: listOf(),
                     index = index,
                     selected = selectedIndex == index,

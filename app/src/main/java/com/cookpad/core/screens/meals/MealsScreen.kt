@@ -92,7 +92,7 @@ fun MealsScreen(
                 }
             } else {
                 val meals = mealsState.data ?: emptyList()
-                val itemWidth = ((LocalConfiguration.current.screenWidthDp - 20).toDouble() / 2).dp
+                val itemWidth = ((LocalConfiguration.current.screenWidthDp - 30).toDouble() / 2).dp
                 if (meals.isNotEmpty()) {
                     Column( modifier = Modifier.padding(bottom = 10.dp)) {
                         SelectedMeal(meals,categoryName, recipeViewModel ,navController)

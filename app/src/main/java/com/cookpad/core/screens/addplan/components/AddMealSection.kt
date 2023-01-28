@@ -19,7 +19,7 @@ import com.cookpad.core.navigation.Route
 import com.cookpad.core.screens.addplan.AddPlanViewModel
 import com.cookpad.core.screens.addplan.states.SelectedMealsState
 import com.cookpad.core.screens.planner.PlannerViewModel
-import com.cookpad.core.screens.planner.states.AddPlanState
+import com.cookpad.core.screens.addplan.states.AddPlanState
 import com.cookpad.domain.model.MealPlan
 import kotlinx.coroutines.launch
 

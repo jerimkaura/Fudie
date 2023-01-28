@@ -4,22 +4,20 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.MoreVert
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -30,14 +28,15 @@ import coil.request.ImageRequest
 import com.cookpad.core.R
 import com.cookpad.core.screens.planner.PlannerViewModel
 import com.cookpad.core.screens.planner.states.MealPlansState
-import com.cookpad.core.screens.utils.BoxIcon
 import com.cookpad.core.screens.utils.LottieAnime
 import com.cookpad.core.ui.theme.montserrat
 import com.cookpad.domain.model.MealPlan
+import kotlinx.coroutines.launch
 
 @Composable
 fun DayMealsSection(plannerViewModel: PlannerViewModel) {
     val mealPlanState by plannerViewModel.mealPlans.collectAsState(initial = MealPlansState())
+
     if (!mealPlanState.isLoading) {
         val mealPlans = mealPlanState.data ?: emptyList()
         if (mealPlans.isNotEmpty()) {
@@ -48,7 +47,7 @@ fun DayMealsSection(plannerViewModel: PlannerViewModel) {
                 columns = GridCells.Fixed(2)
             ) {
                 items(mealPlans.size) { index ->
-                    MealPlanItem(mealPlans[index])
+                    MealPlanItem(mealPlans[index], plannerViewModel)
                 }
             }
         } else {
@@ -79,25 +78,26 @@ fun DayMealsSection(plannerViewModel: PlannerViewModel) {
 }
 
 @Composable
-fun MealPlanItem(mealPlan: MealPlan) {
-    val itemWidth = (((LocalConfiguration.current.screenWidthDp).toDouble() / 2) - 20).dp
+fun MealPlanItem(mealPlan: MealPlan, plannerViewModel: PlannerViewModel) {
+    val itemWidth = (((LocalConfiguration.current.screenWidthDp).toDouble() / 2) - 25).dp
+    val scope = rememberCoroutineScope()
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
-            .padding(horizontal = 1.dp, vertical = 5.dp)
+            .padding(horizontal = 1.dp, vertical = 10.dp)
             .wrapContentHeight(),
         verticalArrangement = Arrangement.Center
     ) {
         Box(
             modifier = Modifier
                 .width(itemWidth)
-                .height(130.dp),
+                .height(100.dp),
             contentAlignment = Alignment.Center
         ) {
             Card(
                 modifier = Modifier.wrapContentSize(),
                 shape = RoundedCornerShape(10.dp),
-                elevation = CardDefaults.cardElevation(1.dp)
+                elevation = CardDefaults.cardElevation(0.dp)
             ) {
                 AsyncImage(
                     model = ImageRequest.Builder(LocalContext.current)
@@ -121,11 +121,25 @@ fun MealPlanItem(mealPlan: MealPlan) {
                     horizontalArrangement = Arrangement.End,
                     verticalAlignment = Alignment.Top
                 ) {
-                    BoxIcon(
-                        icon = Icons.Default.MoreVert,
-                        onClick = {},
-                        boxBackground = Color.Transparent
-                    )
+
+                    IconButton(
+                        modifier = Modifier
+                            .background(Color.Transparent, CircleShape)
+                            .size(30.dp)
+                            .clip(CircleShape),
+                        onClick = {
+                            scope.launch {
+                                plannerViewModel.deleteMealPlan(mealPlan.longId ?: 0)
+                            }
+                        }) {
+
+                        Icon(
+                            modifier = Modifier.size(20.dp),
+                            imageVector = ImageVector.vectorResource(id = R.drawable.ic_remove),
+                            contentDescription = "Search Icon",
+                            tint = Color.White
+                        )
+                    }
                 }
                 Text(
                     text = mealPlan.strMeal,

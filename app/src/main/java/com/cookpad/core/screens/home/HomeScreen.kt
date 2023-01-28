@@ -60,24 +60,11 @@ fun HomeScreen(
             Column(
                 modifier = Modifier
                     .padding(
-                        bottom = paddingValues.calculateBottomPadding(),
+                        bottom = paddingValues.calculateBottomPadding() + 60.dp,
                         top = paddingValues.calculateTopPadding()
                     )
                     .fillMaxSize()
             ) {
-//                RandomMeal(randomRecipe, onClick = {
-//                    scope.launch {
-//                        randomRecipe.data?.idMeal?.let {
-//                            recipeViewModel.getRecipeByMealId(it)
-//                            navController.navigate(
-//                                Route
-//                                    .RecipeScreen
-//                                    .route + "/${randomRecipe.data?.idMeal}"
-//                            )
-//                        }
-//
-//                    }
-//                })
                 MealCategorySection(mealCategories, navController)
                 AllMealsSection(
                     allMealsState = allMealsState,
@@ -98,9 +85,11 @@ fun AllMealsSection(
     windowSize: WindowSizeClass
 ) {
     val allMeals = allMealsState.data ?: emptyList()
-    val itemWidth = ((LocalConfiguration.current.screenWidthDp - 20).toDouble() / 2).dp
+    val itemWidth = ((LocalConfiguration.current.screenWidthDp - 30).toDouble() / 2).dp
     LazyVerticalGrid(
-        modifier = Modifier.fillMaxHeight(), columns = GridCells.Fixed(2)
+        modifier = Modifier
+            .fillMaxHeight()
+            .padding(bottom = 20.dp), columns = GridCells.Fixed(2)
     ) {
         items(allMeals.size) { mealItem ->
             MealItem(allMeals[mealItem], recipeViewModel, navController, itemWidth)

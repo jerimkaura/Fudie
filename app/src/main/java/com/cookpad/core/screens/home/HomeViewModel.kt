@@ -35,8 +35,6 @@ class HomeViewModel @Inject constructor(
     private var _mealCategories = mutableStateOf(MealCategoriesState())
     val mealCategories: State<MealCategoriesState> = _mealCategories
 
-    private var _countries = mutableStateOf(CountriesState())
-    val countries: State<CountriesState> = _countries
 
     private val _searchTextState: MutableState<String> =
         mutableStateOf(value = "")
