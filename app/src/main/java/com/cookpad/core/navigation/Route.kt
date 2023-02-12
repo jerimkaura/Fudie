@@ -10,4 +10,5 @@ sealed class Route(val route:String){
     object SingleIngredientsScreen : Route("single_ingredients_screen")
     object PlannerScreen : Route("planner_screen")
     object AddPlanScreen : Route("add_plan_screen")
+    object FavouritesScreen : Route("favourites_screen")
 }

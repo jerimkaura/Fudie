@@ -3,8 +3,6 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
@@ -14,22 +12,23 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import coil.request.CachePolicy
 import coil.request.ImageRequest
 import com.cookpad.core.R
 import com.cookpad.core.navigation.Route
+import com.cookpad.core.screens.home.HomeViewModel
 import com.cookpad.core.screens.recipe.RecipeViewModels
-import com.cookpad.core.screens.utils.BoxIcon
 import com.cookpad.core.ui.theme.montserrat
 import com.cookpad.domain.model.Meal
 import kotlinx.coroutines.launch
@@ -37,11 +36,12 @@ import kotlinx.coroutines.launch
 @Composable
 fun MealItem(
     meal: Meal,
-    recipeViewModel: RecipeViewModels,
     navController: NavController,
-    itemWidth: Dp
+    homeViewModel: HomeViewModel = hiltViewModel(),
+    recipeViewModel: RecipeViewModels = hiltViewModel(),
 ) {
     val scope = rememberCoroutineScope()
+    val itemWidth = ((LocalConfiguration.current.screenWidthDp - 30).toDouble() / 2).dp
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
@@ -97,14 +97,19 @@ fun MealItem(
                             .size(30.dp)
                             .clip(CircleShape),
                         onClick = {
-
+                            scope.launch {
+                                homeViewModel.toggleFavourite(
+                                    isFavourite = !meal.boolIsFavourite,
+                                    strMealId = meal.idMeal
+                                )
+                            }
                         }) {
 
                         Icon(
                             modifier = Modifier.size(20.dp),
-                            imageVector = ImageVector.vectorResource(id = R.drawable.ic_favourite_outline),
+                            imageVector = ImageVector.vectorResource(id = if (!meal.boolIsFavourite) R.drawable.ic_favourite_outline else R.drawable.ic_favourite_fill),
                             contentDescription = "Search Icon",
-                            tint = Color.White
+                            tint = color_primary_light
                         )
                     }
                 }

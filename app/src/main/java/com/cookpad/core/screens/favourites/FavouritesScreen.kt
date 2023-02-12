@@ -1,59 +1,43 @@
-package com.cookpad.core.screens.meals
+package com.cookpad.core.screens.favourites
 
 import MealItem
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalConfiguration
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowCompat
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.cookpad.core.R
-import com.cookpad.core.screens.home.HomeViewModel
-import com.cookpad.core.screens.meals.components.SelectedMeal
-import com.cookpad.core.screens.recipe.RecipeViewModels
+import com.cookpad.core.screens.favourites.components.TopBarFavouritesScreen
+import com.cookpad.core.screens.home.states.MealsState
+import com.cookpad.core.screens.planner.components.TopBarPlannerScreen
 import com.cookpad.core.screens.utils.LottieAnime
-import com.cookpad.core.screens.utils.getActivity
 import com.cookpad.core.ui.theme.montserrat
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MealsScreen(
+fun FavouritesScreen(
     navController: NavController,
-    mealViewModel: MealViewModel = hiltViewModel(),
-    recipeViewModel: RecipeViewModels = hiltViewModel(),
-    homeViewModel: HomeViewModel = hiltViewModel()
+    favouritesViewModel: FavouritesViewModel = hiltViewModel()
 ) {
-    val context = LocalContext.current
-    LaunchedEffect(Unit) {
-        val activity = context.getActivity()
-        val window = activity?.window
-        if (window != null) {
-            WindowCompat.setDecorFitsSystemWindows(window, false)
-        }
-
-        val windowInsetsController =
-            window?.let { ViewCompat.getWindowInsetsController(it.decorView) }
-
-        windowInsetsController?.isAppearanceLightNavigationBars = true
-
-    }
-    val mealsState = mealViewModel.meals.value
-    val categoryName = mealViewModel.categoryName.value
-
+    val favouriteMealsState by favouritesViewModel.favouritesMeals.collectAsState(initial = MealsState())
     Scaffold(
+        topBar = {
+            TopBarFavouritesScreen()
+        },
         content = { paddingValues ->
-            if (mealsState.isLoading) {
+            if (favouriteMealsState.isLoading) {
                 Column(
                     modifier = Modifier
                         .fillMaxSize()
@@ -70,10 +54,17 @@ fun MealsScreen(
                         speed = 2.0f
                     )
                     Spacer(modifier = Modifier.height(30.dp))
-                    Text(text = "Hang on chef...")
+                    Text(
+                        text = "Hang on chef...",
+                        style = TextStyle(
+                            fontFamily = montserrat,
+                            fontWeight = FontWeight.Medium,
+                            fontSize = 14.sp,
+                        )
+                    )
                 }
 
-            } else if (mealsState.error.isNotEmpty()) {
+            } else if (favouriteMealsState.error.isNotEmpty()) {
                 Column(
                     modifier = Modifier
                         .fillMaxSize()
@@ -90,24 +81,23 @@ fun MealsScreen(
                         speed = 2.0f
                     )
                     Spacer(modifier = Modifier.height(30.dp))
-                    Text(text = mealsState.error)
+                    Text(text = favouriteMealsState.error)
                 }
             } else {
-                val meals = mealsState.data ?: emptyList()
-                val itemWidth = ((LocalConfiguration.current.screenWidthDp - 30).toDouble() / 2).dp
+                val meals = favouriteMealsState.data ?: emptyList()
                 if (meals.isNotEmpty()) {
-                    Column( modifier = Modifier.padding(bottom = 10.dp)) {
-                        SelectedMeal(meals,categoryName, recipeViewModel ,navController)
+                    Column(modifier = Modifier.padding(bottom = 10.dp)) {
                         LazyVerticalGrid(
                             modifier = Modifier
+                                .padding(
+                                    top = paddingValues.calculateTopPadding(),
+                                    bottom = paddingValues.calculateBottomPadding()
+                                )
                                 .fillMaxSize(),
                             columns = GridCells.Fixed(2)
                         ) {
-                            items(meals.size) {
-                                MealItem(
-                                    meals[it],
-                                    navController
-                                )
+                            items(meals.size) { index ->
+                                MealItem(meals[index], navController)
                             }
                         }
                     }
@@ -130,7 +120,7 @@ fun MealsScreen(
                         )
                         Spacer(modifier = Modifier.height(30.dp))
                         Text(
-                            text = "No items, try connecting to the internet.",
+                            text = "No Saved Recipes.",
                             style = TextStyle(
                                 fontFamily = montserrat,
                                 fontWeight = FontWeight.Medium,
@@ -143,4 +133,3 @@ fun MealsScreen(
         }
     )
 }
-

@@ -29,6 +29,7 @@ import coil.request.CachePolicy
 import coil.request.ImageRequest
 import com.cookpad.core.R
 import com.cookpad.core.navigation.Route
+import com.cookpad.core.screens.home.HomeViewModel
 import com.cookpad.core.screens.recipe.RecipeViewModels
 import com.cookpad.core.screens.utils.LottieAnime
 import com.cookpad.core.screens.utils.TopBar
@@ -42,6 +43,7 @@ fun SingleIngredientScreen(
     navController: NavController,
     recipeViewModels: RecipeViewModels = hiltViewModel(),
     ingredientsViewModel: IngredientsViewModel = hiltViewModel(),
+    homeViewModel: HomeViewModel = hiltViewModel()
 ) {
     val mealsState = ingredientsViewModel.meals.collectAsState().value
     val ingredientName = ingredientsViewModel.ingredientName.value
@@ -104,7 +106,10 @@ fun SingleIngredientScreen(
                         columns = GridCells.Fixed(2)
                     ) {
                         items(meals.size) {
-                            MealItem(meals[it], recipeViewModels, navController, itemWidth)
+                            MealItem(
+                                meals[it],
+                                navController,
+                            )
                         }
                     }
                 } else {

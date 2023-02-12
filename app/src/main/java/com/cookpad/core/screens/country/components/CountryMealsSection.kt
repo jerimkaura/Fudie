@@ -13,6 +13,7 @@ import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.cookpad.core.R
+import com.cookpad.core.screens.home.HomeViewModel
 import com.cookpad.core.screens.home.states.MealsState
 import com.cookpad.core.screens.recipe.RecipeViewModels
 import com.cookpad.core.screens.utils.LottieAnime
@@ -21,7 +22,8 @@ import com.cookpad.core.screens.utils.LottieAnime
 fun CountryMealsSection(
     mealsState: MealsState,
     recipeViewModel: RecipeViewModels,
-    navController: NavController
+    navController: NavController,
+    homeViewModel: HomeViewModel
 ) {
     val scope = rememberCoroutineScope()
     if (mealsState.isLoading) {
@@ -48,9 +50,7 @@ fun CountryMealsSection(
             items(meals.size) { meal->
                 MealItem(
                     meal = meals[meal],
-                    recipeViewModel = recipeViewModel,
                     navController = navController,
-                    itemWidth = itemWidth
                 )
             }
         }

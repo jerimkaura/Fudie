@@ -30,4 +30,10 @@ sealed class BottomNavItem(
         R.drawable.ic_plan_add,
         Route.PlannerScreen.route
     )
+
+    object Favourites : BottomNavItem(
+        "Saved",
+        R.drawable.ic_favourite_outline,
+        Route.FavouritesScreen.route
+    )
 }
