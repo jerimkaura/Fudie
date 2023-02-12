@@ -93,7 +93,7 @@ class DataModule {
 
     @Singleton
     @Provides
-    fun providePlannerRepository(planDao: MealPlanDao): MealPlanRepository{
+    fun providePlannerRepository(planDao: MealPlanDao): MealPlanRepository {
         return MealPlanRepositoryImpl(dao = planDao)
     }
 }

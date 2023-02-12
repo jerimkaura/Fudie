@@ -25,14 +25,15 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import com.cookpad.core.app_settings.LocalRecipeSerializer
 import com.cookpad.core.navigation.Route
 import com.cookpad.core.navigation.bottomNavigation.BottomNavigationBar
+import com.cookpad.core.screens.addplan.AddPlanScreen
 import com.cookpad.core.screens.category.CategoriesScreen
 import com.cookpad.core.screens.country.CountriesScreen
+import com.cookpad.core.screens.favourites.FavouritesScreen
 import com.cookpad.core.screens.home.HomeScreen
 import com.cookpad.core.screens.ingredient.IngredientsScreen
 import com.cookpad.core.screens.ingredient.SingleIngredientScreen
 import com.cookpad.core.screens.meals.MealsScreen
 import com.cookpad.core.screens.planner.PlannerScreen
-import com.cookpad.core.screens.addplan.AddPlanScreen
 import com.cookpad.core.screens.recipe.RecipeScreen
 import com.cookpad.core.screens.utils.getActivity
 import com.cookpad.core.ui.theme.CookPadThem
@@ -85,6 +86,7 @@ fun MainScreen(){
             Route.CountriesScreen.route -> true
             Route.PlannerScreen.route -> true
             Route.IngredientsScreen.route -> true
+            Route.FavouritesScreen.route -> true
             else -> false
         }
 
@@ -233,5 +235,15 @@ private fun NavGraphBuilder.screens(navController: NavController) {
             fadeOut(animationSpec = spring(stiffness = Spring.StiffnessMediumLow))
         }) {
         AddPlanScreen(navController)
+    }
+
+    composable(route = Route.FavouritesScreen.route,
+        enterTransition = {
+            fadeIn(animationSpec = spring(stiffness = Spring.StiffnessMediumLow))
+        },
+        exitTransition = {
+            fadeOut(animationSpec = spring(stiffness = Spring.StiffnessMediumLow))
+        }) {
+        FavouritesScreen(navController)
     }
 }

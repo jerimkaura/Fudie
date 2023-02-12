@@ -7,6 +7,7 @@ import com.cookpad.domain.model.Meal
 import com.cookpad.domain.repository.MealRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.map
 import retrofit2.HttpException
 import java.io.IOException
 import javax.inject.Inject
@@ -92,18 +93,8 @@ class MealRepositoryImpl @Inject constructor(
         emit(Resource.Success(newMeals))
     }
 
-    override fun getaAllMeals(): Flow<Resource<List<Meal>>> = flow {
-        emit(Resource.Loading())
-        try {
-            val allMeals =
-                dao.getAllMeals().toMutableList().shuffled().map { it.toDomain() }.take(100)
-            emit(Resource.Success(data = allMeals))
-        } catch (e: Exception) {
-            emit(
-                Resource.Error(message = "Something went wrong")
-            )
-        }
-    }
+    override fun getaAllMeals(): Flow<List<Meal>> =
+        dao.getAllMeals().map { response -> response.map { it.toDomain() } }
 
     override fun searchMeal(searchString: String): Flow<Resource<List<Meal>>> = flow {
         emit(Resource.Loading())
@@ -117,6 +108,13 @@ class MealRepositoryImpl @Inject constructor(
                 Resource.Error(message = "Something went wrong")
             )
         }
+    }
+
+    override suspend fun toggleFavourite(isFavourite: Boolean, strMealId: String) =
+        dao.updateFavourite(isFavourite, strMealId)
+
+    override fun getFavouriteMeals(): Flow<List<Meal>> {
+        return  dao.getFavouriteMeals().map { response -> response.map { it.toDomain() } }
     }
 
 }

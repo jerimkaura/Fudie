@@ -1,6 +1,5 @@
 package com.cookpad.core.screens.country
 
-import android.util.Log
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -20,7 +19,8 @@ import com.cookpad.domain.model.Country
 fun CountriesScreen(
     navController: NavController,
     countriesViewModel: CountriesViewModel = hiltViewModel(),
-    recipeViewModel: RecipeViewModels = hiltViewModel()
+    recipeViewModel: RecipeViewModels = hiltViewModel(),
+    homeViewModel: HomeViewModel = hiltViewModel()
 ) {
     val countries = countriesViewModel.countries.value
     val meals = countriesViewModel.meals.value
@@ -58,7 +58,7 @@ fun CountriesScreen(
                 }
                 SelectedCountry(selectedCountry)
                 CountriesSection(countries, countriesViewModel, selectedCountry)
-                CountryMealsSection(meals, recipeViewModel, navController)
+                CountryMealsSection(meals, recipeViewModel, navController, homeViewModel)
             }
         }
     )

@@ -26,6 +26,7 @@ fun BottomNavigationBar(navController: NavController) {
         BottomNavItem.Categories,
         BottomNavItem.Countries,
         BottomNavItem.Ingredients,
+        BottomNavItem.Favourites,
     )
     NavigationBar(
         modifier = Modifier.wrapContentHeight(),

@@ -8,6 +8,7 @@ import com.cookpad.domain.model.Recipe
 import com.cookpad.domain.repository.RecipeRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.map
 import retrofit2.HttpException
 import java.io.IOException
 import javax.inject.Inject
@@ -91,11 +92,13 @@ class RecipeRepositoryImpl @Inject constructor(
     }
 
     override suspend fun getAllRecipes(): List<Recipe> {
-        mealDao.getAllMeals().forEach { meal ->
-            api.getRecipeByMealId(meal.idMeal).meals?.let { recipes ->
-                recipeDao.insertRecipes(recipes.map { recipeDto ->
-                    recipeDto.toEntity()
-                })
+        val x = mealDao.getAllMeals().map { items ->
+            items.forEach { mealEntity ->
+                api.getRecipeByMealId(mealEntity.idMeal).meals?.let { recipes ->
+                    recipeDao.insertRecipes(recipes.map { recipeDTO ->
+                        recipeDTO.toEntity()
+                    })
+                }
             }
         }
         return recipeDao.getRecipes()?.map {

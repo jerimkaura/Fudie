@@ -11,13 +11,16 @@ data class MealEntity(
     val strMeal: String,
     val strMealThumb: String,
     val strCategory: String? = "default",
-    val strCountry: String? = "Not Available"
+    val strCountry: String? = "Not Available",
+    val boolIsFavourite: Boolean = false
 ) {
     fun toDomain(): Meal {
         return Meal(
             idMeal = idMeal,
             strMeal = strMeal,
-            strMealThumb = strMealThumb
+            strMealThumb = strMealThumb,
+            boolIsFavourite = boolIsFavourite
         )
     }
 }
+

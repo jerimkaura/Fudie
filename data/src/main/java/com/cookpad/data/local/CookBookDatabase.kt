@@ -11,7 +11,8 @@ import com.cookpad.data.local.entity.*
         MealCategoryEntity::class,
         CountryEntity::class,
         MealEntity::class,
-        RecipeEntity::class, MealPlanEntity::class],
+        RecipeEntity::class,
+        MealPlanEntity::class],
     version = 1,
     exportSchema = false
 )

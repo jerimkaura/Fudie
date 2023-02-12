@@ -4,7 +4,6 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.cookpad.common.util.Resource
-import com.cookpad.core.screens.addplan.states.AddPlanState
 import com.cookpad.core.screens.planner.states.DeletePlanState
 import com.cookpad.core.screens.planner.states.MealPlansState
 import com.cookpad.core.screens.utils.getDay
@@ -48,7 +47,6 @@ class PlannerViewModel @Inject constructor(
                 }
 
                 is Resource.Success -> {
-                    Log.d("DELETED=================>", "deleteMealPlan: ${result.data}")
                     _deleteMealPlanResponse.value = DeletePlanState(data = result.data)
                 }
 
@@ -58,6 +56,4 @@ class PlannerViewModel @Inject constructor(
             }
         }.launchIn(viewModelScope)
     }
-
-
 }
