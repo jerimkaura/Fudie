@@ -76,9 +76,7 @@ class MealRepositoryImpl @Inject constructor(
             dao.upsertMeals(remoteMeals.meals.map {
                 it.toMealEntity().copy(strCountry = countryName)
             })
-            emit(Resource.Success(data = remoteMeals.meals.map {
-                it.toMealEntity().toDomain()
-            }))
+            emit(Resource.Success(data =dao.getMealsByCountryName(countryName).map { it.toDomain() }))
         } catch (e: IOException) {
             emit(
                 Resource.Error(

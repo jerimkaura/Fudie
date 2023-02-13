@@ -10,6 +10,7 @@ import com.cookpad.core.screens.country.components.CountriesSection
 import com.cookpad.core.screens.country.components.CountryMealsSection
 import com.cookpad.core.screens.country.components.SelectedCountry
 import com.cookpad.core.screens.home.HomeViewModel
+import com.cookpad.core.screens.home.states.MealsState
 import com.cookpad.core.screens.recipe.RecipeViewModels
 import com.cookpad.core.screens.recipe.states.RecipeState
 import com.cookpad.domain.model.Country
@@ -23,7 +24,7 @@ fun CountriesScreen(
     homeViewModel: HomeViewModel = hiltViewModel()
 ) {
     val countries = countriesViewModel.countries.value
-    val meals = countriesViewModel.meals.value
+    val meals by countriesViewModel.meals.collectAsState(initial = MealsState())
     val recipeState: MutableState<RecipeState?> = remember {
         mutableStateOf(null)
     }

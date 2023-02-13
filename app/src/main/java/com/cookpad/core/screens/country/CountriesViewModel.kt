@@ -10,8 +10,7 @@ import com.cookpad.core.screens.home.states.MealsState
 import com.cookpad.domain.use_cases.GetCountriesUseCase
 import com.cookpad.domain.use_cases.GetMealByCountryNameUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.*
 import javax.inject.Inject
 
 @HiltViewModel
@@ -20,8 +19,8 @@ class CountriesViewModel @Inject constructor(
     private val getCountriesUseCase: GetCountriesUseCase
 ) : ViewModel() {
 
-    private var _meals = mutableStateOf(MealsState())
-    val meals: State<MealsState> = _meals
+    private var _meals = MutableStateFlow(MealsState())
+    val meals = _meals.asStateFlow()
 
     private var _selectedCountryName = mutableStateOf("")
     val selectedCountryName: State<String> = _selectedCountryName

@@ -1,6 +1,5 @@
 package com.cookpad.core.screens.country.components
 
-import MealItem
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
@@ -48,7 +47,7 @@ fun CountryMealsSection(
             columns = GridCells.Fixed(2)
         ) {
             items(meals.size) { meal->
-                MealItem(
+                CountryMealItem(
                     meal = meals[meal],
                     navController = navController,
                 )
