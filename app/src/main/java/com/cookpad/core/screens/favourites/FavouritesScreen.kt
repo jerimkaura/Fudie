@@ -21,7 +21,6 @@ import androidx.navigation.NavController
 import com.cookpad.core.R
 import com.cookpad.core.screens.favourites.components.TopBarFavouritesScreen
 import com.cookpad.core.screens.home.states.MealsState
-import com.cookpad.core.screens.planner.components.TopBarPlannerScreen
 import com.cookpad.core.screens.utils.LottieAnime
 import com.cookpad.core.ui.theme.montserrat
 
@@ -91,7 +90,7 @@ fun FavouritesScreen(
                             modifier = Modifier
                                 .padding(
                                     top = paddingValues.calculateTopPadding(),
-                                    bottom = paddingValues.calculateBottomPadding()
+                                    bottom = paddingValues.calculateBottomPadding() + 80.dp
                                 )
                                 .fillMaxSize(),
                             columns = GridCells.Fixed(2)
