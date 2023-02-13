@@ -2,12 +2,10 @@ package com.cookpad.core.workers
 
 
 import android.content.Context
-import android.util.Log
 import androidx.hilt.work.HiltWorker
 import androidx.work.*
 import com.cookpad.core.screens.utils.Constants.DATA_UPDATE_TAG
-import com.cookpad.domain.repository.IngredientRepository
-import com.cookpad.domain.repository.RecipeRepository
+import com.cookpad.domain.repository.CategoryRepository
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedInject
 import kotlinx.coroutines.delay
@@ -16,16 +14,14 @@ import kotlinx.coroutines.delay
 class DataUpdateWorker @AssistedInject constructor(
     @Assisted context: Context,
     @Assisted workerParameters: WorkerParameters,
-    private val ingredientRepository: IngredientRepository,
-    private val recipeRepository: RecipeRepository
+    private val categoryRepository: CategoryRepository,
 ) : CoroutineWorker(context, workerParameters) {
     override suspend fun doWork(): Result {
         try {
             delay(5000)
-//            ingredientRepository.getIngredients()
-//            recipeRepository.getAllRecipes()
-            Log.d("WORK EXECUTED", "${recipeRepository.getAllRecipes()}")
-            delay(5000)
+            categoryRepository.getMealCategories()
+            delay(1000)
+            categoryRepository.getMealsByCategories()
             val appContext = applicationContext
             val workManager = WorkManager.getInstance()
             var continuation = workManager.beginUniqueWork(
@@ -48,7 +44,6 @@ class DataUpdateWorker @AssistedInject constructor(
 
             return Result.success(workDataOf("data" to "Success"))
         }catch (e: Exception){
-            Log.d("WORK EXECUTED", "${e.message}")
             val workManager = WorkManager.getInstance()
             var continuation = workManager.beginUniqueWork(
                 "dataUpdate",

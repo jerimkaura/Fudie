@@ -52,6 +52,7 @@ class DataModule {
         return retrofit.create(CookPadApiService::class.java)
     }
 
+    @Singleton
     @Provides
     fun provideIngredientsRepository(
         apiService: CookPadApiService,
@@ -64,9 +65,10 @@ class DataModule {
     @Provides
     fun provideMealCategoriesRepository(
         api: CookPadApiService,
-        dao: MealCategoryDao
+        dao: MealCategoryDao,
+        mealDao: MealDao
     ): CategoryRepository {
-        return CategoryRepositoryImpl(api, dao)
+        return CategoryRepositoryImpl(api, dao, mealDao = mealDao)
     }
 
     @Singleton

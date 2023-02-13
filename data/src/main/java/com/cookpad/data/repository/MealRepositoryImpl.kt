@@ -1,6 +1,7 @@
 package com.cookpad.data.repository
 
 import com.cookpad.common.util.Resource
+import com.cookpad.data.local.dao.MealCategoryDao
 import com.cookpad.data.local.dao.MealDao
 import com.cookpad.data.remote.CookPadApiService
 import com.cookpad.domain.model.Meal
