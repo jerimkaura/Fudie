@@ -8,7 +8,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.fudie.common.util.Resource
 import com.fudie.core.screens.addplan.states.SearchRecipeState
-import com.fudie.core.screens.addplan.states.SelectedMealsState
 import com.fudie.core.screens.addplan.states.AddPlanState
 import com.fudie.core.screens.utils.getDay
 import com.fudie.domain.model.Meal

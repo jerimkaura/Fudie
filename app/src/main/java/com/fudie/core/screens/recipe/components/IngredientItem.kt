@@ -12,10 +12,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import color_primary_light
-import com.fudie.core.R
 import com.fudie.core.ui.theme.montserrat
 import com.fudie.domain.model.IngredientItem
-
+import com.fudie.core.R
 @Composable
 fun IngredientItem(recipeIngredient: IngredientItem) {
     Row(

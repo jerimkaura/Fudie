@@ -15,9 +15,10 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import coil.request.CachePolicy
 import coil.request.ImageRequest
-import com.fudie.core.R
 import com.fudie.core.screens.utils.SectionHeader
 import com.fudie.domain.model.Country
+import com.fudie.core.R
+
 
 @Composable
 fun SelectedCountry(

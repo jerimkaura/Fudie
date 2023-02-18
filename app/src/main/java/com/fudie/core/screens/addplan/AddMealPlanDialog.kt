@@ -37,12 +37,12 @@ import coil.request.ImageRequest
 import color_primary_light
 import color_surface_dark
 import color_surface_light
-import com.fudie.core.R
 import com.fudie.core.screens.addplan.components.SearchAppBar
 import com.fudie.core.screens.addplan.states.SearchRecipeState
 import com.fudie.core.ui.theme.montserrat
 import com.fudie.domain.model.Meal
 import kotlinx.coroutines.launch
+import com.fudie.core.R
 
 @Composable
 fun AddMealPlanDialog(
@@ -111,7 +111,7 @@ fun AddMealPlanDialog(
                                             .data(it.strMealThumb)
                                             .crossfade(true).diskCachePolicy(CachePolicy.ENABLED)
                                             .build(),
-                                        contentDescription = stringResource(R.string.app_name),
+                                        contentDescription = "",
                                         contentScale = ContentScale.Crop,
                                         modifier = Modifier.fillMaxSize()
                                     )

@@ -29,13 +29,12 @@ import coil.request.ImageRequest
 import color_primary_light
 import color_surface_dark
 import color_surface_light
-import com.fudie.core.R
 import com.fudie.core.navigation.Route
 import com.fudie.core.screens.home.states.MealsState
 import com.fudie.core.screens.utils.LottieAnime
 import com.fudie.core.screens.utils.SectionHeader
 import com.fudie.core.ui.theme.montserrat
-
+import com.fudie.core.R
 @Composable
 fun SpecialMealCategory(mealsState: MealsState, navController: NavController, title: String) {
     val itemBgColor =

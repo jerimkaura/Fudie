@@ -13,12 +13,11 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import com.fudie.core.R
 import com.fudie.core.navigation.Route
 import com.fudie.core.screens.planner.components.DayMealsSection
 import com.fudie.core.screens.planner.components.DaysOfTheWeekSection
 import com.fudie.core.screens.planner.components.TopBarPlannerScreen
-
+import com.fudie.core.R
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PlannerScreen(

@@ -1,13 +1,10 @@
 package com.fudie.core.screens.category.components
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -15,21 +12,14 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import coil.compose.SubcomposeAsyncImage
 import coil.request.CachePolicy
 import coil.request.ImageRequest
 import color_surface_dark
 import color_surface_light
-import com.fudie.core.R
 import com.fudie.core.screens.utils.shimmerEffect
-import com.fudie.core.ui.theme.montserrat
-import com.fudie.domain.model.MealCategory
-
+import com.fudie.core.R
 @Composable
 fun CategoryItemShimmer() {
     val itemWidth = ((LocalConfiguration.current.screenWidthDp - 20).toDouble() / 3).dp

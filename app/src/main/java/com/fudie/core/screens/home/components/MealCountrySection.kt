@@ -21,14 +21,13 @@ import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import coil.request.CachePolicy
 import coil.request.ImageRequest
-import com.fudie.core.R
 import com.fudie.core.navigation.Route
 import com.fudie.core.screens.home.states.CountriesState
 import com.fudie.core.screens.utils.LottieAnime
 import com.fudie.core.screens.utils.SectionHeader
 import com.fudie.core.ui.theme.montserrat
 import kotlinx.coroutines.launch
-
+import com.fudie.core.R
 @Composable
 fun  MealCountrySection(
     countriesState: CountriesState,

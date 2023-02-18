@@ -92,7 +92,7 @@ class RecipeRepositoryImpl @Inject constructor(
     }
 
     override suspend fun getAllRecipes(): List<Recipe> {
-        val x = mealDao.getAllMeals().map { items ->
+        mealDao.getAllMeals().map { items ->
             items.forEach { mealEntity ->
                 api.getRecipeByMealId(mealEntity.idMeal).meals?.let { recipes ->
                     recipeDao.insertRecipes(recipes.map { recipeDTO ->

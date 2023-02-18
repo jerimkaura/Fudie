@@ -30,6 +30,5 @@ fun makeStatusNotification(message: String, context: Context) {
         .setPriority(NotificationCompat.PRIORITY_HIGH)
         .setVibrate(LongArray(0))
 
-    // Show the notification
     NotificationManagerCompat.from(context).notify(111, builder.build())
 }

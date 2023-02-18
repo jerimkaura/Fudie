@@ -1,7 +1,6 @@
 package com.fudie.core.screens.recipe.components
 
 import com.fudie.core.R
-import com.fudie.core.screens.utils.Constants.INFO
 import com.fudie.core.screens.utils.Constants.INGREDIENTS
 import com.fudie.core.screens.utils.Constants.INSTRUCTIONS
 

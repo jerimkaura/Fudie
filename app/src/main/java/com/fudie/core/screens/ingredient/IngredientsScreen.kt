@@ -21,13 +21,12 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import color_primary_light
-import com.fudie.core.R
 import com.fudie.core.navigation.Route
 import com.fudie.core.screens.home.HomeViewModel
 import com.fudie.core.screens.ingredient.components.TopBarIngredientsScreen
 import com.fudie.core.screens.utils.LottieAnime
 import com.fudie.core.ui.theme.montserrat
-
+import com.fudie.core.R
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun IngredientsScreen(

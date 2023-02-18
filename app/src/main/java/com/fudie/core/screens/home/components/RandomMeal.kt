@@ -21,10 +21,10 @@ import androidx.compose.ui.unit.sp
 import coil.compose.SubcomposeAsyncImage
 import coil.request.CachePolicy
 import coil.request.ImageRequest
-import com.fudie.core.R
 import com.fudie.core.screens.recipe.states.RecipeState
 import com.fudie.core.screens.utils.LottieAnime
 import com.fudie.core.ui.theme.montserrat
+import com.fudie.core.R
 
 @Composable
 fun RandomMeal(randomRecipe: RecipeState, onClick: () -> Unit) {

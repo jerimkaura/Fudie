@@ -1,6 +1,5 @@
 package com.fudie.core.screens.country.components
 
-import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.isSystemInDarkTheme
@@ -24,7 +23,6 @@ import com.fudie.core.screens.country.CountriesViewModel
 import com.fudie.core.screens.home.states.CountriesState
 import com.fudie.core.ui.theme.montserrat
 import com.fudie.domain.model.Country
-import kotlin.math.log
 
 @Composable
 fun CountriesSection(

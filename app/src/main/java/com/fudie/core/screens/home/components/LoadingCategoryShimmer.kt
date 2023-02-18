@@ -18,9 +18,8 @@ import coil.request.CachePolicy
 import coil.request.ImageRequest
 import color_surface_dark
 import color_surface_light
-import com.fudie.core.R
 import com.fudie.core.screens.utils.shimmerEffect
-
+import com.fudie.core.R
 @Composable
 @Preview(showBackground = true)
 fun LoadingCategoryShimmer() {

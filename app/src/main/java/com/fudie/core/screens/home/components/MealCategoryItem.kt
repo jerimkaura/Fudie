@@ -27,7 +27,6 @@ import com.fudie.core.navigation.Route
 import com.fudie.core.ui.theme.montserrat
 import com.fudie.domain.model.MealCategory
 import com.fudie.core.R
-
 @Composable
 fun MealCategoryItem(mealCategory: MealCategory, navController: NavController) {
     val itemBgColor = if (isSystemInDarkTheme()) color_surface_dark else color_surface_light

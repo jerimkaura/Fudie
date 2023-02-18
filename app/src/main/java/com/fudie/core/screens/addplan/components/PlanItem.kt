@@ -26,10 +26,10 @@ import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import coil.request.CachePolicy
 import coil.request.ImageRequest
-import com.fudie.core.R
 import com.fudie.core.screens.addplan.AddPlanViewModel
 import com.fudie.core.ui.theme.montserrat
 import com.fudie.domain.model.Meal
+import com.fudie.core.R
 
 @Composable
 fun PlanItem(meal: Meal, addPlanViewModel: AddPlanViewModel) {

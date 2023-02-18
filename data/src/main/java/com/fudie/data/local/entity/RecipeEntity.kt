@@ -64,7 +64,7 @@ data class RecipeEntity(
     fun toDomain(): Recipe {
         return Recipe(
             dateModified = dateModified,
-            idMeal = idMeal ?: "",
+            idMeal = idMeal,
             strArea = strArea,
             strCategory = strCategory,
             strCreativeCommonsConfirmed = strCreativeCommonsConfirmed,

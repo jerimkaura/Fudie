@@ -1,6 +1,5 @@
 package com.fudie.data.repository
 
-import android.util.Log
 import com.fudie.common.util.Resource
 import com.fudie.data.local.dao.CountryDao
 import com.fudie.data.remote.CookPadApiService

@@ -1,6 +1,5 @@
 package com.fudie.core.screens.planner
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.fudie.common.util.Resource

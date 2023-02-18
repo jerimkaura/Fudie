@@ -4,19 +4,15 @@ import MealItemShimmer
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.fudie.core.R
 import com.fudie.core.screens.home.HomeViewModel
 import com.fudie.core.screens.home.states.MealsState
 import com.fudie.core.screens.recipe.RecipeViewModels
-import com.fudie.core.screens.utils.LottieAnime
 
 @Composable
 fun CountryMealsSection(

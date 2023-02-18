@@ -1,7 +1,6 @@
 package com.fudie.data.repository
 
 import com.fudie.common.util.Resource
-import com.fudie.data.local.dao.MealCategoryDao
 import com.fudie.data.local.dao.MealDao
 import com.fudie.data.remote.CookPadApiService
 import com.fudie.domain.model.Meal

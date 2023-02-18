@@ -1,5 +1,5 @@
 package com.fudie.core.screens.recipe.components
-
+import com.fudie.core.R
 import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
@@ -26,7 +26,6 @@ import coil.request.CachePolicy
 import coil.request.ImageRequest
 import color_primary_light
 import color_surface_light
-import com.fudie.core.R
 import com.fudie.core.screens.home.HomeViewModel
 import com.fudie.domain.model.Recipe
 

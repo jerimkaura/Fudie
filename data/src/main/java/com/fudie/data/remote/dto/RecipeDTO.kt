@@ -4,7 +4,6 @@ package com.fudie.data.remote.dto
 import com.fudie.data.local.entity.RecipeEntity
 import com.fudie.data.remote.utils.getValueOrNull
 import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
 import java.util.*
 
 data class RecipeDTO(

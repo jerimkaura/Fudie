@@ -13,9 +13,8 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import coil.request.CachePolicy
 import coil.request.ImageRequest
-import com.fudie.core.R
 import com.fudie.core.screens.utils.shimmerEffect
-
+import com.fudie.core.R
 @Composable
 fun MealItemShimmer() {
     val itemWidth = ((LocalConfiguration.current.screenWidthDp - 30).toDouble() / 2).dp

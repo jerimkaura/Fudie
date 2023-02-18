@@ -9,7 +9,7 @@ import dagger.hilt.android.HiltAndroidApp
 import javax.inject.Inject
 
 @HiltAndroidApp
-class CookPadApplication : Application(), Configuration.Provider {
+class FudieApplication : Application(), Configuration.Provider {
 
     override fun onCreate() {
         super.onCreate()

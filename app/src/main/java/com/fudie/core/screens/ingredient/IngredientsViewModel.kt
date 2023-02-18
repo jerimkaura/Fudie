@@ -1,12 +1,10 @@
 package com.fudie.core.screens.ingredient
 
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.bumptech.glide.Glide.init
 import com.fudie.common.util.Resource
 import com.fudie.core.screens.home.states.MealsState
 import com.fudie.core.screens.utils.Constants

@@ -12,7 +12,7 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
-rootProject.name = "CookPad"
+rootProject.name = "fudie"
 include ':app'
 include ':data'
 include ':domain'

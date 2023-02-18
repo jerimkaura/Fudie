@@ -1,6 +1,5 @@
 package com.fudie.domain.use_cases
 
-import android.util.Log
 import com.fudie.common.util.Resource
 import com.fudie.domain.model.MealPlan
 import com.fudie.domain.repository.MealPlanRepository

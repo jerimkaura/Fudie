@@ -22,7 +22,7 @@ import androidx.datastore.dataStore
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.currentBackStackEntryAsState
-import com.fudie.core.app_settings.LocalRecipeSerializer
+
 import com.fudie.core.navigation.Route
 import com.fudie.core.navigation.bottomNavigation.BottomNavigationBar
 import com.fudie.core.screens.addplan.AddPlanScreen
@@ -41,8 +41,6 @@ import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.composable
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import dagger.hilt.android.AndroidEntryPoint
-
-val Context.dataStore by dataStore("local-recipe.json", LocalRecipeSerializer)
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {

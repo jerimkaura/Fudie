@@ -17,7 +17,6 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.SubcomposeAsyncImage
@@ -25,9 +24,9 @@ import coil.request.CachePolicy
 import coil.request.ImageRequest
 import color_surface_dark
 import color_surface_light
-import com.fudie.core.R
 import com.fudie.core.ui.theme.montserrat
 import com.fudie.domain.model.MealCategory
+import com.fudie.core.R
 
 @Composable
 fun CategoryItem(

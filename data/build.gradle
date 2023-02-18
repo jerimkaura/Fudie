@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace 'com.cookpad.data'
+    namespace 'com.fudie.data'
     compileSdk 33
 
     defaultConfig {

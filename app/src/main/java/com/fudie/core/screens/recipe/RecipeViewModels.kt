@@ -3,7 +3,6 @@ package com.fudie.core.screens.recipe
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.bumptech.glide.Glide.init
 import com.fudie.common.util.Resource
 import com.fudie.core.screens.recipe.states.RecipeState
 import com.fudie.core.screens.utils.Constants.MEAL_ID

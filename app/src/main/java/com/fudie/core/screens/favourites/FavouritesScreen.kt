@@ -18,11 +18,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import com.fudie.core.R
 import com.fudie.core.screens.favourites.components.TopBarFavouritesScreen
 import com.fudie.core.screens.home.states.MealsState
 import com.fudie.core.screens.utils.LottieAnime
 import com.fudie.core.ui.theme.montserrat
+import com.fudie.core.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
