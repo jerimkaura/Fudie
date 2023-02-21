@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace 'com.cookpad.domain'
+    namespace 'com.fudie.domain'
     compileSdk 33
 
     defaultConfig {

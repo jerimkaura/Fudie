@@ -7,15 +7,15 @@ plugins {
 }
 
 android {
-    namespace 'com.cookpad.core'
+    namespace 'com.fudie.core'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.cookpad.core"
+        applicationId "com.fudie.core"
         minSdk 24
         targetSdk 33
-        versionCode 1
-        versionName "1.0"
+        versionCode 5
+        versionName "1.0.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -25,7 +25,7 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -113,4 +113,7 @@ dependencies {
 
     //lottie animations
     implementation "com.airbnb.android:lottie-compose:5.0.3"
+
+    //Review
+    implementation 'com.google.android.play:review-ktx:2.0.1'
 }
