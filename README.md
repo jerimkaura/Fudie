@@ -17,15 +17,15 @@ The app allows users to create meal plans, making it easier to plan their weekly
 Home Screen           |                  Categories Screen                   |                 Planner  Screen                  |
 :-------------------------:|:----------------------------------------------------:|:------------------------------------------------:|
 ![Home Screen  ](images/home-light.jpeg)  | ![   Categories Screen ](images/category-light.jpeg) | ![Planner  Screen   ](images/planner-light.jpeg) | 
-Cuisine  screen          |                   Reciper Details                    |                Favourites Screens                |
+Cuisine  screen          |                    Recipe Details                    |                Favourites Screens                |
 ![Home screen  ](images/cuisines-light.jpeg)  |  ![ Categories Screen  ](images/recipes-light.jpeg)  | ![Planner  Screen](images/favourites-light.jpeg) | 
 
 ### Dark Theme
 Home Screen              |                 Categories Screen                 |                   Planner  Screen                   |
 :-------------------------:|:-------------------------------------------------:|:---------------------------------------------------:|
-![Home Screen](images/home-dark.jpeg)  | ![Categories Screen  ](images/category-dark.jpeg) |    ![ Planner  Screen ](images/planner-dark.png)    | 
-Cuisine  screen        |                  Product Details                  |                 Favourites Screens                  |
-![Cuisine  screen  ](images/cuisine-dark.jpeg)  |  ![Product Details  ](images/recipe--dark.jpeg)   | ![Favourites Screens ](images/favourites-dark.jpeg) | 
+![Home Screen](images/home-dark.jpeg)  | ![Categories Screen  ](images/category-dark.jpeg) |   ![ Planner  Screen ](images/planner-dark.jpeg)    | 
+Cuisine  screen        |                  Recipe Details                   |                 Favourites Screens                  |
+![Cuisine  screen  ](images/cuisines-dark.jpeg)  |   ![Product Details  ](images/recipe-dark.jpeg)   | ![Favourites Screens ](images/favourites-dark.jpeg) | 
 
 
 ## Tools and Libraries Used
