@@ -14,18 +14,18 @@ The app allows users to create meal plans, making it easier to plan their weekly
 
 ### Light Theme
 
-Home Screen           |                    Categories Screen                    |                   Planner  Screen                 |
-:-------------------------:|:-----------------------------------------------------:|:------------------------------------------:|
-![Home Screen  ](images/lhome-light.png)  |   ![   Categories Screen ](images/categories-light.png)    |     ![Planner  Screen   ](images/planner-light.png)     | 
-Cuisine  screen          |                    Reciper Details                   |                 Favourites Screens                 |
-![Home screen  ](images/cuisine-light.png)  | ![ Categories Screen  ](images/recipe-details-light.png) | ![Planner  Screen](images/favourites-light.png) | 
+Home Screen           |                  Categories Screen                   |                 Planner  Screen                  |
+:-------------------------:|:----------------------------------------------------:|:------------------------------------------------:|
+![Home Screen  ](images/home-light.jpeg)  | ![   Categories Screen ](images/category-light.jpeg) | ![Planner  Screen   ](images/planner-light.jpeg) | 
+Cuisine  screen          |                    Recipe Details                    |                Favourites Screens                |
+![Home screen  ](images/cuisines-light.jpeg)  |  ![ Categories Screen  ](images/recipes-light.jpeg)  | ![Planner  Screen](images/favourites-light.jpeg) | 
 
 ### Dark Theme
-Home Screen              |                 Categories Screen                    |                   Planner  Screen                     |
-:-------------------------:|:------------------------------------------------:|:------------------------------------------:|
-![Home Screen](images/homes-dark.png)  |  ![Categories Screen  ](images/categories-dark.png)   |    ![ Planner  Screen ](images/planner-dark.png)    | 
-Cuisine  screen        |                 Product Details                  |                Favourites Screens                     |
-![Cuisine  screen  ](images/cuisine-dark.png)  | ![Product Details  ](images/recipe-details-dark.png) | ![Favourites Screens ](images/favourites-dark.png) | 
+Home Screen              |                 Categories Screen                 |                   Planner  Screen                   |
+:-------------------------:|:-------------------------------------------------:|:---------------------------------------------------:|
+![Home Screen](images/home-dark.jpeg)  | ![Categories Screen  ](images/category-dark.jpeg) |   ![ Planner  Screen ](images/planner-dark.jpeg)    | 
+Cuisine  screen        |                  Recipe Details                   |                 Favourites Screens                  |
+![Cuisine  screen  ](images/cuisines-dark.jpeg)  |   ![Product Details  ](images/recipe-dark.jpeg)   | ![Favourites Screens ](images/favourites-dark.jpeg) | 
 
 
 ## Tools and Libraries Used
