@@ -115,6 +115,7 @@ fun RecipeInstructions(recipe: Recipe) {
                     val playVideoIntent =
                         Intent(Intent.ACTION_VIEW, Uri.parse(recipe.strYoutube))
                     context.startActivity(playVideoIntent)
+
                 }
             ) {
                 Text(
