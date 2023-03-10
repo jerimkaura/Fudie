@@ -1,5 +1,7 @@
 package com.fudie.core.screens.recipe.components
 
+import android.content.Intent
+import android.net.Uri
 import android.widget.Toast
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -110,7 +112,9 @@ fun RecipeInstructions(recipe: Recipe) {
             Button(
                 modifier = Modifier.padding(vertical = 5.dp),
                 onClick = {
-                    Toast.makeText(context, "Streaming coming soon!", Toast.LENGTH_LONG).show()
+                    val playVideoIntent =
+                        Intent(Intent.ACTION_VIEW, Uri.parse(recipe.strYoutube))
+                    context.startActivity(playVideoIntent)
                 }
             ) {
                 Text(
